@@ -107,6 +107,8 @@ pnpm add -S @types/aos@latest
 /* insalled till here. Ready to be used as template for new projects
 /* firebase must be configered through - .env , utils/firebase-utils.ts, firebase.json
 
+pnpm add @mui/joy @emotion/react @emotion/styled
+
 # still not installed
 
 pnpm install react-icons

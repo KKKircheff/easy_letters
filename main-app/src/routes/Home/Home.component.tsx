@@ -1,7 +1,12 @@
+import Button from '@mui/joy/Button'
+
 
 const Home = () => {
     return (
-        <div>Home</div>
+        <div>
+            <h1>Home</h1>
+            <Button variant="solid">Hello world</Button>
+        </div>
     )
 }
 
