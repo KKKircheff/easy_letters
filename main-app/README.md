@@ -84,6 +84,8 @@ When ready update index.ts with the new function:
 
 firebase hosting:channel:deploy --expires 10m preview2
 
+
+
 ## commands no comments
 
 pnpm create vite main-app --template react-ts
@@ -99,7 +101,11 @@ pnpm add -D vite-plugin-sitemap
 pnpm add -D terser
 
 pnpm add -S react-device-detect
+pnpm add -S aos
+pnpm add -S @types/aos@latest
 
+/* insalled till here. Ready to be used as template for new projects
+/* firebase must be configered through - .env , utils/firebase-utils.ts, firebase.json
 
 # still not installed
 
@@ -111,7 +117,6 @@ pnpm add react-swipeable
 pnpm add -S react-map-interaction
 pnpm add -S react-render-if-visible  
 
-pnpm add -S aos
 
 pnpm add -S @types/aos@latest
 pnpm add -S @types/node@latest

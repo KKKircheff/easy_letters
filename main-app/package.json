@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/aos": "^3.0.7",
+    "aos": "^2.3.4",
     "firebase": "^10.7.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.3",
