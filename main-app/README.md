@@ -108,6 +108,8 @@ pnpm add -S @types/aos@latest
 /* firebase must be configered through - .env , utils/firebase-utils.ts, firebase.json
 
 pnpm add @mui/joy @emotion/react @emotion/styled
+pnpm add @mui/icons-material @mui/material
+<!-- pnpm add --save-dev @mui/system -->
 
 # still not installed
 

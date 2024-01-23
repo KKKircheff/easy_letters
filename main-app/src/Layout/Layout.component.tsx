@@ -1,7 +1,5 @@
 import { Outlet } from "react-router-dom";
-// import { items } from "../application-data/navbar-config";
-
-// import Navigation from "../components/navigation/navigation.component";
+import NavBar from "../components/navbar/NavBar.component";
 
 
 export interface Item {
@@ -11,10 +9,9 @@ export interface Item {
 }
 
 function Layout() {
-
     return (
         <div className='nav-wrapper' style={{ width: '100%' }}>
-            {/* <Navigation items={items} /> */}
+            <NavBar />
             <Outlet />
         </div>
     );

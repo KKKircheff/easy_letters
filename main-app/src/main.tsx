@@ -6,11 +6,13 @@ import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
 
 import App from './App.tsx'
-import ScrollToTop from './Layout/ScrollToTop.component';
+import ScrollToTop from './layout/ScrollToTop.component.tsx';
+import { theme } from './styles/theme.ts'
+import './index.scss'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <CssVarsProvider>
+        <CssVarsProvider theme={theme}>
             <CssBaseline />
             <BrowserRouter>
                 <ScrollToTop />
