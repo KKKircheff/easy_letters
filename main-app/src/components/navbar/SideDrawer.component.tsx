@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import {
     List,
     ModalClose,
@@ -6,13 +5,10 @@ import {
     Sheet,
     Drawer,
     Typography,
-    Button,
-    IconButton
 } from '@mui/joy';
 
-import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
-import ListMenuItem from './ListMenuItem.styled';
-import theme from '../../styles/theme';
+import ListMenuItem from './ListMenuItem.component';
+import LogInGroup from './LogInGroup.component';
 
 type Item = {
     name: string,
@@ -27,7 +23,6 @@ type Props = {
 }
 
 const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
-    const navigate = useNavigate();
     return (
         <Drawer
             size='lg'
@@ -43,21 +38,22 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                     },
                 },
             }}>
+
             <Sheet
                 sx={{
-                    marginTop: '120px',
-                    borderRadius: 'xl',
-                    px: 3,
-                    py: 2,
                     display: 'flex',
                     flexDirection: 'column',
+                    width: '80%',
+                    marginTop: '120px',
+                    mx: '10vw',
+                    px: 3,
+                    py: 2,
                     gap: 2,
+                    borderRadius: 'xl',
                     bgcolor: '#ffffffa0',
                     backdropFilter: 'blur(5px)',
-                    width: '80%',
-                    mx: '10vw'
-                }}
-            >
+                }}>
+
                 <Stack direction='row' justifyContent='space-between' alignItems='center'>
                     <Typography
                         component="label"
@@ -66,6 +62,7 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                         fontWeight="900"
                         sx={{ cursor: 'pointer' }}
                     >easy letters.</Typography>
+
                     <ModalClose id="close-icon" sx={{ position: 'initial' }} />
                 </Stack>
 
@@ -79,37 +76,7 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                     }}>
                     {items.map((item) => <ListMenuItem item={item} />)}
                 </List>
-                <Stack
-                    mx='auto'
-                    role="none"
-                    direction='row'
-                    alignItems='center'
-                    spacing={1}
-                    bgcolor='transparent'>
-                    <Button sx={{
-                        bgcolor: 'neutral.800',
-                        borderRadius: '25px',
-                        px: 8, py: 1.2,
-                        fontWeight: 400
-                    }}
-                        onClick={() => navigate('/ai-creator')}
-                    >AI Creator</Button>
-                    <IconButton
-                        onClick={() => navigate('/profile')}
-                        variant='solid'
-                        sx={{
-                            bgcolor: 'neutral.800',
-                            borderRadius: theme.radius.xl
-                        }}
-                    >
-                        <PermIdentityOutlinedIcon
-                            fontSize='large'
-                            sx={{
-                                color: 'currentcolor',
-                                fontWeight: 300
-                            }} />
-                    </IconButton>
-                </Stack>
+                <LogInGroup />
             </Sheet>
         </Drawer>
     )
