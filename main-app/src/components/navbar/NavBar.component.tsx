@@ -1,23 +1,29 @@
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/joy/Box';
-import List from '@mui/joy/List';
-import ListItem from '@mui/joy/ListItem';
-import ListItemButton from '@mui/joy/ListItemButton';
-import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
-import Typography from '@mui/joy/Typography';
-import Button from '@mui/joy/Button';
-import IconButton from '@mui/joy/IconButton';
+import { useState } from 'react';
 
+import Box from '@mui/joy/Box';
 import Stack from '@mui/joy/Stack';
 import Sheet from '@mui/joy/Sheet';
 
-import Tabs from '@mui/joy/Tabs';
-import TabList from '@mui/joy/TabList';
-import Tab, { tabClasses } from '@mui/joy/Tab';
+import List from '@mui/joy/List';
+import Typography from '@mui/joy/Typography';
+
+import Button from '@mui/joy/Button';
+import IconButton from '@mui/joy/IconButton';
+
+import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
+import Menu from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+
 import theme from '../../styles/theme';
+
+import ListMenuItem from './ListMenuItem.styled';
+import SideDrawer from './SideDrawer.styled';
 
 const NavBar = () => {
     const navigate = useNavigate();
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
     const items = [
         {
             name: 'Home',
@@ -37,87 +43,97 @@ const NavBar = () => {
     ]
 
     return (
-        <Box component="nav"
-            aria-label="My site"
-            sx={(theme) => ({
-                position: 'fixed',
-                width: '80vw',
-                top: '40px',
-                left: '10vw',
-                zIndex: '1999',
-                boxShadow: theme.shadow.md,
-                py: 1,
-                px: 3,
-                borderRadius: 50,
-                bgcolor: '#ffffffb0',
-                flexGrow: 1,
-                backdropFilter: 'blur(5px)',
-            })
-            }>
-            <Stack
-                direction='row'
-                justifyContent='space-between'
-                alignItems='center'
-                spacing={2}
-            >
-                <Sheet role='button' sx={{ cursor: 'pointer', backgroundColor: 'transparent' }} onClick={() => navigate('/')}>
-                    <Typography level="h3" fontWeight={900}>easy letters.</Typography>
-                </Sheet>
-                <List
-                    role="menubar"
-                    orientation="horizontal"
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'center'
-                    }}
+        <>
+            <Box component="nav"
+                aria-label="My site"
+                sx={{
+                    position: 'fixed',
+                    width: '80vw',
+                    top: '40px',
+                    left: '10vw',
+                    zIndex: '1999',
+                    boxShadow: theme.shadow.sm,
+                    py: 1,
+                    px: 3,
+                    flexGrow: 1,
+                    borderRadius: theme.radius.xl,
+                    bgcolor: '#ffffffa0',
+                    backdropFilter: 'blur(5px)',
+                }}>
+                <Stack
+                    direction='row'
+                    justifyContent='space-between'
+                    alignItems='center'
+                    spacing={2}
                 >
-                    {items.map((item) => {
-                        return (
-                            <ListItem key={item.name} role="none">
-                                <Sheet
-                                    role="menuitem"
-                                    sx={{
-                                        cursor: 'pointer',
-                                        fontWeight: 'lg',
-                                        borderColor: 'transparent',
-                                        backgroundColor: 'transparent',
-                                        '&:hover': {
-                                            transition: 'all .15s ease-in',
-                                            borderBottom: '2px solid',
-                                            borderColor: theme.vars.palette.primary[500],
-                                            marginTop: '1px'
-                                        },
-                                    }}
-                                    onClick={() => navigate(item.path)}>
-                                    {item.name}
-                                </Sheet>
-                            </ListItem>
-                        )
-                    })
-                    }
-                </List>
-                <Sheet
-                    role="none"
-                    sx={{
-                        backgroundColor: 'transparent',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '.5rem'
-                    }}>
-                    <Button sx={{ bgcolor: 'neutral.800', borderRadius: '25px', px: 8, py: 1.2, fontWeight: 400 }} onClick={() => navigate('/ai-creator')}>AI Creator</Button>
-                    <IconButton onClick={() => navigate('/profile')}
+                    <Sheet role='button' sx={{ cursor: 'pointer', backgroundColor: 'transparent' }} onClick={() => navigate('/')}>
+                        <Typography level="h3" fontWeight={900}>easy letters.</Typography>
+                    </Sheet>
+
+                    <List
+                        role="menubar"
+                        orientation="horizontal"
                         sx={{
-                            fontSize: '1rem',
-                            p: .9,
-                            my: 0,
+                            display: { xs: 'none', md: 'flex' },
+                            justifyContent: 'center',
+
+                        }}>
+                        {items.map((item) => <ListMenuItem item={item} />)}
+                    </List>
+
+                    <Stack
+                        role="none"
+                        direction='row'
+                        alignItems='center'
+                        spacing={1}
+                        bgcolor='transparent'
+                        sx={{
+                            display: { xs: 'none', md: 'flex' },
+                        }}>
+                        <Button sx={{
                             bgcolor: 'neutral.800',
                             borderRadius: '25px',
-                        }}>
-                        <PermIdentityOutlinedIcon fontSize='large' sx={{ color: 'white', fontWeight: 300 }} />
+                            px: 8, py: 1.2,
+                            fontWeight: 400
+                        }}
+                            onClick={() => navigate('/ai-creator')}
+                        >AI Creator</Button>
+                        <IconButton
+                            onClick={() => navigate('/profile')}
+                            variant='solid'
+                            sx={{
+                                bgcolor: 'neutral.800',
+                                borderRadius: theme.radius.xl
+                            }}
+                        >
+                            <PermIdentityOutlinedIcon
+                                fontSize='large'
+                                sx={{
+                                    color: 'currentcolor',
+                                    fontWeight: 300
+                                }} />
+                        </IconButton>
+                    </Stack>
+
+                    <IconButton
+                        variant='plain'
+                        color="neutral"
+                        sx={{
+                            display: { xs: 'flex', md: 'none' },
+                            alignItems: 'center',
+                            borderRadius: theme.radius.xl,
+                        }}
+                        onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
+                        {isDrawerOpen ? <CloseIcon /> : <Menu />}
                     </IconButton>
-                </Sheet>
-            </Stack>
-        </Box>
+                </Stack>
+
+            </Box>
+            <SideDrawer
+                items={items}
+                isDrawerOpen={isDrawerOpen}
+                setIsDrawerOpen={setIsDrawerOpen} />
+        </>
     )
 }
 
