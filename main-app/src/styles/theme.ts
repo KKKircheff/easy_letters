@@ -1,4 +1,4 @@
-import {CssVarsProvider, extendTheme, PaletteRange} from '@mui/joy/styles';
+import {extendTheme, PaletteRange} from '@mui/joy/styles';
 
 declare module '@mui/joy/styles' {
     interface ColorPalettePropOverrides {
@@ -114,6 +114,32 @@ export const theme = extendTheme({
                     700: '#006163',
                     800: '#00373a',
                     900: '#001816',
+                },
+                secondary: {
+                    50: '#dadeec',
+                    100: '#b6bfd9',
+                    200: '#92a0c6',
+                    300: '#6d83b4',
+                    400: '#4567a1',
+                    500: '#004C8F',
+                    600: '#003a7a',
+                    700: '#002966',
+                    800: '#001952',
+                    900: '#00013f',
+                    solidColor: 'var(--joy-palette-secondary-50)',
+                    solidBg: 'var(--joy-palette-secondary-400)',
+                    solidHoverBg: 'var(--joy-palette-secondary-700)',
+                    solidActiveBg: 'var(--joy-palette-secondary-500)',
+                    solidDisabledColor: 'var(--joy-palette-neutral-500)',
+                    solidDisabledBg: 'var(--joy-palette-neutral-800)',
+                    outlinedBorder: 'var(--joy-palette-secondary-500)',
+                    outlinedColor: 'var(--joy-palette-secondary-700)',
+                    outlinedActiveBg: 'var(--joy-palette-secondary-100)',
+                    softColor: 'var(--joy-palette-secondary-800)',
+                    softBg: 'var(--joy-palette-secondary-200)',
+                    softActiveBg: 'var(--joy-palette-secondary-300)',
+                    plainColor: 'var(--joy-palette-secondary-700)',
+                    plainActiveBg: 'var(--joy-palette-secondary-100)',
                 },
                 danger: {
                     50: '#ffe3d8',

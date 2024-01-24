@@ -39,9 +39,9 @@ const Home = () => {
                 <Grid xs={4}>
                     <Button variant='outlined' color='primary'>My Home button</Button>
                     <Button color='secondary'>My Home button</Button>
-                    <Button color='danger'>My Home button</Button>
-                    <Button color='success'>My Home button</Button>
-                    <Button color='warning'>My Home button</Button>
+                    <Button sx={{ bgcolor: 'danger.400' }}>My Home button</Button>
+                    <Button color='warning' sx={{ bgcolor: 'success.300' }}>My Home button</Button>
+                    <Button color='warning' sx={{ bgcolor: 'warning.300' }}>My Home button</Button>
                     <Button color='neutral'>My Home button</Button>
                 </Grid>
                 <Grid xs={4}>
