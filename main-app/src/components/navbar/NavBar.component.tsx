@@ -1,26 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/joy/Box';
 import List from '@mui/joy/List';
-import ListDivider from '@mui/joy/ListDivider';
 import ListItem from '@mui/joy/ListItem';
 import ListItemButton from '@mui/joy/ListItemButton';
-import Person from '@mui/icons-material/Person';
+import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import Typography from '@mui/joy/Typography';
-import { useNavigate } from 'react-router-dom';
-
+import Button from '@mui/joy/Button';
+import IconButton from '@mui/joy/IconButton';
 
 
 const NavBar = () => {
     const navigate = useNavigate();
-
     const items = [
         {
             name: 'Home',
             path: '/',
-            icon: ''
-        },
-        {
-            name: 'AI Creator',
-            path: '/ai-creator',
             icon: ''
         },
         {
@@ -36,6 +30,7 @@ const NavBar = () => {
     ]
 
     return (
+
         <Box component="nav"
             aria-label="My site"
             sx={(theme) => ({
@@ -45,15 +40,13 @@ const NavBar = () => {
                 left: '10vw',
                 zIndex: '1999',
                 boxShadow: theme.shadow.md,
-                padding: 1,
+                padding: .5,
                 borderRadius: 50,
                 bgcolor: '#ffffff60',
                 flexGrow: 1,
                 backdropFilter: 'blur(4px)',
             })
             }>
-
-
             <List role="menubar" orientation="horizontal" sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -67,7 +60,6 @@ const NavBar = () => {
                         <Typography level="h3" fontWeight={900}>easy letters.</Typography>
                     </ListItemButton>
                 </ListItem>
-
                 <ListItem role="none">
                     {items.map((item) => {
                         return (
@@ -80,16 +72,32 @@ const NavBar = () => {
                     })
                     }
                 </ListItem>
-
-                <ListItem role="none" >
-                    <ListItemButton
+                <ListItem role="none">
+                    <Button sx={{ bgcolor: 'neutral.800', borderRadius: '25px', px: 8, py: 1.2, fontWeight: 400 }} onClick={() => navigate('/ai-creator')}>AI Creator</Button>
+                    {/* <ListItemButton
                         role="menuitem"
-                        component="a"
-                        href="#horizontal-list"
-                        aria-label="Profile"
+                        component="div"
+                        onClick={() => navigate('/profile')}
+                        sx={{
+                            fontSize: '1.3rem',
+                            px: 1.2,
+                            my: 0,
+                            bgcolor: 'neutral.800',
+                            borderRadius: '25px',
+                        }}
                     >
-                        <Person />
-                    </ListItemButton>
+                        <PermIdentityOutlinedIcon fontSize='large' sx={{ color: 'white', fontWeight: 300 }} />
+                    </ListItemButton> */}
+                    <IconButton onClick={() => navigate('/profile')}
+                        sx={{
+                            fontSize: '1rem',
+                            p: .9,
+                            my: 0,
+                            bgcolor: 'neutral.800',
+                            borderRadius: '25px',
+                        }}>
+                        <PermIdentityOutlinedIcon fontSize='large' sx={{ color: 'white', fontWeight: 300 }} />
+                    </IconButton>
                 </ListItem>
             </List>
         </Box>
