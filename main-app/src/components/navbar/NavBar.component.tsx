@@ -26,13 +26,18 @@ const NavBar = () => {
             icon: ''
         },
         {
+            name: 'AI Writer',
+            path: '/ai-writer',
+            icon: ''
+        },
+        {
             name: 'Pricing',
             path: '/pricing',
             icon: ''
         },
         {
-            name: 'Contact',
-            path: '/contact',
+            name: 'Resources',
+            path: '/resources',
             icon: ''
         },
     ]

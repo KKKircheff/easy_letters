@@ -38,7 +38,7 @@ const HeroHome = () => {
                             fontSize: { xs: '10vw', sm: '7vw', md: '3vw' },
                         }}>
                         <Stack textAlign={{ xs: 'center', md: 'left' }}>
-                            <Typography level='h1' fontWeight='800' fontSize='inherit'>AI Creator -</Typography>
+                            <Typography level='h1' fontWeight='800' fontSize='inherit'>AI Writer -</Typography>
                             <Typography level='h1' fontWeight='800' fontSize='inherit'>Build Your Job</Typography>
                             <Typography level='h1' fontWeight='800' fontSize='inherit'>Applications With Ease</Typography>
 
@@ -56,7 +56,7 @@ const HeroHome = () => {
                                 }}
                                 onClick={() => navigate('/ai-creator')}
                                 endDecorator={<ArrowForwardIosIcon sx={{ fontSize: 'sm' }} />}
-                            >AI Creator</Button>
+                            >Get One Free</Button>
                         </Stack>
                     </Stack>
                 </Stack>
