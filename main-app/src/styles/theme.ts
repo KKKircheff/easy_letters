@@ -8,18 +8,44 @@ declare module '@mui/joy/styles' {
 
     interface Palette {
         // this will make the node `secondary` configurable in `extendTheme`
-        // and add `secondary` to the theme's palette.
         secondary: PaletteRange;
+    }
+    interface Radius {
+        full: string;
+    }
+
+    interface FontSize {
+        xl5: string;
+        xl6: string;
     }
 }
 
 export const theme = extendTheme({
+    // fontFamily: {
+    //     body: 'Open Sans, sans-serif',
+    //     display: 'Open Sans, sans-serif',
+    //     code: 'Open Sans, sans-serif',
+    //     fallback: 'sans-serif',
+    // },
+    fontFamily: {
+        body: 'Montserrat',
+        display: 'Montserrat',
+        code: 'Montserrat',
+        fallback: 'sans-serif',
+    },
+
+    fontSize: {
+        xl5: '3rem',
+        xl6: '3.5rem',
+    },
+
     radius: {
         xs: '5px',
         sm: '10px',
         md: '15px',
         lg: '20px',
         xl: '25px',
+        full: '50px',
     },
 
     colorSchemes: {
@@ -76,17 +102,29 @@ export const theme = extendTheme({
                     900: '#4d0000',
                 },
                 success: {
-                    50: '#e1f0df',
-                    100: '#c4e0c0',
-                    200: '#a6d1a1',
-                    300: '#87c183',
-                    400: '#68b266',
-                    500: '#44A248',
-                    600: '#0f7a23',
-                    700: '#005500',
-                    800: '#003100',
-                    900: '#001900',
+                    '50': '#f7fee7',
+                    '100': '#ecfccb',
+                    '200': '#d9f99d',
+                    '300': '#bef264',
+                    '400': '#a3e635',
+                    '500': '#84cc16',
+                    '600': '#65a30d',
+                    '700': '#4d7c0f',
+                    '800': '#3f6212',
+                    '900': '#365314',
                 },
+                // success: {
+                //     50: '#e1f0df',
+                //     100: '#c4e0c0',
+                //     200: '#a6d1a1',
+                //     300: '#87c183',
+                //     400: '#68b266',
+                //     500: '#44A248',
+                //     600: '#0f7a23',
+                //     700: '#005500',
+                //     800: '#003100',
+                //     900: '#001900',
+                // },
                 warning: {
                     50: '#fff4db',
                     100: '#ffe9b8',
@@ -184,13 +222,25 @@ export const theme = extendTheme({
     components: {
         JoyButton: {
             styleOverrides: {
-                root: ({theme}) => {
-                    // perform some logic here
+                root: ({theme, ownerState}) => {
                     const borderRadius = theme.vars.radius.xl;
                     const fontWeight = theme.vars.fontWeight.md;
+
+                    const color = ownerState.variant !== 'solid' ? '' : 'white';
+
+                    const hoverBackgroundColor =
+                        theme.vars.palette[ownerState.color!].solidHoverBg;
+                    const hoverColor =
+                        ownerState.variant === 'solid' ? '' : 'white';
+
                     return {
                         borderRadius,
                         fontWeight,
+                        color,
+                        '&:hover': {
+                            backgroundColor: hoverBackgroundColor,
+                            color: hoverColor,
+                        },
                     };
                 },
             },

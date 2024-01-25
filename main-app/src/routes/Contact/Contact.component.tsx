@@ -1,7 +1,12 @@
+import { Box, Typography } from "@mui/joy"
+import UnderNavBar from "../../components/navbar/underNavBar.component"
 
 const Contact = () => {
     return (
-        <div>Contact</div>
+        <Box>
+            <UnderNavBar />
+            <Typography level='h2' >Contact</Typography>
+        </Box>
     )
 }
 

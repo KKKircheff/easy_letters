@@ -20,7 +20,7 @@ const BurgerButton = ({ isDrawerOpen, setIsDrawerOpen }: Props) => {
                 borderRadius: theme.radius.xl,
             }}
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
-            {isDrawerOpen ? <CloseIcon /> : <Menu />}
+            {isDrawerOpen ? <CloseIcon sx={{ color: 'neutral.900' }} /> : <Menu sx={{ color: 'neutral.900' }} />}
         </IconButton>
     )
 }

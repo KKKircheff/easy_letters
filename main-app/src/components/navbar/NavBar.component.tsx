@@ -43,15 +43,15 @@ const NavBar = () => {
                 aria-label="My site"
                 sx={{
                     position: 'fixed',
-                    width: '80vw',
                     top: '40px',
-                    left: '10vw',
+                    left: { xs: '5vw', md: '7.5vw', lg: '10vw' },
+                    width: { xs: '90vw', md: '85vw', lg: '80vw' },
                     zIndex: '1999',
                     boxShadow: theme.shadow.sm,
-                    py: 1,
-                    px: 3,
+                    py: { xs: 1, md: 1 },
+                    px: { xs: 3, md: 3 },
                     flexGrow: 1,
-                    borderRadius: theme.radius.xl,
+                    borderRadius: theme.radius.full,
                     bgcolor: '#ffffffa0',
                     backdropFilter: 'blur(5px)',
                 }}>
@@ -63,14 +63,24 @@ const NavBar = () => {
                     spacing={2}>
 
                     <Sheet role='logo' sx={{ cursor: 'pointer', backgroundColor: 'transparent' }} onClick={() => navigate('/')}>
-                        <Typography level="h3" fontWeight={900}>easy letters.</Typography>
+                        <Typography
+                            level='h3'
+                            fontWeight={900}
+                            sx={{
+                                fontSize: { xs: 'lg', md: 'xl2' }
+                            }}
+                        >easy letters.</Typography>
                     </Sheet>
 
                     <List
                         role="menubar"
                         orientation="horizontal"
                         sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
-                        {items.map((item) => <ListMenuItem item={item} />)}
+                        {items.map((item) => <ListMenuItem
+                            key={item.name}
+                            item={item}
+                            setIsDrawerOpen={setIsDrawerOpen}
+                        />)}
                     </List>
 
                     <Stack sx={{ display: { xs: 'none', md: 'flex' }, }}>

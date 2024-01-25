@@ -10,13 +10,22 @@ type ItemProps = {
         name: string,
         path: string,
         icon: string
-    }
+    },
+    setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ListMenuItem = ({ item }: ItemProps) => {
+
+const ListMenuItem = ({ item, setIsDrawerOpen }: ItemProps) => {
+
     const navigate = useNavigate()
+
+    const handleClick = () => {
+        navigate(item.path);
+        setIsDrawerOpen(false);
+    }
+
     return (
-        <ListItem key={item.name} role="none">
+        <ListItem key={item.name} role="none" onClick={handleClick}>
             <Sheet
                 role="menuitem"
                 sx={{
@@ -30,8 +39,7 @@ const ListMenuItem = ({ item }: ItemProps) => {
                         borderColor: theme.vars.palette.primary[500],
                         marginTop: '1px'
                     } : {},
-                }}
-                onClick={() => navigate(item.path)}>
+                }}>
                 {item.name}
             </Sheet>
         </ListItem>

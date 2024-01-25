@@ -43,15 +43,17 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    width: '80%',
+                    width: '85%',
                     marginTop: '120px',
-                    mx: '10vw',
+                    mx: { xs: '5vw', md: '7.5vw', lg: '10vw' },
                     px: 3,
                     py: 2,
                     gap: 2,
                     borderRadius: 'xl',
                     bgcolor: '#ffffffa0',
                     backdropFilter: 'blur(5px)',
+                    boxSizing: 'border-box',
+                    overflow: 'hidden',
                 }}>
 
                 <Stack direction='row' justifyContent='space-between' alignItems='center'>
@@ -74,7 +76,11 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                         fontSize: 'xl',
                         '& > div': { justifyContent: 'center' },
                     }}>
-                    {items.map((item) => <ListMenuItem item={item} />)}
+                    {items.map((item) => <ListMenuItem
+                        key={item.name}
+                        item={item}
+                        setIsDrawerOpen={setIsDrawerOpen}
+                    />)}
                 </List>
                 <LogInGroup />
             </Sheet>

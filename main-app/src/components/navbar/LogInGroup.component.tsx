@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Button, IconButton, Stack } from "@mui/joy"
+import { Button, Stack } from "@mui/joy"
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import theme from '../../styles/theme';
 
@@ -17,24 +17,19 @@ const LogInGroup = () => {
             spacing={1}
             bgcolor='transparent'
         >
-            <Button sx={{
-                bgcolor: 'neutral.800',
-                borderRadius: '25px',
-                px: 8, py: 1.2,
-                fontWeight: 400
-            }}
-                onClick={() => navigate('/ai-creator')}
-            >AI Creator</Button>
-
-            <IconButton
-                onClick={() => navigate('/profile')}
-                variant='solid'
+            <Button
+                color='neutral'
                 sx={{
                     bgcolor: 'neutral.800',
-                    borderRadius: theme.radius.xl
-                }}>
-                <PermIdentityOutlinedIcon fontSize='large' sx={{ color: 'currentcolor' }} />
-            </IconButton>
+                    borderRadius: theme.vars.radius.full,
+                    px: 4, py: 1.5,
+                    fontSize: { xs: 'sm' },
+                }}
+                onClick={() => navigate('/profile')}
+                endDecorator={<PermIdentityOutlinedIcon sx={{ color: 'currentcolor' }} />}
+            >Alexandra</Button>
+
+
         </Stack>
     )
 }
