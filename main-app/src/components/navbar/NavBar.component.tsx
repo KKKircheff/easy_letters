@@ -19,7 +19,7 @@ import BurgerButton from './BurgerButton.component';
 const NavBar = () => {
     const navigate = useNavigate();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const { xs, md, lg } = styleVariables.padding;
+    const { xs, md, lg } = styleVariables.layoutPadding;
 
     const items = [
         {

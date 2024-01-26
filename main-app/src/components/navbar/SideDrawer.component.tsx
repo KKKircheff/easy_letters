@@ -24,7 +24,7 @@ type Props = {
 }
 
 const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
-    const { xs, md, lg } = styleVariables.padding;
+    const { xs, md, lg } = styleVariables.layoutPadding;
 
     return (
         <Drawer

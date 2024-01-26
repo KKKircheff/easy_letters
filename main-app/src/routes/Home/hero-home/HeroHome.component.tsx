@@ -16,7 +16,7 @@ import { iconGradientStyles } from "../../../styles/iconGradientStyles";
 
 const HeroHome = () => {
     const navigate = useNavigate();
-    const { xs, md, lg } = styleVariables.padding;
+    const { xs, md, lg } = styleVariables.layoutPadding;
 
     return (
         <Box>

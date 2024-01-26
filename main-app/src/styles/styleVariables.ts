@@ -1,5 +1,5 @@
 export const styleVariables = {
-    padding: {
+    layoutPadding: {
         xs: '5vw',
         sm: '5vw',
         md: '7.5vw',
