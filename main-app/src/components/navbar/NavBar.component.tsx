@@ -9,6 +9,7 @@ import List from '@mui/joy/List';
 import Typography from '@mui/joy/Typography';
 
 import theme from '../../styles/theme';
+import { styleVariables } from '../../styles/styleVariables';
 
 import ListMenuItem from './ListMenuItem.component';
 import SideDrawer from './SideDrawer.component';
@@ -18,6 +19,7 @@ import BurgerButton from './BurgerButton.component';
 const NavBar = () => {
     const navigate = useNavigate();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const { xs, md, lg } = styleVariables.padding;
 
     const items = [
         {
@@ -49,7 +51,7 @@ const NavBar = () => {
                 sx={{
                     position: 'fixed',
                     top: '40px',
-                    left: { xs: '5vw', md: '7.5vw', lg: '10vw' },
+                    left: { xs, md, lg },
                     width: { xs: '90vw', md: '85vw', lg: '80vw' },
                     zIndex: '1999',
                     boxShadow: theme.shadow.sm,

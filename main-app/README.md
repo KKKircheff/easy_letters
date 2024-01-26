@@ -26,7 +26,6 @@ pnpm add -S react-slick
 pnpm add -S @types/react-slick@latest
 pnpm add -S slick-carousel
 
-
 pnpm add -S react-device-detect
 pnpm add -S react-render-if-visible  
 
@@ -104,6 +103,7 @@ pnpm add -S react-device-detect
 pnpm add -S aos
 pnpm add -S @types/aos@latest
 
+
 /* insalled till here. Ready to be used as template for new projects
 /* firebase must be configered through - .env , utils/firebase-utils.ts, firebase.json
 
@@ -135,7 +135,20 @@ pnpm add -S react-photo-album
 
 
 
+# Double color Icons
 
+website converts svg to jsx:  https://svg2jsx.com/
+important to implemet gradient in converted svgs:
+
+1. Add the code below in the converted svg
+  <defs>
+        <linearGradient id="grad1" x1="0%" x2="100%" y1="0%" y2="100%">
+            <stop offset="0%" stopColor={startColor}></stop>
+            <stop offset="100%" stopColor={endColor}></stop>
+        </linearGradient>
+    </defs>
+2. delete the fill option inside the <svg> tag
+3. add fill="url(#grad1)" at the end of each <path> tags below like this: <path ... fill="url(#grad1)"></path>    
 
 
 

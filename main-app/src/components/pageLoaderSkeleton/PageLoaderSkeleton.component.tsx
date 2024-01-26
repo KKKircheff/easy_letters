@@ -3,8 +3,8 @@ import './PageLoaderSkeleton.styles.scss'
 const PageLoaderSkeleton: React.FC = () => {
     return (
         <div className='page-loader-skeleton'>
-            <p>Agro Machines</p>
-            <p>Nederland</p>
+            <p>Easy Letters AI Writer</p>
+            <p>Build With Ease</p>
         </div>
     );
 };

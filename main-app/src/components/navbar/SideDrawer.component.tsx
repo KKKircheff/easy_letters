@@ -9,6 +9,7 @@ import {
 
 import ListMenuItem from './ListMenuItem.component';
 import LogInGroup from './LogInGroup.component';
+import { styleVariables } from '../../styles/styleVariables';
 
 type Item = {
     name: string,
@@ -23,6 +24,8 @@ type Props = {
 }
 
 const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
+    const { xs, md, lg } = styleVariables.padding;
+
     return (
         <Drawer
             size='lg'
@@ -45,7 +48,7 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                     flexDirection: 'column',
                     width: '85%',
                     marginTop: '120px',
-                    mx: { xs: '5vw', md: '7.5vw', lg: '10vw' },
+                    mx: { xs, md, lg },
                     px: 3,
                     py: 2,
                     gap: 2,

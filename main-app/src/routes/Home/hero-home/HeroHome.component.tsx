@@ -3,7 +3,6 @@ import {
     Button,
     Card,
     CardCover,
-    Grid,
     Stack,
     Typography
 } from "@mui/joy"
@@ -12,53 +11,50 @@ import heroHome from '/assets/images/heroHome.webp'
 import theme from "../../../styles/theme"
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from "react-router-dom";
+import { styleVariables } from "../../../styles/styleVariables";
+import { iconGradientStyles } from "../../../styles/iconGradientStyles";
 
 const HeroHome = () => {
     const navigate = useNavigate();
+    const { xs, md, lg } = styleVariables.padding;
+
     return (
         <Box>
-            <Grid container direction={{ xs: 'column-reverse', md: 'row' }} justifyContent='space-between'>
+            <Stack direction={{ xs: 'column-reverse', md: 'row' }} justifyContent='space-between'>
+
                 <Stack
                     direction='column'
-                    spacing={{ xs: 4, sm: 2, md: 4 }}
                     justifyContent='flex-end'
-                    alignItems='flex-start'
+                    alignItems={{ xs: 'center', md: 'flex-start' }}
+                    textAlign={{ xs: 'center', md: 'left' }}
                     flexGrow='1'
+                    gap={0.2}
                     sx={{
-                        padding: { xs: '50px 4vw 10px 4vw', md: '0 0 5% 0' },
-                        paddingLeft: { sm: 3, md: '7.5vw', lg: '10vw' },
-                        width: { xs: '95%', md: '50%' },
-                    }}
-                >
-                    <Stack
-                        justifyContent={{ xs: 'center', md: 'left' }}
-                        width='100%'
-                        gap={2}
+                        padding: { xs: `50px ${xs} 10px ${xs}`, md: '0 0 5% 0' },
+                        paddingLeft: { xs, md, lg },
+                        width: { xs: '100%', md: '50%' },
+                        fontSize: { xs: '10vw', sm: '7vw', md: '3vw' },
+                    }}>
+                    <Typography level='h1' fontWeight='800' fontSize='inherit'>AI Writer -</Typography>
+                    <Typography level='h1' fontWeight='800' fontSize='inherit'
+                        sx={iconGradientStyles.scondaryPrimary}
+                    >Build With Ease</Typography>
+                    <Typography level='h1' fontWeight='800' fontSize='inherit'>Your Job Application Letters</Typography>
+                    <Button
+                        color='neutral'
+                        size="sm"
                         sx={{
-                            fontSize: { xs: '10vw', sm: '7vw', md: '3vw' },
-                        }}>
-                        <Stack textAlign={{ xs: 'center', md: 'left' }}>
-                            <Typography level='h1' fontWeight='800' fontSize='inherit'>AI Writer -</Typography>
-                            <Typography level='h1' fontWeight='800' fontSize='inherit'>Build Your Job</Typography>
-                            <Typography level='h1' fontWeight='800' fontSize='inherit'>Applications With Ease</Typography>
-
-                            <Button
-                                color='neutral'
-                                size="sm"
-                                sx={{
-                                    bgcolor: 'neutral.800',
-                                    borderRadius: theme.vars.radius.full,
-                                    mt: '7%',
-                                    mx: { xs: 'auto', md: '0' },
-                                    py: { xs: 2, md: 1.5 },
-                                    width: { xs: '50%', md: '30%' },
-                                    fontSize: { xs: 'sm' },
-                                }}
-                                onClick={() => navigate('/ai-creator')}
-                                endDecorator={<ArrowForwardIosIcon sx={{ fontSize: 'sm' }} />}
-                            >Get One Free</Button>
-                        </Stack>
-                    </Stack>
+                            bgcolor: 'neutral.800',
+                            borderRadius: theme.vars.radius.full,
+                            mt: '7%',
+                            mx: { xs: 'auto', md: '0' },
+                            py: { xs: 2, md: 1.5 },
+                            width: { xs: '50%', md: '30%' },
+                            fontSize: { xs: 'sm' },
+                        }}
+                        onClick={() => navigate('/ai-writer')}
+                        endDecorator={<ArrowForwardIosIcon sx={{ fontSize: 'sm' }} />}
+                    >Get One Free</Button>
                 </Stack>
 
                 <Card sx={{
@@ -72,7 +68,7 @@ const HeroHome = () => {
                         <img src={heroHome} alt="flow hero image" />
                     </CardCover>
                 </Card>
-            </Grid>
+            </Stack>
         </Box >
     )
 }
