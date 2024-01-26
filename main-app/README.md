@@ -1,10 +1,12 @@
-# easy_letters
-Fullstack CV &amp; cover letter creator 
+## easy_letters
+Fullstack CV & Cover letter creator
+
+# Branch V1_MUI_JOY is ready !!!
+
+# Fully set themed template with pages, router_v6, Vite with config, JoyUI & Firebase
 
 
-# AgroMachines_Firebase
 
-Company website revuilt with Vite &amp; Firebase
 
 # descriptions 
 pnpm create vite main-app --template react-ts
