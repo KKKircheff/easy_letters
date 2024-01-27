@@ -13,7 +13,6 @@ const DarkButton = styled(Button)(({ theme }) => ({
     '&:hover': {
         backgroundColor: theme.vars.palette.neutral[50],
         border: `2px solid ${theme.vars.palette.neutral[400]}`,
-        // color: 'white',
         color: theme.vars.palette.neutral[600],
     },
 }))

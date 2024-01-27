@@ -13,6 +13,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from "react-router-dom";
 import { styleVariables } from "../../../styles/styleVariables";
 import { iconGradientStyles } from "../../../styles/iconGradientStyles";
+import DarkButton from "../../../components/buttons/dark-button/DarkButton.component";
 
 const HeroHome = () => {
     const navigate = useNavigate();
@@ -41,21 +42,18 @@ const HeroHome = () => {
                         sx={iconGradientStyles.scondaryPrimary}
                     >Build With Ease</Typography>
                     <Typography level='h1' fontWeight='800' fontSize='inherit'>Your Job Application Letters</Typography>
-                    <Button
+                    <DarkButton
                         color='neutral'
                         size="sm"
                         sx={{
-                            bgcolor: 'neutral.800',
-                            borderRadius: theme.vars.radius.full,
+                            // borderRadius: theme.vars.radius.full,
                             mt: '7%',
-                            mx: { xs: 'auto', md: '0' },
-                            py: { xs: 2, md: 1.5 },
-                            width: { xs: '50%', md: '30%' },
+                            width: { xs: '70%', md: '30%' },
                             fontSize: { xs: 'sm' },
                         }}
                         onClick={() => navigate('/ai-writer')}
                         endDecorator={<ArrowForwardIosIcon sx={{ fontSize: 'sm' }} />}
-                    >Get One Free</Button>
+                    >Get One Free</DarkButton>
                 </Stack>
 
                 <Card sx={{
@@ -63,7 +61,7 @@ const HeroHome = () => {
                     aspectRatio: { xs: '1.5', sm: '2', md: '1' },
                     transform: { xs: 'skew(0)', md: 'skew(-4deg, 0)' },
                     borderRadius: theme.vars.radius.xl,
-                    m: { xs: '10px auto 0 auto', md: '20px 2% 0 0' },
+                    m: { xs: '3px auto 0 auto', md: '10px 2% 0 0' },
                 }}>
                     <CardCover>
                         <img src={heroHome} alt="flow hero image" />

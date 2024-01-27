@@ -19,7 +19,6 @@ const NavBar = () => {
     const navigate = useNavigate();
     const theme = useTheme();
 
-
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const { xs, md, lg } = styleVariables.layoutPadding;
 
@@ -52,7 +51,7 @@ const NavBar = () => {
                 aria-label="My site"
                 sx={{
                     position: 'fixed',
-                    top: '40px',
+                    top: { xs: '10px', md: '30px' },
                     left: { xs, md, lg },
                     width: { xs: '90vw', md: '85vw', lg: '80vw' },
                     zIndex: '1999',
@@ -93,7 +92,7 @@ const NavBar = () => {
                     </List>
 
                     <Stack sx={{ display: { xs: 'none', md: 'flex' }, }}>
-                        <LogInGroup />
+                        <LogInGroup setIsDrawerOpen={setIsDrawerOpen} />
                     </Stack>
 
                     <Stack role="button" sx={{ display: { xs: 'block', md: 'none' }, }}>

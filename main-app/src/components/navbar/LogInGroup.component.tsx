@@ -3,10 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Stack, useTheme } from "@mui/joy"
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 
+type Props = {
+    setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-const LogInGroup = () => {
+const LogInGroup = ({ setIsDrawerOpen }: Props) => {
+
     const navigate = useNavigate();
     const theme = useTheme();
+
+    const handleClick = () => {
+        navigate('/login');
+        setIsDrawerOpen(false);
+    }
 
     return (
         <Stack
@@ -16,6 +25,7 @@ const LogInGroup = () => {
             alignItems='center'
             spacing={1}
             bgcolor='transparent'
+            onClick={handleClick}
         >
             <Button
                 color='neutral'
@@ -25,11 +35,8 @@ const LogInGroup = () => {
                     px: 4, py: 1.5,
                     fontSize: { xs: 'sm' },
                 }}
-                onClick={() => navigate('/login')}
                 endDecorator={<PermIdentityOutlinedIcon sx={{ color: 'currentcolor' }} />}
             >Log In</Button>
-
-
         </Stack>
     )
 }

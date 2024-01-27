@@ -9,6 +9,7 @@ import Layout from './layout/Layout.component';
 
 import PageLoaderSkeleton from "./components/pageLoaderSkeleton/PageLoaderSkeleton.component";
 import Box from "@mui/joy/Box";
+
 const Home = lazy(() => import('./routes/Home/Home'));
 const Resources = lazy(() => import('./routes/Resources/Resources'));
 const Pricing = lazy(() => import('./routes/Pricing/Pricing'));

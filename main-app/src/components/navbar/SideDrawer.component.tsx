@@ -47,7 +47,7 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                     display: 'flex',
                     flexDirection: 'column',
                     width: '85%',
-                    marginTop: '120px',
+                    marginTop: '80px',
                     mx: { xs, md, lg },
                     px: 3,
                     py: 2,
@@ -85,7 +85,7 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                         setIsDrawerOpen={setIsDrawerOpen}
                     />)}
                 </List>
-                <LogInGroup />
+                <LogInGroup setIsDrawerOpen={setIsDrawerOpen} />
             </Sheet>
         </Drawer>
     )

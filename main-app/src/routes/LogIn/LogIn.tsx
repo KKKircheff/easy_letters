@@ -36,7 +36,7 @@ const LogIn = () => {
             <Grid
                 container
                 justifyContent={{ xs: 'center', md: 'space-between' }}
-                padding={{ xs: `20px ${0}`, md: `11vh ${md}`, lg: `12vh ${xs}`, xl: `12vh ${0}` }}
+                padding={{ xs: `80px ${0}`, md: `11vh ${md}`, lg: `12vh ${xs}`, xl: `12vh ${0}` }}
                 spacing={1}
                 flexGrow='1'
                 maxWidth='1200px'
@@ -64,7 +64,7 @@ const LogIn = () => {
                     justifyContent='center' spacing={3}
                     border={{ xs: '0px solid transparent', md: `1px solid ${c.neutral[300]}` }}
                     borderRadius='lg'
-                    my={6} px={2} py={2}
+                    my={{ xs: 0, md: 5 }} px={2} py={2}
                 >
 
                     <Grid xs={10} md={12}>
