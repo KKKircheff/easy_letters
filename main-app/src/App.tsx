@@ -10,10 +10,12 @@ import Layout from './layout/Layout.component';
 
 import PageLoaderSkeleton from "./components/pageLoaderSkeleton/PageLoaderSkeleton.component";
 import Box from "@mui/joy/Box";
-const Home = lazy(() => import('./routes/Home/Home.component'));
-const Resources = lazy(() => import('./routes/Resources/Resources.component'));
-const Pricing = lazy(() => import('./routes/Pricing/Pricing.component'));
-const AiWriter = lazy(() => import('./routes/AI_Writer/AiWriter.component'));
+const Home = lazy(() => import('./routes/Home/Home'));
+const Resources = lazy(() => import('./routes/Resources/Resources'));
+const Pricing = lazy(() => import('./routes/Pricing/Pricing'));
+const AiWriter = lazy(() => import('./routes/AI_Writer/AiWriter'));
+const SignUp = lazy(() => import('./routes/SignUp/SignUp'));
+const LogIn = lazy(() => import('./routes/LogIn/LogIn'));
 
 // export type ToggleContextType = {
 //     toggleView: boolean;
@@ -62,6 +64,16 @@ function App() {
                     <Route path={`/ai-writer`} element={
                         <Suspense fallback={<PageLoaderSkeleton />}>
                             <AiWriter />
+                        </Suspense>
+                    } />
+                    <Route path={`/signup`} element={
+                        <Suspense fallback={<PageLoaderSkeleton />}>
+                            <SignUp />
+                        </Suspense>
+                    } />
+                    <Route path={`/login`} element={
+                        <Suspense fallback={<PageLoaderSkeleton />}>
+                            <LogIn />
                         </Suspense>
                     } />
                     <Route path={`/*`} element={
