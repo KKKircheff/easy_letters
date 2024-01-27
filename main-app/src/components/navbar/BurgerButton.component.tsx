@@ -2,8 +2,7 @@ import { IconButton } from "@mui/joy"
 
 import CloseIcon from '@mui/icons-material/Close';
 import Menu from '@mui/icons-material/Menu';
-
-import theme from '../../styles/theme';
+import { useTheme } from "@mui/joy";
 
 type Props = {
     isDrawerOpen: boolean,
@@ -11,6 +10,8 @@ type Props = {
 }
 
 const BurgerButton = ({ isDrawerOpen, setIsDrawerOpen }: Props) => {
+    const theme = useTheme();
+
     return (
         <IconButton
             variant='plain'

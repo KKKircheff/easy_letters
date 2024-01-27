@@ -2,11 +2,9 @@
 import signUp from '/assets/images/signup.jfif'
 import StyledInput from "../../components/styled-input/StyledInput.component"
 import { useNavigate } from 'react-router-dom';
-import theme from '../../styles/theme';
 
 import {
     Box,
-    Button,
     Card,
     CardCover,
     FormControl,
@@ -14,26 +12,37 @@ import {
     Grid,
     Typography,
     Link,
+    useTheme,
+    Divider,
+    Chip,
 } from "@mui/joy"
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import GoogleIcon from '../../assets/icons/Google.icon';
 
 import { styleVariables } from "../../styles/styleVariables"
+import GoogleButton from '../../components/buttons/google-button/GoogleButton.component';
+import DarkButton from '../../components/buttons/dark-button/DarkButton.component';
 
 const SignUp = () => {
     const navigate = useNavigate();
-    const { xs, sm, md, lg, xl } = styleVariables.layoutPadding;
+    const { xs, md } = styleVariables.layoutPadding;
+
+    const theme = useTheme();
+    const c = theme.vars.palette
+
     return (
         <Box>
             <Grid
                 container
                 justifyContent={{ xs: 'center', md: 'space-between' }}
-                padding={{ xs: `20px ${0}`, md: `11vh ${xs}`, lg: `12vh ${xs}`, xl: `12vh ${0}` }}
+                padding={{ xs: `20px ${0}`, md: `11vh ${md}`, lg: `12vh ${xs}`, xl: `12vh ${0}` }}
                 spacing={1}
                 flexGrow='1'
-                maxWidth='1000px'
+                maxWidth='1200px'
                 mx='auto'
             >
-                <Grid xs={12} md={5} mt={{ xs: 0, md: '100px' }}>
+                <Grid xs={12} md={5} xl={4} mt={{ xs: 0, md: '100px' }}>
                     <Card
                         sx={{
                             mx: 'auto',
@@ -50,9 +59,13 @@ const SignUp = () => {
                 </Grid>
 
                 <Grid
-                    container py={6}
-                    xs={12} md={6}
-                    justifyContent='center' spacing={2}>
+                    container
+                    xs={12} md={6} xl={6}
+                    justifyContent='center' spacing={1}
+                    border={{ xs: '0px solid transparent', md: `1px solid ${c.neutral[300]}` }}
+                    borderRadius='lg'
+                    my={6} px={2} py={2}
+                >
 
                     <Grid xs={10} md={12}>
                         <Typography level='h2' textAlign='left'>Sign Up</Typography>
@@ -87,49 +100,43 @@ const SignUp = () => {
                     </Grid>
 
                     <Grid xs={10} md={12}>
-
-                        <Button
+                        <DarkButton
                             color='neutral'
-                            sx={{
-                                width: '100%',
-                                bgcolor: 'neutral.800',
-                                borderRadius: theme.vars.radius.full,
-                                px: 4, py: 1.8,
-                                fontSize: { xs: 'md' },
-                                mt: '10px'
-                            }}
+                            sx={{ width: '100%', mt: '10px' }}
+                            onClick={() => navigate('/profile')}>Create Account
+                        </DarkButton>
+
+                        <Divider sx={{ mt: '6px', mx: 'auto', width: '80%' }}>
+                            <Chip
+                                variant="plain" color="neutral" size="md"
+                                sx={{ bgcolor: 'transparent', color: c.neutral[400] }}>
+                                or
+                            </Chip>
+                        </Divider>
+
+                        <GoogleButton
+                            variant='outlined'
+                            color='neutral'
+                            sx={{ width: '100%', mt: '6px' }}
                             onClick={() => navigate('/profile')}
-                            endDecorator={<ArrowForwardIosIcon sx={{ color: 'currentcolor', fontSize: 'md' }} />}>Create Account
-                        </Button>
-                        <Button
-                            variant='soft'
-                            color='danger'
-                            sx={{
-                                width: '100%',
-                                borderRadius: theme.vars.radius.full,
-                                px: 4, py: 1.8,
-                                fontSize: { xs: 'md' },
-                                mt: '15px',
-                                color: theme.vars.palette.danger[600]
-                            }}
-                            onClick={() => navigate('/profile')}
-                            endDecorator={<ArrowForwardIosIcon sx={{ color: 'currentcolor', fontSize: 'md' }} />}>Register With Google
-                        </Button>
+                            startDecorator={<GoogleIcon size={'2.5rem'} />}>Sign Up With Google
+                        </GoogleButton>
 
                         <Typography mt='16px' fontWeight='md' level='body-sm'>Already have an account?
                             <Link
                                 px={1}
                                 component="button"
-                                onClick={() => { navigate('/home') }}>Log in
+                                onClick={() => { navigate('/login') }}>Log in
                             </Link>
                         </Typography>
 
                         <Typography
-                            mt='10px'
+                            mt='8px'
                             mx='auto'
                             level='body-xs'
                             maxWidth='320px'
-                            sx={{ color: 'neutral.400' }}
+                            lineHeight='.8rem'
+                            sx={{ color: 'neutral.300' }}
                         >This site is protected by reCAPTCHA and Google Privacy Policy and Terms of Service apply. </Typography>
 
                     </Grid>

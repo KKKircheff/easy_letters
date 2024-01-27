@@ -5,7 +5,6 @@ import { lazy, Suspense } from 'react';
 import './App.scss';
 import AOS from 'aos'
 
-
 import Layout from './layout/Layout.component';
 
 import PageLoaderSkeleton from "./components/pageLoaderSkeleton/PageLoaderSkeleton.component";

@@ -4,11 +4,11 @@ import {
     Card,
     CardCover,
     Stack,
-    Typography
+    Typography,
+    useTheme,
 } from "@mui/joy"
 
 import heroHome from '/assets/images/heroHome.webp'
-import theme from "../../../styles/theme"
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from "react-router-dom";
 import { styleVariables } from "../../../styles/styleVariables";
@@ -17,6 +17,7 @@ import { iconGradientStyles } from "../../../styles/iconGradientStyles";
 const HeroHome = () => {
     const navigate = useNavigate();
     const { xs, md, lg } = styleVariables.layoutPadding;
+    const theme = useTheme()
 
     return (
         <Box>

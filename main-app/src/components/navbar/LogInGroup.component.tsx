@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Stack } from "@mui/joy"
+import { Button, Stack, useTheme } from "@mui/joy"
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
-import theme from '../../styles/theme';
 
 
 const LogInGroup = () => {
     const navigate = useNavigate();
+    const theme = useTheme();
 
     return (
         <Stack
@@ -25,9 +25,9 @@ const LogInGroup = () => {
                     px: 4, py: 1.5,
                     fontSize: { xs: 'sm' },
                 }}
-                onClick={() => navigate('/profile')}
+                onClick={() => navigate('/login')}
                 endDecorator={<PermIdentityOutlinedIcon sx={{ color: 'currentcolor' }} />}
-            >Alexandra</Button>
+            >Log In</Button>
 
 
         </Stack>

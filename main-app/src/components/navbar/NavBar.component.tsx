@@ -4,11 +4,10 @@ import { useState } from 'react';
 import Box from '@mui/joy/Box';
 import Stack from '@mui/joy/Stack';
 import Sheet from '@mui/joy/Sheet';
-
 import List from '@mui/joy/List';
 import Typography from '@mui/joy/Typography';
 
-import theme from '../../styles/theme';
+import { useTheme } from '@mui/joy';
 import { styleVariables } from '../../styles/styleVariables';
 
 import ListMenuItem from './ListMenuItem.component';
@@ -18,6 +17,9 @@ import BurgerButton from './BurgerButton.component';
 
 const NavBar = () => {
     const navigate = useNavigate();
+    const theme = useTheme();
+
+
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const { xs, md, lg } = styleVariables.layoutPadding;
 
