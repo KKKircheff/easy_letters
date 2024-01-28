@@ -62,6 +62,7 @@ export const theme = extendTheme({
                     700: '#006163',
                     800: '#00373a',
                     900: '#001816',
+                    solidHoverBg: 'var(--joy-palette-primary-400)',
                 },
                 secondary: {
                     50: '#dadeec',
@@ -124,6 +125,7 @@ export const theme = extendTheme({
                     '700': '#4d7c0f',
                     '800': '#3f6212',
                     '900': '#365314',
+                    solidHoverBg: 'var(--joy-palette-success-400)',
                 },
                 warning: {
                     50: '#fff4db',
@@ -136,6 +138,7 @@ export const theme = extendTheme({
                     700: '#845700',
                     800: '#522900',
                     900: '#360000',
+                    solidHoverBg: 'var(--joy-palette-warning-400)',
                 },
             },
         },

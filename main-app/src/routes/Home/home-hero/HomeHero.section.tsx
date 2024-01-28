@@ -15,7 +15,7 @@ import { styleVariables } from "../../../styles/styleVariables";
 import { iconGradientStyles } from "../../../styles/iconGradientStyles";
 import DarkButton from "../../../components/buttons/dark-button/DarkButton.component";
 
-const HeroHome = () => {
+const HomeHero = () => {
     const navigate = useNavigate();
     const { xs, md, lg } = styleVariables.layoutPadding;
     const theme = useTheme()
@@ -72,4 +72,4 @@ const HeroHome = () => {
     )
 }
 
-export default HeroHome
+export default HomeHero
