@@ -1,6 +1,5 @@
-import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
-import CardActions from '@mui/joy/CardActions';
+import Stack from '@mui/joy/Stack';
 import Chip from '@mui/joy/Chip';
 import Divider from '@mui/joy/Divider';
 import List from '@mui/joy/List';
@@ -12,8 +11,9 @@ import Check from '@mui/icons-material/Check';
 
 import { Box, useTheme } from '@mui/joy';
 import { styleVariables } from '../../styles/styleVariables';
-// import { iconGradientStyles } from '../../styles/iconGradientStyles';
+import { iconGradientStyles } from '../../styles/iconGradientStyles';
 import DarkButton from '../buttons/dark-button/DarkButton.component';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
     plan: {
@@ -23,25 +23,27 @@ type Props = {
         price: number,
         priceDescription: string,
         buttonText: string,
+        buttonLink: string,
     }
 }
 
 const PriceCard = ({ plan }: Props) => {
-    const { xs, md, lg } = styleVariables.layoutPadding;
+    const { xs } = styleVariables.layoutPadding;
     const theme = useTheme();
     const c = theme.vars.palette;
-
+    const navigate = useNavigate()
 
     return (
-        <Box boxShadow='0' padding='0' flex={1}>
+        <Box padding='0' flex={1}>
             <Card
                 size="lg"
                 variant="plain"
                 sx={{
                     mx: 'auto',
-                    bgcolor: 'transparent',
-                    px: { xs, md: 2, lg: 4 },
-                    border: `1px solid ${c.neutral[300]}`,
+                    bgcolor: 'white',
+                    px: { xs, md: 4, lg: 4 },
+                    boxShadow: 'sm',
+                    // border: `1px solid ${c.neutral[300]}`,
                     maxWidth: '500px',
                 }}
             >
@@ -54,7 +56,7 @@ const PriceCard = ({ plan }: Props) => {
                     {plan.chip.toUpperCase()}
                 </Chip>
 
-                <Typography level="h2">{plan.title.toUpperCase()}</Typography>
+                <Typography level="h2" fontWeight='800' sx={iconGradientStyles.scondaryPrimary}>{plan.title.toUpperCase()}</Typography>
 
                 <Divider inset="none" />
 
@@ -65,8 +67,15 @@ const PriceCard = ({ plan }: Props) => {
                     {plan.listItems.map((listItem) => {
                         return (
                             <ListItem key={listItem}>
-                                <ListItemDecorator>
-                                    <Check color='primary' />
+                                <ListItemDecorator  >
+                                    <Check
+                                        sx={{
+                                            color: 'white',
+                                            borderRadius: 'md',
+                                            background: `linear-gradient(45deg ,${theme.vars.palette.secondary[500]}, ${theme.vars.palette.primary[500]} )`!,
+                                            opacity: .8,
+                                            WebkitTextFillColor: 'transparent'!,
+                                        }} />
                                 </ListItemDecorator>
                                 {listItem}
                             </ListItem>
@@ -76,33 +85,43 @@ const PriceCard = ({ plan }: Props) => {
 
                 <Divider inset="none" sx={{ my: 1 }} />
 
-                <CardActions
+                <Stack
                     sx={{
                         display: 'flex',
                         flexDirection: { xs: 'column', xl: 'row' },
-                        justifyContent: { sm: 'space-between' },
+                        justifyContent: { sm: 'center', lg: 'space-between' },
+                        alignItems: 'center',
                         gap: 4,
                     }}>
 
-                    <Typography level="title-lg" >
-                        {plan.price}€{' '}
-                        <Typography fontSize="sm" textColor="text.tertiary">
+                    <Typography>
+                        <Typography
+                            level='h1'
+                            fontWeight='700'
+                            textColor='neutral.700'
+                        //  sx={iconGradientStyles.scondaryPrimary}
+                        >
+                            {plan.price}{' '}{' '}
+                        </Typography>
+                        <Typography fontSize="sm" fontWeight='300' textColor="text.icon">
                             {plan.priceDescription}
                         </Typography>
                     </Typography>
 
                     <DarkButton
                         color="neutral"
+                        onClick={() => navigate(plan.buttonLink)}
                         sx={{
                             py: '6px',
                             px: '10%',
+                            width: '50%',
                             border: `2px solid ${c.neutral[500]}`,
                             fontWeight: 'md',
-                            fontSize: 'sm'
+                            fontSize: 'sm',
                         }}>{plan.buttonText}
                     </DarkButton>
 
-                </CardActions>
+                </Stack>
             </Card>
         </Box>
 

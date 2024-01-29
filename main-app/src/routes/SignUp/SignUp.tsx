@@ -74,35 +74,35 @@ const SignUp = () => {
                     <Grid xs={10} md={6}>
                         <FormControl>
                             <FormLabel sx={{ fontWeight: 'bold', mb: '8px' }}>First name</FormLabel>
-                            <StyledInput size='lg' variant="outlined" color='neutral' />
+                            <StyledInput required size='lg' variant="outlined" color='neutral' />
                         </FormControl>
                     </Grid>
 
                     <Grid xs={10} md={6}>
                         <FormControl>
                             <FormLabel sx={{ fontWeight: 'bold', mb: '8px' }}>Family name</FormLabel>
-                            <StyledInput size='lg' color="neutral" />
+                            <StyledInput required size='lg' color="neutral" />
                         </FormControl>
                     </Grid>
 
                     <Grid xs={10} md={12}>
                         <FormControl >
                             <FormLabel sx={{ fontWeight: 'bold', mb: '8px' }}>Email</FormLabel>
-                            <StyledInput size='lg' color="neutral" />
+                            <StyledInput required type='email' size='lg' color="neutral" />
                         </FormControl>
                     </Grid>
 
                     <Grid xs={10} md={12}>
                         <FormControl>
                             <FormLabel sx={{ fontWeight: 'bold', mb: '8px' }}>Password</FormLabel>
-                            <StyledInput size='lg' color="neutral" />
+                            <StyledInput required type='password' size='lg' color="neutral" />
                         </FormControl>
                     </Grid>
 
                     <Grid xs={10} md={12}>
                         <DarkButton
                             color='neutral'
-                            sx={{ width: '100%', mt: '10px' }}
+                            sx={{ width: '100%', mt: '12px' }}
                             onClick={() => navigate('/profile')}>Create Account
                         </DarkButton>
 

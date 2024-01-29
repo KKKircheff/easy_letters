@@ -42,10 +42,11 @@ const LogIn = () => {
                 maxWidth='1200px'
                 mx='auto'
             >
-                <Grid xs={12} md={5} xl={4} mt={{ xs: 0, md: '100px' }}>
+                <Grid xs={12} md={5} xl={4} mt={{ xs: 0 }}>
                     <Card
                         sx={{
                             mx: 'auto',
+                            my: '80px',
                             width: { xs: '80%', md: '100%' },
                             maxWidth: { xs: '800px', md: '600px' },
                             aspectRatio: { xs: '1', sm: '1.5', md: '1' },
@@ -61,7 +62,7 @@ const LogIn = () => {
                 <Grid
                     container
                     xs={12} md={6} xl={6}
-                    justifyContent='center' spacing={3}
+                    justifyContent='center' spacing={2}
                     border={{ xs: '0px solid transparent', md: `1px solid ${c.neutral[300]}` }}
                     borderRadius='lg'
                     my={{ xs: 0, md: 5 }} px={2} py={2}
@@ -75,21 +76,21 @@ const LogIn = () => {
                     <Grid xs={10} md={12}>
                         <FormControl >
                             <FormLabel sx={{ fontWeight: 'bold', mb: '8px' }}>Email</FormLabel>
-                            <StyledInput size='lg' color="neutral" />
+                            <StyledInput required type='email' size='lg' color="neutral" />
                         </FormControl>
                     </Grid>
 
                     <Grid xs={10} md={12}>
                         <FormControl>
                             <FormLabel sx={{ fontWeight: 'bold', mb: '8px' }}>Password</FormLabel>
-                            <StyledInput size='lg' color="neutral" />
+                            <StyledInput required type='password' size='lg' color="neutral" />
                         </FormControl>
                     </Grid>
 
                     <Grid xs={10} md={12}>
                         <DarkButton
                             color='neutral'
-                            sx={{ width: '100%', mt: '10px' }}
+                            sx={{ width: '100%', mt: '18px' }}
                             onClick={() => navigate('/profile')}>Log In
                         </DarkButton>
 

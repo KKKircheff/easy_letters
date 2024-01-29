@@ -8,7 +8,7 @@ const GoogleButton = styled(Button)(({ theme }) => ({
     fontSize: 'medium',
     fontWeight: theme.fontWeight.md,
     color: theme.vars.palette.neutral[600],
-    padding: '4px',
+    padding: '4px 8px 4px 0',
     transition: 'all .3s easy-in',
     '&:hover': {
         backgroundColor: theme.vars.palette.neutral[200],

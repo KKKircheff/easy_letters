@@ -13,9 +13,11 @@ const PricingPlans = () => {
     return (
         <Stack
             direction={{ xs: 'column', lg: 'row' }}
-            spacing={2}
+            spacing={{ xs: 6, lg: 2 }}
             justifyContent='space-around'
             px={{ xs, md, lg }}
+            py={6}
+            bgcolor={`${c.neutral[50]}`}
         >
             {plans.map((plan) => {
                 return (
