@@ -6,3 +6,12 @@
 #44A248
 
 https://colordesigner.io/color-scheme-builder?mode=lch#04BEBE-FFBF00-F4511F-004C8F-44A248
+
+
+
+#04BEBE
+#FFAC05
+#FF0505
+#004C8F
+#05E105
+https://colordesigner.io/color-scheme-builder?mode=lch#04BEBE-FFAC05-FF0505-004C8F-05E105

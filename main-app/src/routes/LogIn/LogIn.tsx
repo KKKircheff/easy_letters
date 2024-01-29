@@ -46,7 +46,6 @@ const LogIn = () => {
                     <Card
                         sx={{
                             mx: 'auto',
-                            my: '80px',
                             width: { xs: '80%', md: '100%' },
                             maxWidth: { xs: '800px', md: '600px' },
                             aspectRatio: { xs: '1', sm: '1.5', md: '1' },

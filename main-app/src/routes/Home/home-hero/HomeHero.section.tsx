@@ -44,16 +44,15 @@ const HomeHero = () => {
                     <Typography level='h1' fontWeight='800' fontSize='inherit'>Your Job Application Letters</Typography>
                     <DarkButton
                         color='neutral'
-                        size="sm"
                         sx={{
                             // borderRadius: theme.vars.radius.full,
                             mt: '7%',
                             width: { xs: '70%', md: '30%' },
-                            fontSize: { xs: 'sm' },
+                            fontSize: { xs: 'md' },
                         }}
-                        onClick={() => navigate('/ai-writer')}
+                        onClick={() => navigate('/signup')}
                         endDecorator={<ArrowForwardIosIcon sx={{ fontSize: 'sm' }} />}
-                    >Get One Free</DarkButton>
+                    >Start now</DarkButton>
                 </Stack>
 
                 <Card sx={{
