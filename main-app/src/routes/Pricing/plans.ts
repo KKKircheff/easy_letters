@@ -32,7 +32,7 @@ export const plans = [
         ],
         price: 9,
         priceDescription: 'euro per set',
-        buttonText: 'Buy plan',
+        buttonText: 'Buy a plan',
         buttonLink: '/signup',
     },
     {
@@ -50,7 +50,7 @@ export const plans = [
         ],
         price: 25,
         priceDescription: 'euro per bundle',
-        buttonText: 'Buy plan',
+        buttonText: 'Buy a plan',
         buttonLink: '/signup',
     },
 ];

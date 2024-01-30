@@ -117,7 +117,7 @@ const PriceCard = ({ plan }: Props) => {
                         sx={{
                             py: '10px',
                             px: '10%',
-                            width: '50%',
+                            width: '170px',
                             border: `2px solid ${c.neutral[500]}`,
                             fontWeight: 'md',
                             fontSize: 'sm',

@@ -22,7 +22,7 @@ const GradientIconTextCard = ({ paragraph }: Props) => {
                 <Typography level='h3' textAlign='left' >
                     {paragraph.title}
                 </Typography>
-                <Typography fontSize={'largeTitle'} textAlign='center' lineHeight='1px' pr={2} pt={.2}>
+                <Typography fontSize={'largeTitle'} lineHeight='1px' pr={2} pt={0}>
                     {paragraph.icon}
                 </Typography>
             </Stack>

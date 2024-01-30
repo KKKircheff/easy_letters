@@ -34,7 +34,7 @@ const HomeThreeResumes = () => {
                         fontSize={{ xs: 'md', md: 'lg' }}
                         textAlign={{ xs: 'left', md: 'center' }}
                         pt={3}
-                    > Professional templates out of the box. No accident typos or grammar errors. Carefully built content. Every language expression measured towards position specific key-words. Job position, company culture and information extraction. And much much more!</Typography>
+                    > Professional templates out of the box. No accident typos or grammar errors. Carefully built content. Every language expression is measured towards job's position  key-words. And much much more!</Typography>
                     <DarkButton
                         sx={{ mt: 6, px: 6, '&:hover': { bgcolor: 'transparent' } }}
                         onClick={() => navigate('/signup')}

@@ -46,43 +46,43 @@ const HomeProcessStepper = () => {
             bottomDivider: true,
         },
         {
-            title: 'Log into your profile',
+            title: 'Log into your account',
             text: 'In case you are a registered user but your plan has expired get or still do not have a plan choose between Free, OneShot or Pro Active.',
             icon: <PermIdentityIcon sx={{ fontSize: '1.3rem' }} />,
             topDivider: true,
             bottomDivider: true,
         },
         {
-            title: 'Profile Creator with AI',
-            text: "Fill in all necessary profile fields. If you have an older resume or cover letter, just upload the file. Our AI will extract as much as possible information and fill in the necessary fields",
+            title: 'Profile completion',
+            text: "Fill in all necessary profile fields. If you have an older resume or cover letter, just upload the file. The AI Profile assistant will extract as much as possible information and fill in the necessary fields",
             icon: <AutoModeIcon sx={{ fontSize: '1.3rem' }} />,
             topDivider: true,
             bottomDivider: true,
         },
         {
             title: 'Time for fun! Go to AI Writer',
-            text: "There on the top you will see option buttons to connect 'job position link' and 'company`s culture' page. Add them and click generate. The assisting AI Writer will go through all uploaded data till now. It will check towards the relevant job position key-words, use appropriate language and create a professional tailored resume and cover letter for you.",
+            text: "On the top of AI Writer page you will see option buttons to connect 'job ad position link' and 'company`s culture' page. Add them and click generate. The assisting AI Writer will go through all uploaded data till now. It will check towards the relevant job position key-words, use appropriate language and create a professional tailored resume and cover letter for you.",
             icon: <AddLinkIcon sx={{ fontSize: '1.3rem' }} />,
             topDivider: true,
             bottomDivider: true,
         },
         {
-            title: 'Time for a careful check',
-            text: 'Read the ready content. In case corrections needed tell AI writer what corrections you need or fill just correct the text by yourself. Do not forget at end to run AI error and grammar check',
+            title: 'Then carefully check',
+            text: 'Read the ready content. In case fine tuning is needed tell AI writer what corrections you want. Or refactor by yourself if you prefer. Do not forget at end to run AI error and grammar check!',
             icon: <ChecklistIcon sx={{ fontSize: '1.3rem' }} />,
             topDivider: true,
             bottomDivider: true,
         },
         {
             title: 'Choose a template',
-            text: "Easy Letters' web applications will save you money and time again! You do not have to pay for templates. Just choose some of ours 'Free' or 'Pro' templates and you have a brilliant final result.",
+            text: "Easy Letters' will save you money and time again! Just choose one from our 'Free' or designed 'Pro' templates. Now you have a brilliant final result.",
             icon: <FormatAlignLeftIcon sx={{ fontSize: '1.3rem' }} />,
             topDivider: true,
             bottomDivider: true,
         },
         {
-            title: 'Time to download',
-            text: "Just click create and download and you'll have receive your resume and cover letter collection. ",
+            title: 'Time to export',
+            text: "Just click create and download and you'll receive your resume and cover letter collection in .docx or pdf. ",
             icon: <CloudDownloadIcon sx={{ fontSize: '1.3rem' }} />,
             topDivider: true,
             bottomDivider: false,
@@ -93,18 +93,20 @@ const HomeProcessStepper = () => {
         <Stack spacing={8} direction={{ xs: 'column', md: 'row' }}>
             <Typography
                 level='h2'
-                fontSize={{ xs: 'xLargeTitle', md: 'xLargeTitle' }}
+                pl={2}
                 fontWeight='800'
                 minWidth={{ xs: '100px', md: '280px' }}
+                fontSize={{ xs: 'xLargeTitle', md: 'xLargeTitle' }}
+                textAlign={{ xs: 'left', md: 'right' }}
             >Seamless Process Flow</Typography>
 
             <Box maxWidth='600px'>
                 {stepperData.map((stepper) => {
                     return (
-                        <Stack key={stepper.title} direction='row' spacing={5} >
+                        <Stack key={stepper.title} direction='row' spacing={{ xs: 2, md: 8 }} >
 
                             <Stack direction='column' gap={1}>
-                                {stepper.topDivider && stepper.bottomDivider && <StyledDivider orientation="vertical" />}
+                                {/* {stepper.topDivider && stepper.bottomDivider && <StyledDivider orientation="vertical" />} */}
                                 <StepIndicator variant="solid" color="primary"
                                     sx={{
                                         background: `linear-gradient(90deg ,${c.secondary[400]}, ${c.primary[500]} )`!,
@@ -122,7 +124,7 @@ const HomeProcessStepper = () => {
                                     level='title-md'
                                     fontSize={{ xs: 'md', md: 'lg' }}
                                     textColor={c.neutral[600]}
-                                    pb={stepper.bottomDivider ? 3 : 0}
+                                    pb={stepper.bottomDivider ? 8 : 0}
                                 >{stepper.text}</Typography>
                             </Stack>
                         </Stack>

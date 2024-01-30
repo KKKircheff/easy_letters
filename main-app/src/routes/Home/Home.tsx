@@ -15,7 +15,10 @@ const Home = () => {
 
     return (
         <Box sx={{ width: '100%' }}>
-            <HomeHero />
+            <Box pb={6}>
+                <HomeHero />
+            </Box>
+
             <Box
                 pt={10}
                 sx={{ px: { xs, md, lg } }}
