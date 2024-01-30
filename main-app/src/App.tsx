@@ -9,8 +9,7 @@ import Layout from './layout/Layout.component';
 
 import PageLoaderSkeleton from "./components/pageLoaderSkeleton/PageLoaderSkeleton.component";
 import Box from "@mui/joy/Box";
-
-const Home = lazy(() => import('./routes/Home/Home'));
+import Home from "./routes/Home/Home";
 const Resources = lazy(() => import('./routes/Resources/Resources'));
 const Pricing = lazy(() => import('./routes/Pricing/Pricing'));
 const AiWriter = lazy(() => import('./routes/AI_Writer/AiWriter'));
@@ -47,39 +46,38 @@ function App() {
             {/* <ToggleContext.Provider value={{ toggleView, setToggleView }}> */}
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={
-                        <Suspense fallback={<PageLoaderSkeleton />}>
-                            <Home />
-                        </Suspense>} />
+                    <Route index element={<Home />} />
+
                     <Route path={`/resources`} element={
                         <Suspense fallback={<PageLoaderSkeleton />}>
                             <Resources />
                         </Suspense>
                     } />
+
                     <Route path={`/pricing`} element={
                         <Suspense fallback={<PageLoaderSkeleton />}>
                             <Pricing />
                         </Suspense>
                     } />
+
                     <Route path={`/ai-writer`} element={
                         <Suspense fallback={<PageLoaderSkeleton />}>
                             <AiWriter />
                         </Suspense>
                     } />
+
                     <Route path={`/signup`} element={
                         <Suspense fallback={<PageLoaderSkeleton />}>
                             <SignUp />
                         </Suspense>
                     } />
+
                     <Route path={`/login`} element={
                         <Suspense fallback={<PageLoaderSkeleton />}>
                             <LogIn />
                         </Suspense>
                     } />
-                    <Route path={`/*`} element={
-                        <Suspense fallback={<PageLoaderSkeleton />}>
-                            <Home />
-                        </Suspense>} />
+                    <Route path={`/*`} element={<Home />} />
                 </Route>
             </Routes>
             {/* </ToggleContext.Provider> */}

@@ -42,7 +42,7 @@ const LogIn = () => {
                 maxWidth='1200px'
                 mx='auto'
             >
-                <Grid xs={12} md={5} xl={4} mt={{ xs: 0 }}>
+                <Grid xs={12} md={5} xl={4} mt={{ xs: 0, md: '80px', xl: '100px' }}>
                     <Card
                         sx={{
                             mx: 'auto',

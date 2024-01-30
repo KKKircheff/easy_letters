@@ -14,6 +14,8 @@ import { styleVariables } from '../../styles/styleVariables';
 import { iconGradientStyles } from '../../styles/iconGradientStyles';
 import DarkButton from '../buttons/dark-button/DarkButton.component';
 import { useNavigate } from 'react-router-dom';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 
 type Props = {
     plan: {
@@ -29,8 +31,8 @@ type Props = {
 
 const PriceCard = ({ plan }: Props) => {
     const { xs } = styleVariables.layoutPadding;
-    const theme = useTheme();
-    const c = theme.vars.palette;
+    const c = useTheme().palette;
+
     const navigate = useNavigate()
 
     return (
@@ -72,7 +74,7 @@ const PriceCard = ({ plan }: Props) => {
                                         sx={{
                                             color: 'white',
                                             borderRadius: 'md',
-                                            background: `linear-gradient(45deg ,${theme.vars.palette.secondary[500]}, ${theme.vars.palette.primary[500]} )`!,
+                                            background: `linear-gradient(45deg ,${c.secondary[500]}, ${c.primary[500]} )`!,
                                             opacity: .8,
                                             WebkitTextFillColor: 'transparent'!,
                                         }} />
@@ -111,8 +113,9 @@ const PriceCard = ({ plan }: Props) => {
                     <DarkButton
                         color="neutral"
                         onClick={() => navigate(plan.buttonLink)}
+                        endDecorator={<ArrowForwardIosIcon sx={{ fontSize: 'sm' }} />}
                         sx={{
-                            py: '6px',
+                            py: '10px',
                             px: '10%',
                             width: '50%',
                             border: `2px solid ${c.neutral[500]}`,

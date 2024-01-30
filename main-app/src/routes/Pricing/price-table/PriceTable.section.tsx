@@ -1,6 +1,6 @@
 
 import { styleVariables } from '../../../styles/styleVariables';
-import { plansTableChecks } from '../pricing-plans/plans';
+import { plansTableChecks } from '../plans';
 import { Box, Grid, Stack, useTheme } from '@mui/joy';
 import PriceTableRow from '../../../components/price-table-row/PriceTableRow.component';
 

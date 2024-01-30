@@ -2,7 +2,7 @@
 
 import { Stack, useTheme } from '@mui/joy';
 import { styleVariables } from "../../../styles/styleVariables";
-import { plans } from './plans';
+import { plans } from '../plans';
 import PriceCard from '../../../components/price-card/PriceCard';
 
 const PricingPlans = () => {
