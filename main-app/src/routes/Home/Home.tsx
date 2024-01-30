@@ -43,13 +43,6 @@ const Home = () => {
                 mt={6}
                 sx={{ px: { xs, md, lg } }}
                 bgcolor={'neutral.100'}>
-                <HomeAboutTemplates />
-            </Box> */}
-
-            {/* <Box
-                mt={6}
-                sx={{ px: { xs, md, lg } }}
-                bgcolor={'neutral.100'}>
                 <HomeKeyWords />
             </Box> */}
             <UnderNavBar />

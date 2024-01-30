@@ -26,14 +26,12 @@ const PriceTableRow = ({ rowData }: Props) => {
     }
     return (
         <Grid container
-            fontSize='sm'
-            pl='3vw' pr='1vw' pt={1.8} pb={1.8}
-            fontWeight='400'
-
-
+            pl='3vw' pr='1vw' pt={2} pb={1.7}
+            fontWeight='500'
             sx={{
                 color: c.neutral[500],
-                borderTop: `1px solid ${c.neutral[300]}`
+                borderBottom: `1.5px solid ${c.neutral[200]}`,
+                fontSize: '.95rem',
             }}
         >
             <Grid xs={6} textAlign='left' >{rowData.title}</Grid>

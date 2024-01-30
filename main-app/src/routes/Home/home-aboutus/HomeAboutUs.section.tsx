@@ -11,24 +11,10 @@ const HomeAboutUs = () => {
     const theme = useTheme();
     const c = theme.vars.palette;
 
-    // const paragraphs = [
-    //     {
-    //         content: "Create a profile with ease or just upload your old CV or resume. Our smart AI Profile assistant will extract all need information, check for errors, polish the information and fill in as much as possible fields on your profile page. Check and correct if needed the your profile info. Fill in all the required empty fields, if needed.",
-    //         icon: <ProfileData startColor={c.primary[500]} middleColor={c.secondary[400]} endColor={c.danger[200]} />
-    //     },
-    //     {
-    //         content: "Supply AI Writer with a link pointing to the job position page /optional/. It will extract the information and tailor your CV and Resume skillset. You can interact with AI writer or edit manually the content till you have the perfect result.",
-    //         icon: <WebLink startColor={c.primary[500]} middleColor={c.secondary[400]} endColor={c.danger[200]} />
-    //     },
-    //     {
-    //         content: "Provide AI writer with a link to 'companies culture' page /optional/. It will extract the information. Then personalize and finetune and you motivation letter in seconds. You can interact with AI writer or edit manually the content till you have the perfect result.",
-    //         icon: <WebLink startColor={c.primary[500]} middleColor={c.secondary[400]} endColor={c.danger[200]} />
-    //     },
-    // ]
 
     const paragraphs = [
         {
-            title: 'AI Profile Assistant',
+            title: 'AI Profile assistant',
             content: "Log In or Sign Up. Navigate to profile. Upload an old CV or a resume... Booom! A professional polished profile only for few second! Just fill in the rest required fields, if needed.",
             icon: <ProfileData startColor={c.primary[500]} middleColor={c.secondary[400]} endColor={c.danger[200]} />
         },
@@ -39,10 +25,11 @@ const HomeAboutUs = () => {
         },
         {
             title: 'Another link for a tailored cover letter...?',
-            content: "Of course! Provide AI Writer with company's `Culture` page link, contact person name... few seconds... Congratulations! You have personalized cover letter! Check and fine tune again.",
+            content: "Of course! Provide AI Writer with company's 'Culture' page link, then a contact name... few seconds... Congratulations! You have personalized cover letter! Check and fine tune again.",
             icon: <WebLink startColor={c.primary[500]} middleColor={c.secondary[400]} endColor={c.danger[200]} />
         },
     ]
+
     return (
         <Box
             display='flex'
@@ -53,13 +40,16 @@ const HomeAboutUs = () => {
                 level='h3'
                 px={{ xs: 2, md: 0 }}
                 fontSize={{ md: 'largeTitle' }}
-                maxWidth='950px'
+                // level='h3'
+                // fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
+                fontWeight='700'
+                maxWidth='960px'
                 textAlign='left'>
                 We powerd
                 <Typography sx={iconGradientStyles.scondaryPrimary}> AI Writer </Typography>
                 with the latest
                 <Typography sx={iconGradientStyles.scondaryPrimary}> cutting edge technologies. </Typography>
-                It will help you to build professional resume and cover letters within minutes!</Typography>
+                It is ready to help you with composing professional resumes and cover letters within minutes!</Typography>
             <Box
                 pt={10}
                 fontWeight={500}

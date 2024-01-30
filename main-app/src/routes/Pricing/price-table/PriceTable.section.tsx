@@ -18,7 +18,7 @@ const PriceTable = () => {
                 marginX: 'auto',
             }}>
             <Stack
-                borderRadius='sm'
+                borderRadius='lg'
                 overflow='hidden'
                 sx={{
                     boxShadow: 'md',
@@ -30,9 +30,11 @@ const PriceTable = () => {
                     xs={12}
                     bgcolor={c.neutral[50]}
                     fontSize={{ xs: 'sm', md: 'sm' }} pl='3vw' pr='2vw' pt={2.5} pb={2}
+                    sx={{ borderBottom: `1.5px solid ${c.neutral[200]}` }}
                     fontWeight='600'
                 >
-                    <Grid xs={6} textAlign='left' >Features</Grid>
+
+                    <Grid xs={6} textAlign='left'>Features</Grid>
                     <Grid xs={2} >Free</Grid>
                     <Grid xs={2} >One Shot</Grid>
                     <Grid xs={2} >Pro Active</Grid>

@@ -95,8 +95,8 @@ const HomeProcessStepper = () => {
                 level='h2'
                 fontSize={{ xs: 'xLargeTitle', md: 'xLargeTitle' }}
                 fontWeight='800'
-
-            >Seamless process flow</Typography>
+                minWidth={{ xs: '100px', md: '280px' }}
+            >Seamless Process Flow</Typography>
 
             <Box maxWidth='600px'>
                 {stepperData.map((stepper) => {
