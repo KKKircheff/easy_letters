@@ -16,7 +16,7 @@ const PricingPlans = () => {
             spacing={{ xs: 6, lg: 2 }}
             justifyContent='space-around'
             px={{ xs, md, lg }}
-            py={6}
+            py={0}
         >
             {plans.map((plan) => {
                 return (

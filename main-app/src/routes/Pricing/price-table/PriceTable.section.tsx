@@ -28,6 +28,7 @@ const PriceTable = () => {
                 <Grid
                     container
                     xs={12}
+                    alignItems='center'
                     bgcolor={c.warning[200]}
                     color={c.neutral[500]}
                     fontWeight='600'

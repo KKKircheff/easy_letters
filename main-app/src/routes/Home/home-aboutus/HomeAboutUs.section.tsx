@@ -75,7 +75,7 @@ const HomeAboutUs = () => {
             </Typography>
 
             <Box
-                pt={10}
+                pt={{ xs: 5, md: 10 }}
                 fontWeight={500}
                 maxWidth='950px'
                 textAlign='left'>

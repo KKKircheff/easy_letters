@@ -10,9 +10,9 @@ const PricingHero = () => {
         <Box
             display='flex'
             flexDirection={{ xs: 'column', md: 'row' }}
-            gap={2}
-            py={8}
-            pt={{ xs: 1, md: 5 }}
+            gap={{ xs: 5, md: 2 }}
+            pb={{ xs: 5, md: 10 }}
+            pt={{ xs: 2, md: 5 }}
             px={{ xs, md, lg }}
         >
 

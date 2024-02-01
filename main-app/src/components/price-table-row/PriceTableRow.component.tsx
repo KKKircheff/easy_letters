@@ -28,6 +28,7 @@ const PriceTableRow = ({ rowData }: Props) => {
         <Grid container
             pl='3vw' pr='1vw' pt={2} pb={1.7}
             fontWeight='500'
+            alignItems='center'
             sx={{
                 color: c.neutral[500],
                 borderTop: `1px solid ${c.warning[100]}`,

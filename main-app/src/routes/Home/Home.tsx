@@ -19,7 +19,7 @@ const Home = () => {
             </Box>
 
             <Box
-                pt={10}
+                pt={{ xs: 5, md: 10 }}
                 sx={{ px: { xs, md, lg } }}
                 bgcolor={'neutral.100'}>
                 <HomeAboutUs />
@@ -28,15 +28,15 @@ const Home = () => {
             <Box
                 boxSizing='border-box'
                 overflow='hidden'
-                pt={{ xs: 14, md: 14, lg: 16 }}
-                pb={{ xs: 10, md: 10, lg: 12 }}
+                pt={{ xs: 7, md: 14, lg: 16 }}
+                pb={{ xs: 7, md: 10, lg: 12 }}
                 sx={{ px: { xs, md, lg } }}
                 bgcolor={'neutral.100'}>
                 <HomeThreeResumes />
             </Box>
 
             <Box
-                pt={12}
+                pt={8}
                 sx={{ px: { xs, md, lg } }}
             >
                 <HomeProcessStepper />
