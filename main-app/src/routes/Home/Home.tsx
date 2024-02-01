@@ -4,7 +4,6 @@ import HomeHero from './home-hero/HomeHero.section';
 import HomeProcessStepper from './home-process-stepper/HomeProcessStepper.section';
 import HomeAboutUs from './home-aboutus/HomeAboutUs.section';
 import HomeThreeResumes from './home-three-resumes/HomeThreeResumes.section';
-import HomeAboutTemplates from './home-about-templates/HomeAboutTemplates.section';
 import HomeKeyWords from './home-key-words/HomeKeyWords.section';
 import UnderNavBar from '../../components/navbar/UnderNavBar.component';
 
@@ -42,12 +41,14 @@ const Home = () => {
             >
                 <HomeProcessStepper />
             </Box>
-            {/* <Box
-                mt={6}
+            <Box
+                mt={10}
+                bgcolor={'neutral.100'}
+                py={6}
                 sx={{ px: { xs, md, lg } }}
-                bgcolor={'neutral.100'}>
+            >
                 <HomeKeyWords />
-            </Box> */}
+            </Box>
             <UnderNavBar />
         </Box>
     )

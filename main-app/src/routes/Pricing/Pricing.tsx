@@ -11,8 +11,9 @@ const Pricing = () => {
             <UnderNavBar />
             <PricingHero />
             <PricingPlans />
-            <UnderNavBar />
-            <PricingTable />
+            <Box py={8}>
+                <PricingTable />
+            </Box>
             <UnderNavBar />
         </Box>
     )

@@ -42,11 +42,13 @@ const PriceCard = ({ plan }: Props) => {
                 variant="plain"
                 sx={{
                     mx: 'auto',
+                    py: 4,
                     bgcolor: 'white',
                     px: { xs, md: 4, lg: 4 },
-                    boxShadow: 'sm',
-                    // border: `1px solid ${c.neutral[300]}`,
+                    // boxShadow: 'sm',
                     maxWidth: '500px',
+                    borderRadius: 'xl',
+                    border: `1px solid ${c.neutral[300]}`
                 }}
             >
                 <Chip
@@ -80,10 +82,10 @@ const PriceCard = ({ plan }: Props) => {
                                         }} />
                                 </ListItemDecorator>
                                 {listItem}
-                            </ListItem>
+                            </ListItem >
                         )
                     })}
-                </List>
+                </List >
 
                 <Divider inset="none" sx={{ my: 1 }} />
 
@@ -93,7 +95,7 @@ const PriceCard = ({ plan }: Props) => {
                         flexDirection: { xs: 'column', xl: 'row' },
                         justifyContent: { sm: 'center', lg: 'space-between' },
                         alignItems: 'center',
-                        gap: 4,
+                        gap: { xs: 2, lg: 1 }
                     }}>
 
                     <Typography>
@@ -101,7 +103,6 @@ const PriceCard = ({ plan }: Props) => {
                             level='h1'
                             fontWeight='700'
                             textColor='neutral.700'
-                        //  sx={iconGradientStyles.scondaryPrimary}
                         >
                             {plan.price}{' '}{' '}
                         </Typography>
@@ -116,7 +117,7 @@ const PriceCard = ({ plan }: Props) => {
                         endDecorator={<ArrowForwardIosIcon sx={{ fontSize: 'sm' }} />}
                         sx={{
                             py: '10px',
-                            px: '10%',
+                            px: '10px',
                             width: '170px',
                             border: `2px solid ${c.neutral[500]}`,
                             fontWeight: 'md',
@@ -125,8 +126,8 @@ const PriceCard = ({ plan }: Props) => {
                     </DarkButton>
 
                 </Stack>
-            </Card>
-        </Box>
+            </Card >
+        </Box >
 
 
     );

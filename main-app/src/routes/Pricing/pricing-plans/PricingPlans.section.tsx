@@ -17,7 +17,6 @@ const PricingPlans = () => {
             justifyContent='space-around'
             px={{ xs, md, lg }}
             py={6}
-            bgcolor={`${c.neutral[100]}`}
         >
             {plans.map((plan) => {
                 return (

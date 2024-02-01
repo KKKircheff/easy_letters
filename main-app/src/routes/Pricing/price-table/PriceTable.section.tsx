@@ -21,17 +21,18 @@ const PriceTable = () => {
                 borderRadius='lg'
                 overflow='hidden'
                 sx={{
-                    boxShadow: 'md',
-                    border: `1px solid ${c.neutral[200]}`
+                    border: `1px solid ${c.warning[200]}`,
+                    pb: .8
                 }}>
 
                 <Grid
                     container
                     xs={12}
-                    bgcolor={c.neutral[50]}
-                    fontSize={{ xs: 'sm', md: 'sm' }} pl='3vw' pr='2vw' pt={2.5} pb={2}
-                    sx={{ borderBottom: `1.5px solid ${c.neutral[200]}` }}
+                    bgcolor={c.warning[200]}
+                    color={c.neutral[500]}
                     fontWeight='600'
+                    fontSize={{ xs: 'sm', md: 'sm' }} pl='3vw' pr='2vw' pt={2.7} pb={2}
+                    sx={{ borderBottom: `1.5px solid ${c.warning[200]}` }}
                 >
 
                     <Grid xs={6} textAlign='left'>Features</Grid>
