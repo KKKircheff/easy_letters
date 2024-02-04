@@ -93,10 +93,10 @@ const HomeProcessStepper = () => {
         <Stack spacing={8} direction={{ xs: 'column', md: 'row' }}>
             <Typography
                 level='h2'
-                pl={2}
+                fontSize={{ xs: 'mediumTitle', md: 'largeTitle' }}
                 fontWeight='800'
+                pl={2}
                 minWidth={{ xs: '100px', md: '280px' }}
-                fontSize={{ xs: 'xLargeTitle', md: 'xLargeTitle' }}
                 textAlign={{ xs: 'left', md: 'right' }}
             >Seamless Process Flow</Typography>
 
@@ -118,14 +118,23 @@ const HomeProcessStepper = () => {
                                 {stepper.bottomDivider && <StyledDivider orientation="vertical" />}
                             </Stack>
 
-                            <Stack flexGrow='1' textAlign='left' spacing={1}>
-                                <Typography level='h2'>{stepper.title}</Typography>
+                            <Stack flexGrow='1' textAlign='left' spacing={2}>
                                 <Typography
-                                    level='title-md'
-                                    fontSize={{ xs: 'md', md: 'lg' }}
-                                    textColor={c.neutral[600]}
+                                    level='h2'
+                                    fontSize={{ xs: 'mediumTitle', md: 'largeTitle' }}
+                                    fontWeight='800'
+                                    lineHeight={'2.2rem'}
+                                    pb={1}
+                                >{stepper.title}
+                                </Typography>
+
+                                <Typography
+                                    textAlign='left'
+                                    textColor='neutral.500'
+                                    fontWeight='500'
                                     pb={stepper.bottomDivider ? 8 : 0}
-                                >{stepper.text}</Typography>
+                                >{stepper.text}
+                                </Typography>
                             </Stack>
                         </Stack>
 

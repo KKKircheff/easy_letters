@@ -6,6 +6,7 @@ import HomeAboutUs from './home-aboutus/HomeAboutUs.section';
 import HomeThreeResumes from './home-three-resumes/HomeThreeResumes.section';
 import HomeKeyWords from './home-key-words/HomeKeyWords.section';
 import UnderNavBar from '../../components/navbar/UnderNavBar.component';
+import Footer from '../../components/footer/Footer.component';
 
 import { styleVariables } from '../../styles/styleVariables';
 
@@ -19,7 +20,7 @@ const Home = () => {
             </Box>
 
             <Box
-                pt={{ xs: 5, md: 10 }}
+                pt={{ xs: 5, md: 12 }}
                 sx={{ px: { xs, md, lg } }}
                 bgcolor={'neutral.100'}>
                 <HomeAboutUs />
@@ -28,15 +29,16 @@ const Home = () => {
             <Box
                 boxSizing='border-box'
                 overflow='hidden'
-                pt={{ xs: 7, md: 14, lg: 16 }}
-                pb={{ xs: 7, md: 10, lg: 12 }}
+                pt={{ xs: 7, md: 16, lg: 16 }}
+                pb={{ xs: 7, md: 12, lg: 12 }}
                 sx={{ px: { xs, md, lg } }}
                 bgcolor={'neutral.100'}>
                 <HomeThreeResumes />
             </Box>
 
             <Box
-                pt={8}
+                pt={{ xs: 8, md: 16 }}
+                pb={{ xs: 2, md: 4 }}
                 sx={{ px: { xs, md, lg } }}
             >
                 <HomeProcessStepper />
@@ -44,12 +46,15 @@ const Home = () => {
             <Box
                 mt={10}
                 bgcolor={'neutral.100'}
-                py={6}
+                pt={10}
+                pb={16}
                 sx={{ px: { xs, md, lg } }}
             >
                 <HomeKeyWords />
             </Box>
-            <UnderNavBar />
+            <Box>
+                <Footer />
+            </Box>
         </Box>
     )
 }

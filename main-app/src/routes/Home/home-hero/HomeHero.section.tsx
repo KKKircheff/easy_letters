@@ -1,6 +1,5 @@
 import {
     Box,
-    Button,
     Card,
     CardCover,
     Stack,
@@ -9,6 +8,7 @@ import {
 } from "@mui/joy"
 
 import heroHome from '/assets/images/heroHome.webp'
+
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from "react-router-dom";
 import { styleVariables } from "../../../styles/styleVariables";
@@ -57,12 +57,13 @@ const HomeHero = () => {
 
                 <Card sx={{
                     width: { xs: '95%', md: '37%' },
-                    aspectRatio: { xs: '1.5', sm: '2', md: '1' },
+                    aspectRatio: { xs: '1.2', sm: '2', md: '1' },
                     transform: { xs: 'skew(0)', md: 'skew(-4deg, 0)' },
+                    overflow: 'hidden',
                     borderRadius: theme.vars.radius.xl,
                     m: { xs: '3px auto 0 auto', md: '10px 2% 0 0' },
                 }}>
-                    <CardCover>
+                    <CardCover sx={{ transform: { xs: 'skew(0)', md: 'skew(+4deg, 0) scale(1.1)' }, }}>
                         <img src={heroHome} alt="flow hero image" />
                     </CardCover>
                 </Card>

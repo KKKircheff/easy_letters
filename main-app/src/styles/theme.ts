@@ -16,6 +16,7 @@ declare module '@mui/joy/styles' {
     }
 
     interface FontSize {
+        smallTitle: string;
         mediumTitle: string;
         largeTitle: string;
         xLargeTitle: string;
@@ -39,6 +40,7 @@ export const theme = extendTheme({
     },
 
     fontSize: {
+        smallTitle: '1.4rem',
         mediumTitle: '1.7rem',
         largeTitle: '2rem',
         xLargeTitle: '2.3rem',
@@ -109,6 +111,9 @@ export const theme = extendTheme({
                 //     800: '#27272a',
                 //     900: '#18181b',
                 // },
+                neutral: {
+                    800: '#22272a',
+                },
                 danger: {
                     '50': '#ffdfd4',
                     '100': '#ffbfab',
@@ -201,6 +206,9 @@ export const theme = extendTheme({
                 //     800: '#27272a',
                 //     900: '#18181b',
                 // },
+                neutral: {
+                    800: '#22272a',
+                },
                 danger: {
                     '50': '#ffdfd4',
                     '100': '#ffbfab',

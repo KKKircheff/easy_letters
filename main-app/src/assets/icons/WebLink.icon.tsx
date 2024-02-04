@@ -3,7 +3,7 @@ const WebLink = ({ startColor = 'currentColor', middleColor = 'currentColor', en
         <svg
             xmlns="http://www.w3.org/2000/svg"
             className="svg-icon"
-            style={{ width: "1em", height: "1em", verticalAlign: "middle" }}
+            style={{ width: ".9em", height: ".9em", verticalAlign: "middle" }}
             viewBox="0 0 1024 1024"
         >
             {/* important this defs block below is mandatort */}

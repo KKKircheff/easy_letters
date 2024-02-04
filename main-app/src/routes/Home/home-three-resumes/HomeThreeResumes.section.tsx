@@ -22,16 +22,15 @@ const HomeThreeResumes = () => {
                 <Box width={{ xs: '98%', md: '60%' }} >
                     <Typography
                         level='h2'
-                        fontSize={{ xs: 'mediumTitle', md: 'xLargeTitle' }}
-                        pb={2}
+                        fontSize={{ xs: 'mediumTitle', md: 'largeTitle' }}
                         fontWeight='800'
+                        pb={2}
                     >Only 3% of resumes make it past the first round. Be in TOP 3!
                     </Typography>
 
                     <Typography
-                        level='title-md'
-                        textColor='neutral.600'
-                        fontSize={{ xs: 'md', md: 'lg' }}
+                        textColor='neutral.500'
+                        fontWeight='500'
                         textAlign={{ xs: 'left', md: 'center' }}
                         pt={3}
                     > Professional templates out of the box. No accident typos or grammar errors. Carefully built content. Every language expression is measured towards job's position  key-words. And much much more!</Typography>

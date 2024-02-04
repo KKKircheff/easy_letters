@@ -2,14 +2,24 @@ import { Box, Button, Typography } from "@mui/joy"
 import UnderNavBar from "../../components/navbar/UnderNavBar.component"
 import TextConfirmed from "../../assets/icons/TextConfirmed.icon"
 import { useTheme } from "@mui/joy"
+import Footer from "../../components/footer/Footer.component"
+import ResourceHero from "./resource-hero/ResourceHero.section"
+import ResourceGuidelines from "./resource-guidelines/ResourceGuidelines.section"
+import { styleVariables } from "../../styles/styleVariables"
 
 const Resources = () => {
-    const theme = useTheme();
-    const c = theme.vars.palette;
+    const c = useTheme().palette;
+    const { xs, md, lg } = styleVariables.layoutPadding
+
     return (
         <Box>
-            <UnderNavBar />
-            <Typography level='h1' fontSize='xxLargeTitle'>Resources</Typography>
+            <ResourceHero />
+            <Box
+                py={{ xs: 5, md: 10 }}
+                sx={{ px: { xs, md, lg } }}
+                bgcolor={'neutral.100'}>
+                <ResourceGuidelines />
+            </Box>
 
             <Typography level='h1' fontSize='largeTitle' py='200px'>
                 <TextConfirmed
@@ -18,15 +28,7 @@ const Resources = () => {
                     endColor={c.danger[200]} />
                 <Typography level="title-lg" px={1}> Some nice gradient icons.</Typography>
             </Typography>
-
-            {/* <Button variant="solid" sx={{ border: '2px solid' }} color="danger"> Danger</Button>
-            <Button variant="solid" sx={{ border: '2px solid' }} color="warning"> Warning</Button>
-            <Button variant="solid" sx={{ border: '2px solid' }} color="primary"> Primary</Button>
-            <Button variant="solid" sx={{ border: '2px solid' }} color="secondary"> Secondary</Button>
-            <Button variant="solid" sx={{ border: '2px solid' }} color="neutral"> Neutral</Button>
-            <Button variant="solid" loading sx={{ border: '2px solid' }} color="neutral"> Neutral</Button>
-            <Button variant="solid" disabled color="neutral"> Neutral</Button>
-            <Button variant="solid" sx={{ border: '2px solid' }} color="success"> Sucess</Button> */}
+            <Footer />
         </Box>
     )
 }

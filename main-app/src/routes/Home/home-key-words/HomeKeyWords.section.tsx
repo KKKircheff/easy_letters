@@ -37,54 +37,37 @@ const HomeKeyWords = () => {
             <Grid container
                 columns={12}
                 justifyContent='center'
-                alignItems='center'
-                spacing={{ xs: 0, md: 4 }}>
+                // alignItems='center'
+                spacing={{ xs: 2, md: 4, lg: 8 }}>
 
-                <Grid xs={12} md={5} lg={5} pt={3}>
+                <Grid xs={12} md={5} lg={5}>
                     <Typography
-                        fontSize={{ xs: 'xLargeTitle', lg: 'xxxLargeTitle' }}
-                        textAlign={{ xs: 'center', md: 'right' }}
-                        lineHeight={{ xs: '3rem', md: '3.5rem' }}
+                        sx={{ textWrap: 'balance', ...iconGradientStyles.scondaryPrimary, }}
+                        level='h2'
+                        fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
                         fontWeight='800'
-                    >What are
+                        textAlign={{ xs: 'center', md: 'left' }}
+                    >Empowered Key-Words?
                     </Typography>
-                    <Stack
-                        sx={iconGradientStyles.scondaryPrimary}
-                        direction={{ xs: 'row', md: 'column' }}
-                        flexWrap='wrap'
-                        spacing={{ xs: '1rem', md: 0 }}
-                        justifyContent={{ xs: 'center', md: 'right' }}
-                        alignItems={{ xs: 'left' }} >
-                        <Typography
-                            alignSelf='right'
-                            lineHeight={{ xs: '3rem', md: '3.5rem' }}
-                            fontSize={{ xs: 'xLargeTitle', lg: 'xxxLargeTitle' }}
-                            fontWeight='800'
-                            textAlign={{ xs: 'center', md: 'right' }}
-                        >Empowered
-                        </Typography>
-
-                        <Typography
-                            fontSize={{ xs: 'xLargeTitle', lg: 'xxxLargeTitle' }}
-                            textAlign={{ xs: 'center', md: 'right' }}
-                            fontWeight='800'
-                            lineHeight={{ xs: '3rem', md: '3.5rem' }}
-                        >Key-Words?
-                        </Typography>
-                    </Stack>
                 </Grid>
 
                 <Grid xs={12} md={7} lg={7}>
-                    <Typography level='h2' textAlign={{ xs: 'center', md: 'left' }} py={3} >
+                    <Typography
+                        level='h2'
+                        fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
+                        fontWeight='800'
+                        pb={3}
+                        textAlign={{ xs: 'center', md: 'left' }}
+                    >
                         And how do we cover you?
                     </Typography>
 
-                    <Typography level='title-md' textAlign='left' textColor='neutral.500'>
-                        A lot of HR departments use smart algorithms for inital candidate selection. These algorithms search for specific words in the applicant's resumes and cover letters. These words we call 'empowered key-words'.
-                    </Typography>
-
-                    <Typography level='title-md' textAlign='left' textColor='neutral.500' pb={2}>
-                        So we trained our AI Writer to include in the documents the proper key-words.'
+                    <Typography
+                        textAlign='left'
+                        textColor='neutral.500'
+                        fontWeight='500'
+                        pb={2}>
+                        A lot of HR departments use smart algorithms for inital candidate selection. These algorithms search for specific words amoung the applicant's resumes and cover letters. These words we call 'empowered key-words'. Our AI Writer remixes application's topic specific key-words in your letters.'
                     </Typography>
                 </Grid>
             </Grid>
@@ -92,21 +75,25 @@ const HomeKeyWords = () => {
             <Grid
                 container
                 columns={12}
-                spacing={{ xs: 0, md: 4 }}
+                spacing={{ xs: 0, md: 4, lg: 8 }}
             >
 
                 <Grid xs={12} md={5} lg={5} pb={2}>
                     <Typography
                         level='h2'
-                        fontWeight='700'
-                        textAlign={{ xs: 'center', md: 'right' }}
-                    >Example:
+                        fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
+                        fontWeight='800'
+                        textColor='neutral.800'
+                        textAlign={{ xs: 'center', md: 'left' }}
+                    >Example
                     </Typography>
 
                     <Typography
                         level='h2'
+                        fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
                         fontWeight='800'
-                        textAlign={{ xs: 'center', md: 'right' }}
+                        textColor='neutral.500'
+                        textAlign={{ xs: 'center', md: 'left' }}
                     >Software Engineer
                     </Typography>
                 </Grid>
@@ -123,7 +110,7 @@ const HomeKeyWords = () => {
                         {keyWords.map((keyWord, index) =>
                             <Typography
                                 key={index}
-                                level='title-md'
+                                fontWeight='500'
                                 textAlign='left'
                                 textColor='primary.600'>
                                 {keyWord}

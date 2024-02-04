@@ -17,7 +17,7 @@ const HomeAboutUs = () => {
 
     const paragraphs = [
         {
-            title: 'AI Advanced Algorithms',
+            title: 'Advanced AI Algorithms',
             content: "Under the hood Easy Letters' smart algorithms use OpenAI's GPT4, Google Gemini Pro and Perplexity AI Large Language Models. Then our software engineers and linguists fine-tune them for best results.",
             icon: <AIicon
                 startColor={c.primary[500]}
@@ -26,7 +26,7 @@ const HomeAboutUs = () => {
             textSize: 'xxxLargeTitle'
         },
         {
-            title: 'Smart Profile With AI',
+            title: 'Smart Profiles With AI',
             content: "Log in or Sign up. Go to profile page. Upload an old CV or resume... Booom! A professional polished profile only for a couple of seconds! Fill in the rest required fields, only if needed.",
             icon: <ProfileData
                 startColor={c.primary[500]}
@@ -35,7 +35,7 @@ const HomeAboutUs = () => {
             textSize: 'xLargeTitle'
         },
         {
-            title: 'Drop Job Announcement Link ',
+            title: 'Drop A Job Announcement Link ',
             content: "Wow, AI Writer tailored the resume with your best matched skills for less than an eye blink! Needs some adjustments? Just explain to the assistant or type it by yourself!",
             icon: <WebLinkExternal
                 startColor={c.primary[500]}
@@ -44,7 +44,7 @@ const HomeAboutUs = () => {
             textSize: 'xxxLargeTitle'
         },
         {
-            title: "Share Company's Values Web Page",
+            title: "Share Employer's Values Web Page",
             content: "Maybe add a contact name too... few seconds... Congratulations! You have personalized cover letter! Check and fine tune again.",
             icon: <WebLink
                 startColor={c.primary[500]}
@@ -61,17 +61,23 @@ const HomeAboutUs = () => {
             alignItems='center'>
 
             <Typography
-                level='h3'
-                mx='auto'
-                px={{ xs: 1, md: 2 }}
-                fontSize={{ md: 'largeTitle' }}
+                level='h2'
+                fontSize={{ xs: 'smallTitle', md: 'largeTitle' }}
                 fontWeight='700'
+                px={{ xs: 0, md: 2 }}
+                py={2}
                 maxWidth='960px'
-                textAlign='left'>
-                {/* <Typography sx={iconGradientStyles.scondaryPrimary}> AI Writer </Typography> */}
-                Empowerd with the latest
-                <Typography sx={iconGradientStyles.scondaryPrimary}> cutting edge technologies </Typography>
-                Easy Letter's AI assistant is here to help you! Compose professional cover letters and resumes within minutes!
+                textAlign='center'>
+                {'Empowered with the latest'}
+
+                <Typography
+                    level='h2'
+                    fontSize={{ xs: 'smallTitle', md: 'largeTitle' }}
+                    sx={iconGradientStyles.scondaryPrimary}>
+                    {' cutting edge technologies '}
+                </Typography>
+
+                {"Easy Letters AI assistant is here to help you! Compose professional cover letters and resumes within minutes!"}
             </Typography>
 
             <Box

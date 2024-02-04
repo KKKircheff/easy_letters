@@ -1,35 +1,39 @@
-import { Box, Stack, Typography, useTheme } from "@mui/joy"
+import { Box, List, ListItem, Stack, Typography, useTheme } from "@mui/joy"
 import { ReactNode } from "react"
 import { iconGradientStyles } from "../../styles/iconGradientStyles"
 
 type Props = {
     paragraph: {
         title: string,
-        content: string,
+        content: string[],
         icon: ReactNode,
         textSize: string,
     }
 }
-const GradientIconTextCard = ({ paragraph }: Props) => {
+const GradientListCard = ({ paragraph }: Props) => {
 
     const c = useTheme().palette
     return (
         <Box
             display='flex'
             flexDirection={{ xs: 'column' }}
-            gap={{ xs: 2, md: 4 }}
+            gap={{ xs: 1, md: 0 }}
             bgcolor='white'
             px={{ xs: 2, md: 4 }}
-            py={3}
+            pt={3}
+            pb={2}
             borderRadius='md'
             maxWidth='700px'
             height='100%'
             sx={{ color: 'inherit' }}
         >
-            <Stack direction='row-reverse' justifyContent='space-between' gap={{ xs: 1, md: 3 }} alignItems='center'>
-
+            <Stack
+                direction='row-reverse'
+                justifyContent='space-between'
+                gap={{ xs: 1, md: 3 }}
+                pb={{ xs: 2, md: 4 }}
+                alignItems='center'>
                 <Typography
-
                     level='h2'
                     fontSize='smallTitle'
                     fontWeight='700'
@@ -38,6 +42,7 @@ const GradientIconTextCard = ({ paragraph }: Props) => {
                     flexGrow='1'>
                     {paragraph.title}
                 </Typography>
+
                 <Box
                     width='45px' height='45px'
                     minWidth='45px'
@@ -69,14 +74,29 @@ const GradientIconTextCard = ({ paragraph }: Props) => {
                 </Box>
             </Stack >
 
-            <Typography
-                maxWidth={{ sm: '100%' }}
-                textColor='neutral.500'
-                fontWeight='500'>
-                {paragraph.content}
-            </Typography>
+            {paragraph.content.map((list, index) => {
+                return (
+                    <Typography
+                        key={index}
+                        maxWidth={{ sm: '100%' }}
+                        textColor='neutral.500'
+                        fontWeight='500'>
+                        {index < 1 ?
+                            list :
+                            <List marker='disc'>
+                                <ListItem sx={{ color: 'neutral.500' }}>
+                                    <Typography level='body-md' textColor='neutral.500'> {list}</Typography>
+                                </ListItem>
+                            </List>
+                        }
+                    </Typography>
+                )
+            })
+
+            }
+
         </Box >
     )
 }
 
-export default GradientIconTextCard
+export default GradientListCard
