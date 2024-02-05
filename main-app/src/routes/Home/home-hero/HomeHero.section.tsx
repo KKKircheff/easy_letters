@@ -23,7 +23,6 @@ const HomeHero = () => {
     return (
         <Box>
             <Stack direction={{ xs: 'column-reverse', md: 'row' }} justifyContent='space-between'>
-
                 <Stack
                     direction='column'
                     justifyContent='flex-end'
@@ -32,21 +31,40 @@ const HomeHero = () => {
                     flexGrow='1'
                     gap={0.2}
                     sx={{
-                        padding: { xs: `50px ${xs} 10px ${xs}`, md: '0 0 5% 0' },
+                        p: { xs: `50px ${xs} 10px ${xs}`, md: '12% 0 5% 0' },
                         paddingLeft: { xs, md, lg },
                         width: { xs: '100%', md: '50%' },
-                        fontSize: { xs: '10vw', sm: '7vw', md: '3vw' },
+                        fontSize: { xs: '9vw', sm: '7vw', md: '3vw' },
                     }}>
-                    <Typography level='h1' fontWeight='800' fontSize='inherit'>AI Writer -</Typography>
-                    <Typography level='h1' fontWeight='800' fontSize='inherit'
+
+                    <Typography
+                        level='h1'
+                        fontWeight='800'
+                        fontSize='inherit'
+                    >AI WRITER -
+                    </Typography>
+
+                    <Typography
+                        level='h1'
+                        fontWeight='800'
+                        fontSize='inherit'
                         sx={iconGradientStyles.scondaryPrimary}
-                    >Build With Ease</Typography>
-                    <Typography level='h1' fontWeight='800' fontSize='inherit'>Your Job Application Letters</Typography>
+                    >BUILD WITH EASE
+                    </Typography>
+
+                    <Typography
+                        level='h1'
+                        fontWeight='800'
+                        fontSize='inherit'
+                        maxWidth='80%'
+                    >{'Your Job Application Letters'.toUpperCase()}
+                    </Typography>
+
                     <DarkButton
                         color='neutral'
                         sx={{
                             // borderRadius: theme.vars.radius.full,
-                            mt: '7%',
+                            mt: { xs: '15%', md: '7%' },
                             width: { xs: '70%', md: '30%' },
                             fontSize: { xs: 'md' },
                         }}

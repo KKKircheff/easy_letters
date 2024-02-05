@@ -40,14 +40,14 @@ const HomeKeyWords = () => {
                 // alignItems='center'
                 spacing={{ xs: 2, md: 4, lg: 8 }}>
 
-                <Grid xs={12} md={5} lg={5}>
+                <Grid xs={12} md={5} lg={5} px={1}>
                     <Typography
                         sx={{ textWrap: 'balance', ...iconGradientStyles.scondaryPrimary, }}
                         level='h2'
                         fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
                         fontWeight='800'
                         textAlign={{ xs: 'center', md: 'left' }}
-                    >Empowered Key-Words?
+                    >{'Empowered Key-Words?'.toUpperCase()}
                     </Typography>
                 </Grid>
 
@@ -58,8 +58,7 @@ const HomeKeyWords = () => {
                         fontWeight='800'
                         pb={3}
                         textAlign={{ xs: 'center', md: 'left' }}
-                    >
-                        And how do we cover you?
+                    >{'And how do we cover you?'.toUpperCase()}
                     </Typography>
 
                     <Typography
@@ -78,20 +77,26 @@ const HomeKeyWords = () => {
                 spacing={{ xs: 0, md: 4, lg: 8 }}
             >
 
-                <Grid xs={12} md={5} lg={5} pb={2}>
+                <Grid xs={12} md={5} lg={5} px={1} pb={2}>
                     <Typography
+                        // level='h2'
+                        // fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
+                        // fontWeight='800'
                         level='h2'
-                        fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
-                        fontWeight='800'
+                        fontSize='mediumTitle'
+                        fontWeight='700'
                         textColor='neutral.800'
                         textAlign={{ xs: 'center', md: 'left' }}
                     >Example
                     </Typography>
 
                     <Typography
+                        // level='h2'
+                        // fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
+                        // fontWeight='800'
                         level='h2'
-                        fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
-                        fontWeight='800'
+                        fontSize='mediumTitle'
+                        fontWeight='700'
                         textColor='neutral.500'
                         textAlign={{ xs: 'center', md: 'left' }}
                     >Software Engineer

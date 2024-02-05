@@ -25,7 +25,7 @@ const HomeThreeResumes = () => {
                         fontSize={{ xs: 'mediumTitle', md: 'largeTitle' }}
                         fontWeight='800'
                         pb={2}
-                    >Only 3% of resumes make it past the first round. Be in TOP 3!
+                    >{'Only 3% of resumes make it past the first round. Be in TOP 3!'.toUpperCase()}
                     </Typography>
 
                     <Typography

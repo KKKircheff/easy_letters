@@ -35,7 +35,7 @@ const HomeAboutUs = () => {
             textSize: 'xLargeTitle'
         },
         {
-            title: 'Drop A Job Announcement Link ',
+            title: 'Drop The Job Position Link ',
             content: "Wow, AI Writer tailored the resume with your best matched skills for less than an eye blink! Needs some adjustments? Just explain to the assistant or type it by yourself!",
             icon: <WebLinkExternal
                 startColor={c.primary[500]}
@@ -45,7 +45,7 @@ const HomeAboutUs = () => {
         },
         {
             title: "Share Employer's Values Web Page",
-            content: "Maybe add a contact name too... few seconds... Congratulations! You have personalized cover letter! Check and fine tune again.",
+            content: "And add a contact name too... few seconds... Congratulations! You have personalized cover letter! Check and fine tune again.",
             icon: <WebLink
                 startColor={c.primary[500]}
                 middleColor={c.secondary[400]}
@@ -62,22 +62,34 @@ const HomeAboutUs = () => {
 
             <Typography
                 level='h2'
-                fontSize={{ xs: 'smallTitle', md: 'largeTitle' }}
+                fontSize={{ xs: 'smallTitle', sm: 'mediumTitle', md: 'largeTitle' }}
                 fontWeight='700'
-                px={{ xs: 0, md: 2 }}
+                px={{ xs: 0, md: 0 }}
                 py={2}
-                maxWidth='960px'
+                maxWidth='900px'
                 textAlign='center'>
                 {'Empowered with the latest'}
 
                 <Typography
                     level='h2'
-                    fontSize={{ xs: 'smallTitle', md: 'largeTitle' }}
+                    fontSize={{ xs: 'smallTitle', sm: 'mediumTitle', md: 'largeTitle' }}
                     sx={iconGradientStyles.scondaryPrimary}>
                     {' cutting edge technologies '}
                 </Typography>
 
-                {"Easy Letters AI assistant is here to help you! Compose professional cover letters and resumes within minutes!"}
+                {"Easy Letters AI assistant is here to help you!"}
+            </Typography>
+
+
+            <Typography
+                level='h2'
+                fontSize={{ xs: 'smallTitle', sm: 'mediumTitle', md: 'largeTitle' }}
+                fontWeight='700'
+                px={{ xs: 0, md: 0 }}
+                py={2}
+                maxWidth='800px'
+                textAlign='center'>
+                {'Compose professional cover letters and resumes within minutes!'}
             </Typography>
 
             <Box
@@ -95,7 +107,7 @@ const HomeAboutUs = () => {
                     sx={{ fontSize: 'md', fontWeight: '500', color: 'neutral.600' }}>
                     {paragraphs.map((paragraph, index) => {
                         return (
-                            <Grid xs={12} md={6}>
+                            <Grid key={index} xs={12} md={6}>
                                 <GradientIconTextCard key={index} paragraph={paragraph} />
                             </Grid>
                         )

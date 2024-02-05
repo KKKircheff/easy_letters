@@ -11,8 +11,8 @@ const PricingHero = () => {
             display='flex'
             flexDirection={{ xs: 'column', md: 'row' }}
             gap={{ xs: 5, md: 2 }}
-            pb={{ xs: 5, md: 10 }}
             pt={{ xs: 10, md: 14 }}
+            pb={{ xs: 5, md: 10 }}
             pr={{ xs, md }}
             pl={{ xs, md: md }}
         >
@@ -46,18 +46,18 @@ const PricingHero = () => {
                 spacing={{ xs: 2, md: 2, lg: 2 }}
             >
                 <Typography
-                    level='h2'
-                    fontSize={{ xs: 'largeTitle', md: 'xxLargeTitle' }}
+                    level='h1'
+                    fontSize={{ xs: '9vw', sm: '7vw', md: '3vw' }}
                     fontWeight={800}
-                >Time Is Money!
+                >TIME IS MONEY
                 </Typography>
 
                 <Typography
-                    level='h2'
+                    level='h1'
                     pb={1}
                     fontWeight={800}
-                    fontSize={{ xs: 'mediumTitle', md: 'xLargeTitle' }}
-                    sx={iconGradientStyles.scondaryPrimary}>Save Both With Our AI Writer
+                    fontSize={{ xs: '5vw', sm: '5vw', md: '2.5vw' }}
+                    sx={iconGradientStyles.scondaryPrimary}>SAVE BOTH WITH OUR AI WRITER
                 </Typography>
 
                 <Typography

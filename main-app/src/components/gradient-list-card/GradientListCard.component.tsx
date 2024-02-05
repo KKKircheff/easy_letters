@@ -19,9 +19,8 @@ const GradientListCard = ({ paragraph }: Props) => {
             flexDirection={{ xs: 'column' }}
             gap={{ xs: 1, md: 0 }}
             bgcolor='white'
-            px={{ xs: 2, md: 4 }}
-            pt={3}
-            pb={2}
+            px={{ xs: 3, md: 4 }}
+            py={3}
             borderRadius='md'
             maxWidth='700px'
             height='100%'
@@ -38,15 +37,15 @@ const GradientListCard = ({ paragraph }: Props) => {
                     fontSize='smallTitle'
                     fontWeight='700'
                     textAlign='right'
-                    maxWidth='80%'
+                    maxWidth='83%'
                     flexGrow='1'>
-                    {paragraph.title}
+                    {paragraph.title.toUpperCase()}
                 </Typography>
 
                 <Box
-                    width='45px' height='45px'
-                    minWidth='45px'
-                    maxWidth='45px'
+                    width='40px' height='40px'
+                    minWidth='40px'
+                    maxWidth='40px'
                     display='flex'
                     justifyContent='center'
                     alignItems='center'
@@ -58,13 +57,12 @@ const GradientListCard = ({ paragraph }: Props) => {
                         display='flex'
                         alignItems='center'
                         justifyContent='center'
-                        width='92%'
-                        height='92%'
+                        width='91%'
+                        height='91%'
                         bgcolor='white'
                         borderRadius='50%' >
-
                         <Typography
-                            fontSize='xLargeTitle'
+                            fontSize='largeTitle'
                             lineHeight='1px'
                             textAlign='center'
                             borderRadius={'50%'}
@@ -76,20 +74,21 @@ const GradientListCard = ({ paragraph }: Props) => {
 
             {paragraph.content.map((list, index) => {
                 return (
-                    <Typography
-                        key={index}
-                        maxWidth={{ sm: '100%' }}
-                        textColor='neutral.500'
-                        fontWeight='500'>
+                    <Box key={index}>
                         {index < 1 ?
-                            list :
-                            <List marker='disc'>
+                            <Typography
+                                maxWidth={{ sm: '100%' }}
+                                textColor='neutral.500'
+                                fontWeight='500'>
+                                {list}
+                            </Typography>
+                            : <List marker='disc' sx={{ py: 0 }}>
                                 <ListItem sx={{ color: 'neutral.500' }}>
                                     <Typography level='body-md' textColor='neutral.500'> {list}</Typography>
                                 </ListItem>
                             </List>
                         }
-                    </Typography>
+                    </Box>
                 )
             })
 

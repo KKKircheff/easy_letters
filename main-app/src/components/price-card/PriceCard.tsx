@@ -43,9 +43,8 @@ const PriceCard = ({ plan }: Props) => {
                 sx={{
                     mx: 'auto',
                     py: 4,
-                    bgcolor: 'white',
                     px: { xs, md: 4, lg: 4 },
-                    // boxShadow: 'sm',
+                    bgcolor: 'white',
                     maxWidth: '500px',
                     borderRadius: 'xl',
                     border: `1px solid ${c.neutral[300]}`
@@ -60,7 +59,12 @@ const PriceCard = ({ plan }: Props) => {
                     {plan.chip.toUpperCase()}
                 </Chip>
 
-                <Typography level="h2" fontWeight='800' sx={iconGradientStyles.scondaryPrimary}>{plan.title.toUpperCase()}</Typography>
+                <Typography
+                    level="h2"
+                    fontWeight='800'
+                    sx={iconGradientStyles.scondaryPrimary}
+                >{plan.title.toUpperCase()}
+                </Typography>
 
                 <Divider inset="none" />
 
@@ -81,7 +85,9 @@ const PriceCard = ({ plan }: Props) => {
                                             WebkitTextFillColor: 'transparent'!,
                                         }} />
                                 </ListItemDecorator>
-                                {listItem}
+                                <Typography textColor='neutral.500'>
+                                    {listItem}
+                                </Typography>
                             </ListItem >
                         )
                     })}

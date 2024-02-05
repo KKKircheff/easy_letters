@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, Card, Stack, Typography } from "@mui/joy"
+import { Box, Card, Stack, Typography } from "@mui/joy"
 import { iconGradientStyles } from "../../../styles/iconGradientStyles";
 import { styleVariables } from "../../../styles/styleVariables";
 import heroImage from '/assets/images/resourceHero.jfif'
@@ -11,10 +11,9 @@ const ResourceHero = () => {
             display='flex'
             flexDirection={{ xs: 'column', md: 'row' }}
             gap={{ xs: 5, md: 2 }}
-            pb={{ xs: 5, md: 10 }}
+            pb={{ xs: 5, md: 8 }}
             pt={{ xs: 10, md: 14 }}
-            pr={{ xs, md }}
-            pl={{ xs, md: md }}
+            px={{ xs, md }}
         >
 
             <Box maxWidth={{ xs: '100%', md: '40%', lg: '36%' }}
@@ -44,17 +43,17 @@ const ResourceHero = () => {
             >
                 <Typography
                     level='h1'
-                    fontSize={{ xs: 'largeTitle', md: 'xxLargeTitle' }}
-                    fontWeight='800'>Templates
+                    fontSize={{ xs: '9vw', sm: '7vw', md: '3vw' }}
+                    fontWeight='800'>TEMPLATES
                 </Typography>
 
 
                 <Typography
-                    level='h2'
+                    level='h1'
                     pb={1}
                     fontWeight='800'
-                    fontSize={{ xs: 'mediumTitle', md: 'xLargeTitle' }}
-                    sx={iconGradientStyles.scondaryPrimary}>And More Tips & Guidelines
+                    fontSize={{ xs: '9vw', sm: '7vw', md: '3vw' }}
+                    sx={iconGradientStyles.scondaryPrimary}>AND GUIDELINES
                 </Typography>
 
                 <Typography
@@ -63,7 +62,7 @@ const ResourceHero = () => {
                     textColor='neutral.500'
                     fontWeight='500'
                     px={{ lg: 4 }}
-                >Quick and mart Solutions. Instant impact, minimal time. Your shortcut to a standout application!
+                >Quick and smart solutions. Instant impact, minimal time. Your shortcut to a standout application!
                 </Typography>
             </Stack>
         </Box>

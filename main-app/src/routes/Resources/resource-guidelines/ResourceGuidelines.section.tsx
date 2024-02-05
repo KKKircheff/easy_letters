@@ -63,7 +63,7 @@ const ResourceGuidelines = () => {
             textSize: 'xxxLargeTitle'
         },
         {
-            title: "Main guidelines crafting your documents",
+            title: "Main guidelines when crafting your documents",
             content: ["Here our AI Writer covers you well!", "Carefully read the job posting to understand the employer's requirements.", "Customize your resume or CV and cover letter for each application.", "Keep the documents concise, well-organized, and free from errors.", "Follow any specific instructions provided by the employer in the job posting."],
             icon: <AIicon
                 startColor={c.primary[500]}
@@ -87,7 +87,7 @@ const ResourceGuidelines = () => {
                 py={2}
                 maxWidth='960px'
                 textAlign='center'>
-                {'Before you choose a template and start to tailor your docs, '}
+                {'Before you do a template choice and start tailoring your docs, '}
 
                 <Typography
                     level='h2'
@@ -96,7 +96,7 @@ const ResourceGuidelines = () => {
                     {' please read carefully '}
                 </Typography>
 
-                {"our major tips and keep them in mind."}
+                {"our major guidelines and keep them in mind."}
             </Typography>
 
             <Box
@@ -114,7 +114,7 @@ const ResourceGuidelines = () => {
                     sx={{ fontSize: 'md', fontWeight: '500', color: 'neutral.600' }}>
                     {paragraphs.map((paragraph, index) => {
                         return (
-                            <Grid xs={12} md={6}>
+                            <Grid key={index} xs={12} md={6}>
                                 <GradientListCard key={index} paragraph={paragraph} />
                             </Grid>
                         )

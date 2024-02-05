@@ -95,10 +95,9 @@ const HomeProcessStepper = () => {
                 level='h2'
                 fontSize={{ xs: 'mediumTitle', md: 'largeTitle' }}
                 fontWeight='800'
-                pl={2}
                 minWidth={{ xs: '100px', md: '280px' }}
-                textAlign={{ xs: 'left', md: 'right' }}
-            >Seamless Process Flow</Typography>
+                textAlign={{ xs: 'center', md: 'right' }}
+            >{'Seamless Process Flow'.toUpperCase()}</Typography>
 
             <Box maxWidth='600px'>
                 {stepperData.map((stepper) => {
@@ -120,12 +119,14 @@ const HomeProcessStepper = () => {
 
                             <Stack flexGrow='1' textAlign='left' spacing={2}>
                                 <Typography
+                                    // level='h2'
+                                    // fontSize={{ xs: 'mediumTitle', md: 'largeTitle' }}
+                                    // fontWeight='800'
                                     level='h2'
-                                    fontSize={{ xs: 'mediumTitle', md: 'largeTitle' }}
-                                    fontWeight='800'
-                                    lineHeight={'2.2rem'}
-                                    pb={1}
-                                >{stepper.title}
+                                    fontSize='smallTitle'
+                                    fontWeight='700'
+                                    pt={.5}
+                                >{stepper.title.toUpperCase()}
                                 </Typography>
 
                                 <Typography
