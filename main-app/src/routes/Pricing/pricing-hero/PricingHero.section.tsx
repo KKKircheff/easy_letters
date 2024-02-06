@@ -48,6 +48,7 @@ const PricingHero = () => {
                 <Typography
                     level='h1'
                     fontSize={{ xs: '9vw', sm: '7vw', md: '3vw' }}
+                    pb={1}
                     fontWeight={800}
                 >TIME IS MONEY
                 </Typography>
@@ -56,7 +57,7 @@ const PricingHero = () => {
                     level='h1'
                     pb={1}
                     fontWeight={800}
-                    fontSize={{ xs: '5vw', sm: '5vw', md: '2.5vw' }}
+                    fontSize={{ xs: '7vw', sm: '4vw', md: '2vw' }}
                     sx={iconGradientStyles.scondaryPrimary}>SAVE BOTH WITH OUR AI WRITER
                 </Typography>
 

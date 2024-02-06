@@ -6,7 +6,7 @@ import {getAuth} from 'firebase/auth';
 // @ts-ignore
 import {getFirestore} from 'firebase/firestore';
 // @ts-ignore
-import {firebaseConfig} from '../application-data/firebase-config';
+import {firebaseConfig} from './firebase-config';
 import {getStorage, ref, getDownloadURL} from 'firebase/storage';
 
 // TODO: Add SDKs for Firebase products that you want to use

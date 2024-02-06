@@ -72,10 +72,9 @@ const TemplateCarousel = () => {
                     return (
                         <Box
                             key={index}
-                            // bgcolor='neutral.300'
                             pt={isSmallScreen ? '27vw' : '11vw'}
                             width={isSmallScreen ? '100vw' : '100%'}
-                            height={isSmallScreen ? '125vw' : '53vw'}
+                            height={isSmallScreen ? '130vw' : '53vw'}
                         >
                             <Card
                                 sx={{
@@ -85,25 +84,28 @@ const TemplateCarousel = () => {
                                                 : index === lastImageIndex ? 'scale(1.25)'
                                                     : index === firstImageIndex ? 'scale(1.25)'
                                                         : 'scale(1.2)',
+
                                     zIndex: index == centerImageIndex ? 4
                                         : index === prevImageIndex ? 3
                                             : index === nextImageIndex ? 3
                                                 : index === lastImageIndex ? 2
                                                     : index === firstImageIndex ? 2
                                                         : 1,
-                                    borderRadius: 'xl',
+
+                                    borderRadius: { xs: 'sm', md: 'lg' },
                                     width: isSmallScreen ? '55vw' : '24vw',
-                                    aspectRatio: '1/1.2',
-                                    transition: 'all .3s ease-in',
+                                    aspectRatio: { xs: '1/1.35', md: '1/1.2' },
                                     marginX: isSmallScreen ? 'auto' : '-3vw',
                                     border: '0px solid transparent',
                                     boxShadow: 'sm',
+                                    transition: 'all .3s ease-in',
+                                    overflow: 'hidden'
                                 }}>
 
                                 <CardCover>
                                     <img
                                         src={slider}
-                                        alt="hero image" style={{ objectFit: 'cover' }} />
+                                        alt="hero image" style={{ objectFit: 'fill', borderRadius: '0' }} />
                                 </CardCover>
 
                                 {/* {index == centerImageIndex && */}
@@ -111,7 +113,6 @@ const TemplateCarousel = () => {
                                     maxHeight: '1.5rem',
                                     width: '100px',
                                     marginLeft: 'auto',
-                                    // marginTop: isSmallScreen ? '52vw' : '24.5vw',
                                     marginTop: 'auto'
                                 }}>
                                     <Typography

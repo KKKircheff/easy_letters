@@ -85,7 +85,7 @@ const PriceCard = ({ plan }: Props) => {
                                             WebkitTextFillColor: 'transparent'!,
                                         }} />
                                 </ListItemDecorator>
-                                <Typography textColor='neutral.500'>
+                                <Typography textColor='neutral.500' textAlign='left'>
                                     {listItem}
                                 </Typography>
                             </ListItem >

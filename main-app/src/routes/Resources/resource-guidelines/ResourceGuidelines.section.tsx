@@ -87,7 +87,7 @@ const ResourceGuidelines = () => {
                 py={2}
                 maxWidth='960px'
                 textAlign='center'>
-                {'Before you do a template choice and start tailoring your docs, '}
+                {'Before you choose a template and start tailoring your docs, '}
 
                 <Typography
                     level='h2'

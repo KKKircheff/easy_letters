@@ -1,4 +1,5 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { useEffect } from "react";
+import { AuthContextProvider } from './context/AuthContext'
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
@@ -15,20 +16,10 @@ const Pricing = lazy(() => import('./routes/Pricing/Pricing'));
 const AiWriter = lazy(() => import('./routes/AI_Writer/AiWriter'));
 const SignUp = lazy(() => import('./routes/SignUp/SignUp'));
 const LogIn = lazy(() => import('./routes/LogIn/LogIn'));
-
-// export type ToggleContextType = {
-//     toggleView: boolean;
-//     setToggleView: React.Dispatch<React.SetStateAction<boolean>>;
-// };
-
-// const ToggleContext = createContext<ToggleContextType | undefined>(undefined);
-
-// export const useToggleContext = (): ToggleContextType | undefined => {
-//     return useContext(ToggleContext);
-// };
+const ProtectedRoute = lazy(() => import('./components/protected-route/ProtectedRoute.component'))
 
 function App() {
-    // const [toggleView, setToggleView] = useState(false);
+
 
     useEffect(() => {
         /* ! important how to init AOS in Vite */
@@ -43,45 +34,48 @@ function App() {
 
     return (
         <Box sx={{ width: '100vw', m: 0, p: 0 }}>
-            {/* <ToggleContext.Provider value={{ toggleView, setToggleView }}> */}
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
+            <AuthContextProvider>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<Home />} />
 
-                    <Route path={`/resources`} element={
-                        <Suspense fallback={<PageLoaderSkeleton />}>
-                            <Resources />
-                        </Suspense>
-                    } />
+                        <Route path={`/resources`} element={
+                            <Suspense fallback={<PageLoaderSkeleton />}>
+                                <Resources />
+                            </Suspense>
+                        } />
 
-                    <Route path={`/pricing`} element={
-                        <Suspense fallback={<PageLoaderSkeleton />}>
-                            <Pricing />
-                        </Suspense>
-                    } />
+                        <Route path={`/pricing`} element={
+                            <Suspense fallback={<PageLoaderSkeleton />}>
+                                <Pricing />
+                            </Suspense>
+                        } />
 
-                    <Route path={`/ai-writer`} element={
-                        <Suspense fallback={<PageLoaderSkeleton />}>
-                            <AiWriter />
-                        </Suspense>
-                    } />
+                        <Route path={`/ai-writer`} element={
+                            <Suspense fallback={<PageLoaderSkeleton />}>
+                                <ProtectedRoute>
+                                    <AiWriter />
+                                </ProtectedRoute>
+                            </Suspense>
+                        } />
 
-                    <Route path={`/signup`} element={
-                        <Suspense fallback={<PageLoaderSkeleton />}>
-                            <SignUp />
-                        </Suspense>
-                    } />
+                        <Route path={`/signup`} element={
+                            <Suspense fallback={<PageLoaderSkeleton />}>
+                                <SignUp />
+                            </Suspense>
+                        } />
 
-                    <Route path={`/login`} element={
-                        <Suspense fallback={<PageLoaderSkeleton />}>
-                            <LogIn />
-                        </Suspense>
-                    } />
-                    <Route path={`/*`} element={<Home />} />
-                </Route>
-            </Routes>
-            {/* </ToggleContext.Provider> */}
+                        <Route path={`/login`} element={
+                            <Suspense fallback={<PageLoaderSkeleton />}>
+                                <LogIn />
+                            </Suspense>
+                        } />
+                        <Route path={`/*`} element={<Home />} />
+                    </Route>
+                </Routes>
+            </AuthContextProvider>
         </Box>
+
     )
 }
 

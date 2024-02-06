@@ -54,7 +54,7 @@ const HomeKeyWords = () => {
                 <Grid xs={12} md={7} lg={7}>
                     <Typography
                         level='h2'
-                        fontSize={{ xs: 'largeTitle', md: 'largeTitle' }}
+                        fontSize={{ xs: 'mediumTitle', md: 'largeTitle' }}
                         fontWeight='800'
                         pb={3}
                         textAlign={{ xs: 'center', md: 'left' }}
