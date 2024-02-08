@@ -59,6 +59,14 @@ export const theme = extendTheme({
         full: '50px',
     },
 
+    shadow: {
+        xs: 'var(--joy-shadowRing, 0 0 #000), 0px 1px 2px 0px rgba(var(--joy-shadowChannel, 21 21 21) / var(--joy-shadowOpacity, 0.12))',
+
+        sm: 'var(--joy-shadowRing, 0 0 #000), 0px 1px 2px 1px rgba(var(--joy-shadowChannel, 21 21 21) / var(--joy-shadowOpacity, 0.08)), 0px 2px 2px 1px rgba(var(--joy-shadowChannel, 21 21 21) / var(--joy-shadowOpacity, 0.08))',
+
+        md: 'var(--joy-shadowRing, 0 0 #000), 0px 2px 8px -2px rgba(var(--joy-shadowChannel, 21 21 21) / var(--joy-shadowOpacity, 0.12)), 0px 6px 12px -2px rgba(var(--joy-shadowChannel, 21 21 21) / var(--joy-shadowOpacity, 0.12))',
+    },
+
     colorSchemes: {
         light: {
             palette: {

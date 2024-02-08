@@ -16,6 +16,7 @@ const Pricing = lazy(() => import('./routes/Pricing/Pricing'));
 const AiWriter = lazy(() => import('./routes/AI_Writer/AiWriter'));
 const SignUp = lazy(() => import('./routes/SignUp/SignUp'));
 const LogIn = lazy(() => import('./routes/LogIn/LogIn'));
+const Profile = lazy(() => import('./routes/Profile/Profile'));
 const ProtectedRoute = lazy(() => import('./components/protected-route/ProtectedRoute.component'))
 
 function App() {
@@ -67,6 +68,13 @@ function App() {
                         <Route path={`/login`} element={
                             <Suspense fallback={<PageLoaderSkeleton />}>
                                 <LogIn />
+                            </Suspense>
+                        } />
+                        <Route path={`/profile`} element={
+                            <Suspense fallback={<PageLoaderSkeleton />}>
+                                <ProtectedRoute>
+                                    <Profile />
+                                </ProtectedRoute>
                             </Suspense>
                         } />
                         <Route path={`/*`} element={<Home />} />

@@ -38,22 +38,6 @@ type UserCredentials = {
 
 const LogIn = () => {
 
-    // useEffect(() => {
-    //     const logRedirect = async () => {
-    //         try {
-    //             const response = await getRedirectResult(auth);
-    //             console.log('redirect from Login:', response)
-    //             if (response) {
-    //                 const userDocRef = await createUserDocumentFromAuth(response.user);
-    //                 navigate('/profile');
-    //             }
-    //         } catch (error) {
-    //             console.error("Error during redirect:", error);
-    //         }
-    //     };
-    //     logRedirect();
-    // }, [])
-
     const c = useTheme().palette
     const { xs, md, lg } = styleVariables.layoutPadding;
 
@@ -69,7 +53,6 @@ const LogIn = () => {
     const handleCredentials = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserCredentials({ ...userCredentials, [e.currentTarget.name]: e.currentTarget.value })
     }
-
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -148,11 +131,10 @@ const LogIn = () => {
                         spacing={1.4}
                         border={{ xs: '0px solid transparent', md: `1px solid ${c.neutral[300]}` }}
                         borderRadius='lg'
-                        my={{ xs: 0, md: 2 }} ml={{ xs: 0, md: 'auto' }}
-                        px={{ xs: 0, md: 4 }} py={2}
+                        my={{ xs: 0, md: 2 }} ml={{ md: 'auto' }}
+                        py={2} px={{ xs: 0, md: 4 }}
                         flexGrow={1}
                     >
-
                         <Grid xs={12} md={12} mb={2}>
                             <Typography
                                 level='h2'
@@ -173,7 +155,11 @@ const LogIn = () => {
                         ><GoogleIcon size={'2.5rem'} />Log In With Google
                         </GoogleButton>
 
-                        <Typography mt={1} fontWeight='md' level='body-sm'>Don't have an account?
+                        <Typography
+                            mt={1}
+                            fontWeight='md'
+                            level='body-sm'
+                        >Don't have an account?
                             <Link
                                 px={1}
                                 component="button"
@@ -224,7 +210,6 @@ const LogIn = () => {
                         </Grid>
 
                         <Grid xs={12} md={12} px={0}>
-
                             <DarkButton
                                 color='neutral'
                                 type='submit'

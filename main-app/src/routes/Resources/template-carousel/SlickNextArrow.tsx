@@ -31,7 +31,7 @@ const SlickNextArrow = (props: SlickArrowProps) => {
             sx={{
                 position: 'absolute',
                 top: { xs: '35%', md: '45%' },
-                right: { xs: '5%', md: '27%', lg: '28%' },
+                right: { xs: '5%', md: '31%', lg: '32.5%' },
             }}
         >
             <ChevronRightIcon sx={{ color: 'white', fontSize: '2.5rem' }} />

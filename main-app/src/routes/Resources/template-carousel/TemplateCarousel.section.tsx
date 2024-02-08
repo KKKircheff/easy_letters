@@ -72,18 +72,18 @@ const TemplateCarousel = () => {
                     return (
                         <Box
                             key={index}
-                            pt={isSmallScreen ? '27vw' : '11vw'}
+                            pt={isSmallScreen ? '18vw' : '12vw'}
                             width={isSmallScreen ? '100vw' : '100%'}
                             height={isSmallScreen ? '130vw' : '53vw'}
                         >
                             <Card
                                 sx={{
-                                    transform: index == centerImageIndex ? 'scale(1.7)'
-                                        : index === prevImageIndex ? 'scale(1.45)'
-                                            : index === nextImageIndex ? 'scale(1.45)'
-                                                : index === lastImageIndex ? 'scale(1.25)'
-                                                    : index === firstImageIndex ? 'scale(1.25)'
-                                                        : 'scale(1.2)',
+                                    transform: index == centerImageIndex ? 'scale(1.35)'
+                                        : index === prevImageIndex ? 'scale(1.2)'
+                                            : index === nextImageIndex ? 'scale(1.2)'
+                                                : index === lastImageIndex ? 'scale(1.1)'
+                                                    : index === firstImageIndex ? 'scale(1.1)'
+                                                        : 'scale(1)',
 
                                     zIndex: index == centerImageIndex ? 4
                                         : index === prevImageIndex ? 3
@@ -93,7 +93,7 @@ const TemplateCarousel = () => {
                                                         : 1,
 
                                     borderRadius: { xs: 'sm', md: 'lg' },
-                                    width: isSmallScreen ? '55vw' : '24vw',
+                                    width: isSmallScreen ? '66vw' : '24vw',
                                     aspectRatio: { xs: '1/1.35', md: '1/1.2' },
                                     marginX: isSmallScreen ? 'auto' : '-3vw',
                                     border: '0px solid transparent',

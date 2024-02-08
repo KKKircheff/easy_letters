@@ -65,7 +65,7 @@ const HomeHero = () => {
                         sx={{
                             // borderRadius: theme.vars.radius.full,
                             mt: { xs: '15%', md: '7%' },
-                            width: { xs: '70%', md: '30%' },
+                            width: { xs: '70%', md: 'auto' },
                             fontSize: { xs: 'md' },
                         }}
                         onClick={() => navigate('/signup')}

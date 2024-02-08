@@ -34,7 +34,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const logRedirect = async () => {
             const response = await getRedirectResult(auth)
-            console.log('response from Auth', response)
             if (response) {
                 const userDocRef = await createUserDocumentFromAuth(response.user)
                 navigate('/profile')
@@ -43,7 +42,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         logRedirect();
     }, [])
 
-    console.log('Inside context!')
 
     const googleProvider = new GoogleAuthProvider;
     googleProvider.setCustomParameters({
@@ -77,7 +75,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log(currentUser);
             setUser(currentUser);
         });
         return () => unsubscribe();

@@ -35,6 +35,7 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
             slotProps={{
                 content: {
                     sx: {
+                        width: '100%',
                         bgcolor: 'transparent',
                         p: { md: 3, sm: 0 },
                         boxShadow: 'none',
@@ -42,22 +43,19 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                 },
             }}>
 
-            <Sheet
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '85%',
-                    marginTop: '80px',
-                    mx: { xs, md, lg },
-                    px: 3,
-                    py: 2,
-                    gap: 2,
-                    borderRadius: 'xl',
-                    bgcolor: '#ffffffa0',
-                    backdropFilter: 'blur(5px)',
-                    boxSizing: 'border-box',
-                    overflow: 'hidden',
-                }}>
+            <Stack
+                direction='column'
+                mt='80px'
+                mx={{ xs, md, lg }}
+                px={3}
+                py={2}
+                gap={3}
+                borderRadius='xl'
+                boxSizing='border-box'
+                overflow='hidden'
+                bgcolor='#ffffffa0'
+                sx={{ backdropFilter: 'blur(5px)' }}
+            >
 
                 <Stack direction='row' justifyContent='space-between' alignItems='center'>
                     <Typography
@@ -86,7 +84,7 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                     />)}
                 </List>
                 <LogInGroup setIsDrawerOpen={setIsDrawerOpen} />
-            </Sheet>
+            </Stack>
         </Drawer>
     )
 }
