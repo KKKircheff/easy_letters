@@ -4,11 +4,10 @@ import { useState } from 'react';
 import Box from '@mui/joy/Box';
 import Stack from '@mui/joy/Stack';
 import Sheet from '@mui/joy/Sheet';
-
 import List from '@mui/joy/List';
 import Typography from '@mui/joy/Typography';
 
-import theme from '../../styles/theme';
+import { useTheme } from '@mui/joy';
 import { styleVariables } from '../../styles/styleVariables';
 
 import ListMenuItem from './ListMenuItem.component';
@@ -18,6 +17,8 @@ import BurgerButton from './BurgerButton.component';
 
 const NavBar = () => {
     const navigate = useNavigate();
+    const theme = useTheme();
+
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const { xs, md, lg } = styleVariables.layoutPadding;
 
@@ -50,7 +51,7 @@ const NavBar = () => {
                 aria-label="My site"
                 sx={{
                     position: 'fixed',
-                    top: '40px',
+                    top: { xs: '10px', md: '30px' },
                     left: { xs, md, lg },
                     width: { xs: '90vw', md: '85vw', lg: '80vw' },
                     zIndex: '1999',
@@ -91,7 +92,7 @@ const NavBar = () => {
                     </List>
 
                     <Stack sx={{ display: { xs: 'none', md: 'flex' }, }}>
-                        <LogInGroup />
+                        <LogInGroup setIsDrawerOpen={setIsDrawerOpen} />
                     </Stack>
 
                     <Stack role="button" sx={{ display: { xs: 'block', md: 'none' }, }}>

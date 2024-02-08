@@ -1,15 +1,17 @@
-const TextConfirmed = ({ startColor = 'currentColor', endColor = 'currentColor' }) => {
+const TextConfirmed = ({ startColor = 'currentColor', middleColor = 'currentColor', endColor = 'currentColor' }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
             className="svg-icon"
-            style={{ width: "1em", height: "1em", verticalAlign: "middle" }}
+            style={{ width: ".8em", height: ".8em", verticalAlign: "middle" }}
             viewBox="0 0 1024 1024"
         >
             {/* important this defs block below is mandatort */}
             <defs>
                 <linearGradient id="grad1" x1="0%" x2="100%" y1="0%" y2="100%">
-                    <stop offset="0%" stopColor={startColor}></stop>
+                    <stop offset="5%" stopColor={startColor}></stop>
+                    <stop offset="40%" stopColor={middleColor}></stop>
+                    <stop offset="50%" stopColor={middleColor}></stop>
                     <stop offset="100%" stopColor={endColor}></stop>
                 </linearGradient>
             </defs>

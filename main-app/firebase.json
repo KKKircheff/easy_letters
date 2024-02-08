@@ -9,6 +9,12 @@
         "frameworksBackend": {
             "region": "europe-west1"
         },
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ],
         "headers": [
             {
                 "source": "**/*.@(js|css|jpg|jpeg|png|gif|ico|webp|woff2)",

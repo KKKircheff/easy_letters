@@ -113,6 +113,17 @@ pnpm add @mui/joy @emotion/react @emotion/styled
 pnpm add @mui/icons-material @mui/material
 <!-- pnpm add --save-dev @mui/system -->
 
+pnpm add react-slick
+pnpm add slick-carousel
+
+pnpm add -S @types/react-slick@latest
+pnpm add -S @types/slick-carousel@latest
+
+/* don't forget:
+  import "slick-carousel/slick/slick.css";
+  import "slick-carousel/slick/slick-theme.css";
+*/
+
 # still not installed
 
 pnpm install react-icons

@@ -1,8 +1,9 @@
 
 import ListItem from "@mui/joy/ListItem"
 import Sheet from "@mui/joy/Sheet"
+import { useTheme } from "@mui/joy";
+
 import { useNavigate } from "react-router-dom";
-import theme from '../../styles/theme';
 import { isMobile } from 'react-device-detect';
 
 type ItemProps = {
@@ -18,6 +19,7 @@ type ItemProps = {
 const ListMenuItem = ({ item, setIsDrawerOpen }: ItemProps) => {
 
     const navigate = useNavigate()
+    const theme = useTheme();
 
     const handleClick = () => {
         navigate(item.path);

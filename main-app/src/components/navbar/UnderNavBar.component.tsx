@@ -2,7 +2,10 @@ import { Box } from "@mui/joy"
 
 const UnderNavBar = () => {
     return (
-        <Box sx={{ backgroundColor: 'transparent', height: '100px' }}>
+        <Box
+            bgcolor='transparent'
+            height={{ xs: '70px', md: '100px' }}
+        >
         </Box>
     )
 }
