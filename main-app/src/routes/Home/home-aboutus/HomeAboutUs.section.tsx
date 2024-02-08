@@ -60,40 +60,56 @@ const HomeAboutUs = () => {
             flexDirection='column'
             alignItems='center'>
 
-            <Typography
-                level='h2'
-                fontSize={{ xs: 'smallTitle', sm: 'mediumTitle', md: 'largeTitle' }}
-                fontWeight='700'
-                px={{ xs: 0, md: 0 }}
-                py={2}
-                maxWidth='900px'
-                textAlign='center'>
-                {'Empowered with the latest'}
-
+            <Box
+                borderRadius='md'
+                bgcolor='white'
+                width='100%'
+                maxWidth='950px'
+                mb={4}
+                py={{ xs: 3, md: 4 }}
+                px={{ xs: 1.7, md: 4 }}
+            >
                 <Typography
                     level='h2'
                     fontSize={{ xs: 'smallTitle', sm: 'mediumTitle', md: 'largeTitle' }}
-                    sx={iconGradientStyles.scondaryPrimary}>
-                    {' cutting edge technologies '}
+                    fontWeight='700'
+                    px={{ xs: 0, md: 0 }}
+                    mx='auto'
+                    maxWidth='900px'
+                    textAlign='center'>
+                    {'Empowered with the latest'}
+                    <Typography
+                        level='h2'
+                        fontSize={{ xs: 'smallTitle', sm: 'mediumTitle', md: 'largeTitle' }}
+                        sx={iconGradientStyles.scondaryPrimary}>
+                        {' cutting edge technologies '}
+                    </Typography>
+                    {"Easy Letters AI assistant is here to help you!"}
                 </Typography>
-
-                {"Easy Letters AI assistant is here to help you!"}
-            </Typography>
-
-
-            <Typography
-                level='h2'
-                fontSize={{ xs: 'smallTitle', sm: 'mediumTitle', md: 'largeTitle' }}
-                fontWeight='700'
-                px={{ xs: 0, md: 0 }}
-                py={2}
-                maxWidth='800px'
-                textAlign='center'>
-                {'Compose professional cover letters and resumes within minutes!'}
-            </Typography>
+            </Box>
 
             <Box
-                pt={{ xs: 5, md: 10 }}
+                borderRadius='md'
+                bgcolor='white'
+                width='100%'
+                maxWidth='950px'
+                py={{ xs: 3, md: 4 }}
+                px={{ xs: 1.8, md: 4 }}
+            >
+                <Typography
+                    level='h2'
+                    fontSize={{ xs: 'smallTitle', sm: 'mediumTitle', md: 'largeTitle' }}
+                    fontWeight='700'
+                    px={{ xs: 0, md: 0 }}
+                    maxWidth='800px'
+                    mx='auto'
+                    textAlign='center'>
+                    {'Compose professional cover letters and resumes within minutes!'}
+                </Typography>
+            </Box>
+
+            <Box
+                pt={{ xs: 6, md: 8 }}
                 fontWeight={500}
                 maxWidth='950px'
                 textAlign='left'>

@@ -14,13 +14,13 @@ const PricingHero = () => {
             pt={{ xs: 10, md: 14 }}
             pb={{ xs: 5, md: 10 }}
             pr={{ xs, md }}
-            pl={{ xs, md: md }}
+            pl={{ xs, md, lg }}
         >
 
             <Box
                 maxWidth={{ xs: '100%', md: '40%', lg: '36%' }}
                 sx={{
-                    transform: { xs: 'skew(0)', md: 'skew(-4deg, 0)' },
+                    // transform: { xs: 'skew(0)', md: 'skew(-4deg, 0)' },
                     overflow: 'hidden',
                     borderRadius: 'xl',
                 }}
@@ -29,7 +29,7 @@ const PricingHero = () => {
                     p: 0,
                     overflow: 'hidden',
                     borderRadius: 'xl',
-                    transform: { xs: 'skew(0)', md: 'skew(+4deg, 0) scale(1.07)' },
+                    // transform: { xs: 'skew(0)', md: 'skew(+4deg, 0) scale(1.07)' },
                 }}
                 >
                     <img src={heroImage} alt="hero image" />

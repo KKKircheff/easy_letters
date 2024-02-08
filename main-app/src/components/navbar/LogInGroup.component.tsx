@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button, Stack, useTheme } from "@mui/joy"
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
+import { useUserContext } from '../../context/AuthContext';
 
 type Props = {
     setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -12,9 +13,17 @@ const LogInGroup = ({ setIsDrawerOpen }: Props) => {
     const navigate = useNavigate();
     const theme = useTheme();
 
-    const handleClick = () => {
-        navigate('/login');
-        setIsDrawerOpen(false);
+    const { user, logOut } = useUserContext()
+
+    const handleClick = async () => {
+        if (!user) {
+            navigate('/login');
+            setIsDrawerOpen(false);
+        } else {
+            await logOut();
+            navigate('/');
+            setIsDrawerOpen(false);
+        }
     }
 
     return (
@@ -36,7 +45,7 @@ const LogInGroup = ({ setIsDrawerOpen }: Props) => {
                     fontSize: { xs: 'sm' },
                 }}
                 endDecorator={<PermIdentityOutlinedIcon sx={{ color: 'currentcolor' }} />}
-            >Log In</Button>
+            >{user ? 'Log Out' : 'Log In'}</Button>
         </Stack>
     )
 }

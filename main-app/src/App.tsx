@@ -20,7 +20,6 @@ const ProtectedRoute = lazy(() => import('./components/protected-route/Protected
 
 function App() {
 
-
     useEffect(() => {
         /* ! important how to init AOS in Vite */
         AOS.init({

@@ -79,26 +79,33 @@ const ResourceGuidelines = () => {
             flexDirection='column'
             alignItems='center'>
 
-            <Typography
-                level='h2'
-                fontSize={{ xs: 'smallTitle', md: 'largeTitle' }}
-                fontWeight='700'
-                px={{ xs: 0, md: 2 }}
-                py={2}
-                maxWidth='960px'
-                textAlign='center'>
-                {'Before you choose a template and start tailoring your docs, '}
-
+            <Box
+                borderRadius='md'
+                bgcolor='white'
+                width='100%'
+                maxWidth='950px'
+                py={{ xs: 3, md: 4 }}
+                px={{ xs: 2.2, md: 4 }}
+            >
                 <Typography
                     level='h2'
                     fontSize={{ xs: 'smallTitle', md: 'largeTitle' }}
-                    sx={iconGradientStyles.scondaryPrimary}>
-                    {' please read carefully '}
+                    fontWeight='700'
+                    px={{ xs: 0, md: 2 }}
+                    maxWidth='960px'
+                    textAlign='center'>
+                    {'Before you choose a template and start tailoring your docs, '}
+
+                    <Typography
+                        level='h2'
+                        fontSize={{ xs: 'smallTitle', md: 'largeTitle' }}
+                        sx={iconGradientStyles.scondaryPrimary}>
+                        {' please read carefully '}
+                    </Typography>
+
+                    {"our major guidelines and keep them in mind."}
                 </Typography>
-
-                {"our major guidelines and keep them in mind."}
-            </Typography>
-
+            </Box>
             <Box
                 pt={{ xs: 5, md: 10 }}
                 fontWeight={500}

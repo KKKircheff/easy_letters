@@ -1,48 +1,78 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-
 import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
+    User,
     UserCredential,
+    updateProfile,
+    signInWithRedirect,
+    signInWithPopup,
+    createUserWithEmailAndPassword,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    getRedirectResult,
 } from 'firebase/auth';
 
-import { auth } from '../utils/firebase-utils.ts';
-import { User } from 'firebase/auth';
+
+import { auth, createUserDocumentFromAuth } from '../utils/firebase-utils.ts';
+import { useNavigate } from 'react-router-dom';
 
 type UserContextType = {
     user: User | null;
+    signInWithGoogleRedirect: () => Promise<void>;
+    signInWithGooglePopUp: () => Promise<void>;
     logInWithEmail: (email: string, password: string) => Promise<UserCredential>;
-    logInWithGoogle?: () => Promise<UserCredential>;
+    signUpWithEmail: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
     logOut: () => Promise<void>;
-    signUpWithEmail: (email: string, password: string) => Promise<UserCredential>;
-    signUpWithGoogle?: () => Promise<UserCredential>;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState(null);
 
-    const logInWithEmail = (email: string, password: string) => {
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const logRedirect = async () => {
+            const response = await getRedirectResult(auth)
+            console.log('response from Auth', response)
+            if (response) {
+                const userDocRef = await createUserDocumentFromAuth(response.user)
+                navigate('/profile')
+            }
+        }
+        logRedirect();
+    }, [])
+
+    console.log('Inside context!')
+
+    const googleProvider = new GoogleAuthProvider;
+    googleProvider.setCustomParameters({
+        prompt: 'select_account',
+        state: '/profile'
+    })
+
+    const signInWithGooglePopUp = async () => {
+        const newUser = await signInWithPopup(auth, googleProvider)
+        return createUserDocumentFromAuth(newUser.user);
+    }
+
+    const signInWithGoogleRedirect = async () => signInWithRedirect(auth, googleProvider)
+
+    const signUpWithEmail = async (email: string, password: string, firstName: string, lastName: string) => {
+        const newUser = await createUserWithEmailAndPassword(auth, email, password)
+        await updateProfile(newUser.user, { displayName: `${firstName} ${lastName}` })
+        const updatedUser = auth.currentUser
+        return createUserDocumentFromAuth(updatedUser)
+    }
+
+    const logInWithEmail = async (email: string, password: string) => {
+        const { signInWithEmailAndPassword } = await import('firebase/auth')
         return signInWithEmailAndPassword(auth, email, password);
     };
 
-    const logInWithGoogle = () => {
-        alert('logIn with Google');
-    };
-
-    const logOut = () => {
+    const logOut = async () => {
+        const { signOut } = await import('firebase/auth')
         return signOut(auth);
-    };
-
-    const signUpWithEmail = (email: string, password: string) => {
-        return createUserWithEmailAndPassword(auth, email, password);
-    };
-
-    const signUpWithGoogle = () => {
-        alert('signUpWithGoogle');
     };
 
     useEffect(() => {
@@ -58,9 +88,9 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
             value={{
                 user,
                 logInWithEmail,
-                // logInWithGoogle,
                 signUpWithEmail,
-                // signUpWithGoogle,
+                signInWithGooglePopUp,
+                signInWithGoogleRedirect,
                 logOut,
             }}>
             {children}

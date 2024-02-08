@@ -2,6 +2,7 @@
 import logIn from '/assets/images/login1.jfif'
 import StyledInput from "../../components/styled-input/StyledInput.component"
 import { useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 import {
     Box,
@@ -15,101 +16,164 @@ import {
     useTheme,
     Divider,
     Chip,
+    Stack,
+    Snackbar,
 } from "@mui/joy"
 
-// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import GoogleIcon from '../../assets/icons/Google.icon';
 
 import { styleVariables } from "../../styles/styleVariables"
 import GoogleButton from '../../components/buttons/google-button/GoogleButton.component';
 import DarkButton from '../../components/buttons/dark-button/DarkButton.component';
+import UnderNavBar from '../../components/navbar/UnderNavBar.component';
+import { useEffect, useState } from 'react';
+import { useUserContext } from '../../context/AuthContext';
+import { getRedirectResult } from 'firebase/auth';
+import { auth, createUserDocumentFromAuth } from '../../utils/firebase-utils';
+
+type UserCredentials = {
+    email: string,
+    password: string,
+}
 
 const LogIn = () => {
-    const navigate = useNavigate();
-    const { xs, md } = styleVariables.layoutPadding;
 
-    const theme = useTheme();
-    const c = theme.vars.palette
+    // useEffect(() => {
+    //     const logRedirect = async () => {
+    //         try {
+    //             const response = await getRedirectResult(auth);
+    //             console.log('redirect from Login:', response)
+    //             if (response) {
+    //                 const userDocRef = await createUserDocumentFromAuth(response.user);
+    //                 navigate('/profile');
+    //             }
+    //         } catch (error) {
+    //             console.error("Error during redirect:", error);
+    //         }
+    //     };
+    //     logRedirect();
+    // }, [])
+
+    const c = useTheme().palette
+    const { xs, md, lg } = styleVariables.layoutPadding;
+
+    const navigate = useNavigate();
+    const { user, logInWithEmail, signInWithGooglePopUp, signInWithGoogleRedirect, logOut } = useUserContext()
+
+    const [isLoading, setIsLoading] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+    const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+    const [userCredentials, setUserCredentials] = useState<UserCredentials | null>(null)
+
+
+    const handleCredentials = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserCredentials({ ...userCredentials, [e.currentTarget.name]: e.currentTarget.value })
+    }
+
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            setIsLoading(true)
+            await logOut();
+            await logInWithEmail(userCredentials.email, userCredentials.password)
+            setUserCredentials({ email: '', password: '' })
+            setIsLoading(false)
+            navigate('/profile')
+        } catch (error) {
+            if (error.message === 'Firebase: Error (auth/invalid-credential).') {
+                setErrorMessage('Wrong Email or Password')
+                setIsSnackbarOpen(true)
+                setIsLoading(false)
+            } else {
+                setErrorMessage(error.message)
+                setIsSnackbarOpen(true)
+                setIsLoading(false)
+            }
+        }
+    }
+
+    const handleGoogleLogIn = async () => {
+        setIsLoading(true)
+        try {
+            if (user) await logOut();
+            if (isMobile) {
+                const newUser = await signInWithGoogleRedirect();
+            } else {
+                await signInWithGooglePopUp();
+                setIsLoading(false)
+                navigate('/profile')
+            }
+
+        } catch (error) {
+            setErrorMessage(error.message)
+            setIsLoading(false)
+            setIsSnackbarOpen(true)
+        }
+    }
 
     return (
-        <Box>
-            <Grid
-                container
+        <Box px={{ xs, md, lg }}>
+            <UnderNavBar />
+            <Stack
+                direction={{ xs: 'column', md: 'row' }}
                 justifyContent={{ xs: 'center', md: 'space-between' }}
-                padding={{ xs: `80px ${0}`, md: `11vh ${md}`, lg: `12vh ${xs}`, xl: `12vh ${0}` }}
-                spacing={1}
-                flexGrow='1'
+                alignItems={{ xs: 'center', md: 'flex-start' }}
+                spacing={0}
                 maxWidth='1200px'
                 mx='auto'
             >
-                <Grid xs={12} md={5} xl={4} mt={{ xs: 0, md: '80px', xl: '100px' }}>
-                    <Card
-                        sx={{
-                            mx: 'auto',
-                            width: { xs: '80%', md: '100%' },
-                            maxWidth: { xs: '800px', md: '600px' },
-                            aspectRatio: { xs: '1', sm: '1.5', md: '1' },
-                            borderRadius: 'lg',
-                            objectFit: 'cover',
-                        }}>
-                        <CardCover>
-                            <img src={logIn} alt="Login account avatar image" />
-                        </CardCover>
-                    </Card>
-                </Grid>
+                <Card
+                    sx={{
+                        marginTop: { xs: 1, md: 6, xl: 6 },
+                        marginBottom: { xs: 1, md: 0 },
+                        width: { xs: '100%', md: '70%', lg: '100%' },
+                        maxWidth: { xs: '800px', md: '400px' },
+                        aspectRatio: { xs: '1', sm: '1.5', md: '1' },
+                        borderRadius: 'lg',
+                        objectFit: 'cover',
+                        flexGrow: 1
+                    }}>
+                    <CardCover>
+                        <img src={logIn} alt="Login account avatar image" />
+                    </CardCover>
+                </Card>
 
-                <Grid
-                    container
-                    xs={12} md={6} xl={6}
-                    justifyContent='center' spacing={2}
-                    border={{ xs: '0px solid transparent', md: `1px solid ${c.neutral[300]}` }}
-                    borderRadius='lg'
-                    my={{ xs: 0, md: 5 }} px={2} py={2}
-                >
+                <form onSubmit={(e) => handleSubmit(e)}>
+                    <Grid
+                        container
+                        columns={12}
+                        width={{ xs: '100%', md: '80%' }}
+                        justifyContent='center'
+                        spacing={1.4}
+                        border={{ xs: '0px solid transparent', md: `1px solid ${c.neutral[300]}` }}
+                        borderRadius='lg'
+                        my={{ xs: 0, md: 2 }} ml={{ xs: 0, md: 'auto' }}
+                        px={{ xs: 0, md: 4 }} py={2}
+                        flexGrow={1}
+                    >
 
-                    <Grid xs={10} md={12}>
-                        <Typography level='h2' textAlign='left'>Log In</Typography>
-                    </Grid>
-
-
-                    <Grid xs={10} md={12}>
-                        <FormControl >
-                            <FormLabel sx={{ fontWeight: 'bold', mb: '8px' }}>Email</FormLabel>
-                            <StyledInput required type='email' size='lg' color="neutral" />
-                        </FormControl>
-                    </Grid>
-
-                    <Grid xs={10} md={12}>
-                        <FormControl>
-                            <FormLabel sx={{ fontWeight: 'bold', mb: '8px' }}>Password</FormLabel>
-                            <StyledInput required type='password' size='lg' color="neutral" />
-                        </FormControl>
-                    </Grid>
-
-                    <Grid xs={10} md={12}>
-                        <DarkButton
-                            color='neutral'
-                            sx={{ width: '100%', mt: '18px' }}
-                            onClick={() => navigate('/profile')}>Log In
-                        </DarkButton>
-
-                        <Divider sx={{ mt: '6px', mx: 'auto', width: '80%' }}>
-                            <Chip
-                                variant="plain" color="neutral" size="md"
-                                sx={{ bgcolor: 'transparent', color: c.neutral[400] }}>
-                                or
-                            </Chip>
-                        </Divider>
+                        <Grid xs={12} md={12} mb={2}>
+                            <Typography
+                                level='h2'
+                                fontSize='mediumTitle'
+                                fontWeight='700'
+                                textAlign='left'
+                                pb={1}
+                            >LOG IN
+                            </Typography>
+                        </Grid>
 
                         <GoogleButton
                             variant='outlined'
                             color='neutral'
-                            sx={{ width: '100%', mt: '6px' }}
-                            onClick={() => navigate('/profile')}
-                            startDecorator={<GoogleIcon size={'2.5rem'} />}>Log In With Google
+                            disabled={isLoading}
+                            sx={{ width: '100%', mb: 1 }}
+                            onClick={handleGoogleLogIn}
+                        ><GoogleIcon size={'2.5rem'} />Log In With Google
                         </GoogleButton>
 
-                        <Typography mt='16px' fontWeight='md' level='body-sm'>Don't have an account?
+                        <Typography mt={1} fontWeight='md' level='body-sm'>Don't have an account?
                             <Link
                                 px={1}
                                 component="button"
@@ -117,18 +181,94 @@ const LogIn = () => {
                             </Link>
                         </Typography>
 
-                        <Typography
-                            mt='8px'
-                            mx='auto'
-                            level='body-xs'
-                            maxWidth='320px'
-                            lineHeight='.8rem'
-                            sx={{ color: 'neutral.300' }}
-                        >This site is protected by reCAPTCHA and Google Privacy Policy and Terms of Service apply. </Typography>
+                        <Divider sx={{ mt: 1.4, mb: .7, mx: 'auto', width: '80%' }}>
+                            <Chip
+                                variant="plain"
+                                color="neutral"
+                                size="md"
+                                sx={{ bgcolor: 'transparent', color: c.neutral[400] }}>
+                                <Typography level='body-xs' textColor='neutral.400'>
+                                    Log In With Email
+                                </Typography>
+                            </Chip>
+                        </Divider>
 
+                        <Grid xs={12} md={12} px={0} >
+                            <FormControl >
+                                <FormLabel sx={{ mb: '8px' }}>Email</FormLabel>
+                                <StyledInput
+                                    required
+                                    autoComplete='off'
+                                    type='email'
+                                    name='email'
+                                    size='md'
+                                    color="neutral"
+                                    onChange={(e) => handleCredentials(e)}
+                                />
+                            </FormControl>
+                        </Grid>
+
+                        <Grid xs={12} md={12} mb={2} px={0}>
+                            <FormControl>
+                                <FormLabel sx={{ mb: '8px' }}>Password</FormLabel>
+                                <StyledInput
+                                    required
+                                    autoComplete='off'
+                                    type='password'
+                                    name='password'
+                                    size='md'
+                                    color="neutral"
+                                    onChange={(e) => handleCredentials(e)}
+                                />
+                            </FormControl>
+                        </Grid>
+
+                        <Grid xs={12} md={12} px={0}>
+
+                            <DarkButton
+                                color='neutral'
+                                type='submit'
+                                loading={isLoading}
+                                sx={{ width: '100%', mt: '12px', py: 1.3 }}
+                            >Log In
+                            </DarkButton>
+
+                            <Typography
+                                mt={2}
+                                mx='auto'
+                                level='body-xs'
+                                maxWidth='320px'
+                                lineHeight='.8rem'
+                                sx={{ color: 'neutral.300' }}
+                            >Ours Privacy Policy and Terms of Service apply
+                            </Typography>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Grid>
+                </form>
+            </Stack>
+
+            <Snackbar
+                autoHideDuration={4000}
+                open={isSnackbarOpen}
+                variant='soft'
+                color='danger'
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                onClose={(event, reason) => {
+                    if (reason === 'clickaway') {
+                        return;
+                    }
+                    setIsSnackbarOpen(false);
+                }}
+                sx={{
+                    border: `1.5px solid ${c.danger[300]}`,
+                    bgcolor: c.danger[50],
+                    borderRadius: 'md'
+                }}
+            >
+                <Typography mx='auto' textColor='danger.600' level='body-sm'>
+                    {errorMessage}
+                </Typography>
+            </Snackbar>
         </Box >
     )
 }

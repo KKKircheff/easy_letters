@@ -2,9 +2,9 @@
 import {initializeApp} from 'firebase/app';
 import {getAnalytics} from 'firebase/analytics';
 // @ts-ignore
-import {getAuth} from 'firebase/auth';
+import {getAuth, doc, User} from 'firebase/auth';
 // @ts-ignore
-import {getFirestore} from 'firebase/firestore';
+import {doc, getDoc, getFirestore, setDoc} from 'firebase/firestore';
 // @ts-ignore
 import {firebaseConfig} from './firebase-config';
 import {getStorage, ref, getDownloadURL} from 'firebase/storage';
@@ -32,6 +32,31 @@ export const getFirebaseStorageImageUrl = async (fullPath: string) => {
         return newUrl;
     } catch (error) {
         return 'https://firebasestorage.googleapis.com/v0/b/red-digit-ai.appspot.com/o/blogs%2FblogPost-empty%2Fred-digit-ai-default.webp?alt=media&token=290a56ea-1f0a-4eaa-8b80-bada0add9fa1'; // Return null if there's an error
+    }
+};
+
+export const createUserDocumentFromAuth = async (user: User) => {
+    const userDocRef = doc(db, 'users', user.uid);
+    const userSnapshot = await getDoc(userDocRef);
+
+    if (!userSnapshot.exists()) {
+        const {displayName, email} = user;
+        const createdAt = new Date();
+
+        const names = displayName.split(' ');
+        const [firstName, lastName] = names;
+
+        try {
+            await setDoc(userDocRef, {
+                firstName,
+                lastName,
+                createdAt,
+                email,
+                uid: user.uid,
+            });
+        } catch (error) {
+            alert(error);
+        }
     }
 };
 
