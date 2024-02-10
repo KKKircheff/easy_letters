@@ -74,7 +74,7 @@ export const createUserDocumentFromAuth = async (user: User) => {
         const names = displayName.split(' ');
         const [firstName, lastName] = names;
 
-        const userProfile: UserProfile = {
+        const initProfile: UserProfile = {
             uid: user.uid,
             general: {
                 createdAt,
@@ -87,7 +87,8 @@ export const createUserDocumentFromAuth = async (user: User) => {
         };
 
         try {
-            await setDoc(userDocRef, userProfile);
+            await setDoc(userDocRef, initProfile);
+            return initProfile;
         } catch (error) {
             throw new Error(error);
         }

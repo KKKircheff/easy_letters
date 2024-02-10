@@ -14,7 +14,7 @@ import {
 } from 'firebase/auth';
 
 
-import { auth, createUserDocumentFromAuth, updateUserProfileFirebase } from '../utils/firebase-utils.ts';
+import { auth, createUserDocumentFromAuth, getUserProfileInfo, updateUserProfileFirebase } from '../utils/firebase-utils.ts';
 import { useNavigate } from 'react-router-dom';
 import { UserProfile } from '../data/userProfileTypes.ts';
 
@@ -24,7 +24,7 @@ type UserContextType = {
     updateUserProfile: (UserProfile) => Promise<void>
     signInWithGoogleRedirect: () => Promise<void>;
     signInWithGooglePopUp: () => Promise<void>;
-    logInWithEmail: (email: string, password: string) => Promise<UserCredential>;
+    logInWithEmail: (email: string, password: string) => Promise<void>;
     signUpWithEmail: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
     logOut: () => Promise<void>;
 };
@@ -34,7 +34,7 @@ const UserContext = createContext<UserContextType | null>(null);
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<User | null>(null);
     const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
 
     const navigate = useNavigate();
@@ -47,21 +47,24 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
     const signInWithGooglePopUp = async () => {
         const newUser = await signInWithPopup(auth, googleProvider)
-        return createUserDocumentFromAuth(newUser.user);
+        const profile = await createUserDocumentFromAuth(newUser.user);
+        setUserProfile(profile)
     }
-
-    const signInWithGoogleRedirect = async () => signInWithRedirect(auth, googleProvider)
 
     const signUpWithEmail = async (email: string, password: string, firstName: string, lastName: string) => {
         const newUser = await createUserWithEmailAndPassword(auth, email, password)
         await updateProfile(newUser.user, { displayName: `${firstName} ${lastName}` })
-        const updatedUser = auth.currentUser
-        return createUserDocumentFromAuth(updatedUser)
+        await newUser.user.reload();
+        const updatedUser = auth.currentUser;
+        const profile = await createUserDocumentFromAuth(updatedUser)
+        setUserProfile(profile)
     }
 
     const logInWithEmail = async (email: string, password: string) => {
         const { signInWithEmailAndPassword } = await import('firebase/auth')
-        return signInWithEmailAndPassword(auth, email, password);
+        const loggedUser = await signInWithEmailAndPassword(auth, email, password);
+        const profile = await getUserProfileInfo(loggedUser.user.uid)
+        setUserProfile(profile)
     };
 
     const logOut = async () => {
@@ -74,12 +77,14 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         setUserProfile(updatedProfile);
     }
 
+    const signInWithGoogleRedirect = async () => signInWithRedirect(auth, googleProvider)
+
     useEffect(() => {
         const logInRedirect = async () => {
             const response = await getRedirectResult(auth)
             if (response) {
-                const userDocRef = await createUserDocumentFromAuth(response.user)
-                console.log('There is response')
+                const profile = await createUserDocumentFromAuth(response.user)
+                setUserProfile(profile)
                 navigate('/profile')
             }
         }
@@ -89,21 +94,17 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
-                const { getUserProfileInfo } = await import('../utils/firebase-utils.ts')
-                const userDocRef = await getUserProfileInfo(currentUser.uid);
-                setUserProfile(userDocRef);
                 setUser(currentUser);
                 return
-            } else {
-                setUserProfile(null)
-                setUser(null);
-                return
             }
+            setUserProfile(null)
+            setUser(null);
+            return
+
         })
         return () => unsubscribe();
-    }, [user]);
+    }, []);
 
-    console.log('UeerProfile from AuthContext:', userProfile)
     return (
         <UserContext.Provider
             value={{
