@@ -8,6 +8,7 @@ import {doc, getDoc, getFirestore, setDoc} from 'firebase/firestore';
 // @ts-ignore
 import {firebaseConfig} from './firebase-config';
 import {getStorage, ref, getDownloadURL} from 'firebase/storage';
+import {UserProfile} from '../data/userProfileTypes';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -35,6 +36,29 @@ export const getFirebaseStorageImageUrl = async (fullPath: string) => {
     }
 };
 
+export const getUserProfileInfo = async (uid: string) => {
+    const userDocRef = doc(db, 'users', uid);
+    try {
+        const userSnapshot = (await getDoc(userDocRef)).data() as
+            | UserProfile
+            | undefined;
+        return userSnapshot;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+export const updateUserProfileFirebase = async (
+    updatedProfile: UserProfile
+) => {
+    const userDocRef = doc(db, 'users', updatedProfile.uid);
+    try {
+        await setDoc(userDocRef, updatedProfile);
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
 export const createUserDocumentFromAuth = async (user: User) => {
     const userDocRef = doc(db, 'users', user.uid);
     const userSnapshot = await getDoc(userDocRef);
@@ -42,20 +66,30 @@ export const createUserDocumentFromAuth = async (user: User) => {
     if (!userSnapshot.exists()) {
         const {displayName, email} = user;
         const createdAt = new Date();
+        const planValidTill = new Date(
+            createdAt.getTime() + 30 * 24 * 60 * 60 * 1000
+        );
+        const pricePlan = 'free';
 
         const names = displayName.split(' ');
         const [firstName, lastName] = names;
 
-        try {
-            await setDoc(userDocRef, {
+        const userProfile: UserProfile = {
+            uid: user.uid,
+            general: {
+                createdAt,
                 firstName,
                 lastName,
-                createdAt,
                 email,
-                uid: user.uid,
-            });
+                pricePlan,
+                planValidTill,
+            },
+        };
+
+        try {
+            await setDoc(userDocRef, userProfile);
         } catch (error) {
-            alert(error);
+            throw new Error(error);
         }
     }
 };

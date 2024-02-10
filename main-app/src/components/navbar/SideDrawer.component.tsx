@@ -54,7 +54,10 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                 boxSizing='border-box'
                 overflow='hidden'
                 bgcolor='#ffffffa0'
-                sx={{ backdropFilter: 'blur(5px)' }}
+                sx={{
+                    backdropFilter: 'blur(5px)',
+                    transition: 'all .2s ease-in'
+                }}
             >
 
                 <Stack direction='row' justifyContent='space-between' alignItems='center'>

@@ -67,7 +67,7 @@ const SignUp = () => {
             } else {
                 await signInWithGooglePopUp();
                 setIsLoading(false)
-                navigate('/profile')
+                navigate('/')
             }
 
         } catch (error) {
@@ -90,10 +90,10 @@ const SignUp = () => {
                 return
             }
             if (user) await logOut();
-            await signUpWithEmail(email, password, firstName, lastName)
+            const newUser = await signUpWithEmail(email, password, firstName, lastName)
             setUserCredentials({ email: '', password: '', firstName: '', lastName: '', confirmPassword: '' })
             setIsLoading(false)
-            navigate('/profile')
+            navigate('/');
         } catch (error) {
             if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
                 setErrorMessage('User already exist. Recover password?')
