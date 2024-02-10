@@ -1,4 +1,6 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
+
 import {
     User,
     UserCredential,
@@ -12,11 +14,14 @@ import {
 } from 'firebase/auth';
 
 
-import { auth, createUserDocumentFromAuth } from '../utils/firebase-utils.ts';
+import { auth, createUserDocumentFromAuth, updateUserProfileFirebase } from '../utils/firebase-utils.ts';
 import { useNavigate } from 'react-router-dom';
+import { UserProfile } from '../data/userProfileTypes.ts';
 
 type UserContextType = {
     user: User | null;
+    userProfile: UserProfile | null;
+    updateUserProfile: (UserProfile) => Promise<void>
     signInWithGoogleRedirect: () => Promise<void>;
     signInWithGooglePopUp: () => Promise<void>;
     logInWithEmail: (email: string, password: string) => Promise<UserCredential>;
@@ -24,29 +29,20 @@ type UserContextType = {
     logOut: () => Promise<void>;
 };
 
+
 const UserContext = createContext<UserContextType | null>(null);
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
     const [user, setUser] = useState(null);
+    const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const logRedirect = async () => {
-            const response = await getRedirectResult(auth)
-            if (response) {
-                const userDocRef = await createUserDocumentFromAuth(response.user)
-                navigate('/profile')
-            }
-        }
-        logRedirect();
-    }, [])
-
-
     const googleProvider = new GoogleAuthProvider;
+
     googleProvider.setCustomParameters({
         prompt: 'select_account',
-        state: '/profile'
     })
 
     const signInWithGooglePopUp = async () => {
@@ -73,17 +69,47 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         return signOut(auth);
     };
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-        });
-        return () => unsubscribe();
-    }, []);
+    const updateUserProfile = async (updatedProfile: UserProfile) => {
+        await updateUserProfileFirebase(updatedProfile);
+        setUserProfile(updatedProfile);
+    }
 
+    useEffect(() => {
+        const logInRedirect = async () => {
+            const response = await getRedirectResult(auth)
+            if (response) {
+                const userDocRef = await createUserDocumentFromAuth(response.user)
+                console.log('There is response')
+                navigate('/profile')
+            }
+        }
+        logInRedirect();
+    }, [])
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                const { getUserProfileInfo } = await import('../utils/firebase-utils.ts')
+                const userDocRef = await getUserProfileInfo(currentUser.uid);
+                setUserProfile(userDocRef);
+                setUser(currentUser);
+                return
+            } else {
+                setUserProfile(null)
+                setUser(null);
+                return
+            }
+        })
+        return () => unsubscribe();
+    }, [user]);
+
+    console.log('UeerProfile from AuthContext:', userProfile)
     return (
         <UserContext.Provider
             value={{
                 user,
+                userProfile,
+                updateUserProfile,
                 logInWithEmail,
                 signUpWithEmail,
                 signInWithGooglePopUp,

@@ -62,7 +62,7 @@ const LogIn = () => {
             await logInWithEmail(userCredentials.email, userCredentials.password)
             setUserCredentials({ email: '', password: '' })
             setIsLoading(false)
-            navigate('/profile')
+            navigate('/')
         } catch (error) {
             if (error.message === 'Firebase: Error (auth/invalid-credential).') {
                 setErrorMessage('Wrong Email or Password')
@@ -85,7 +85,7 @@ const LogIn = () => {
             } else {
                 await signInWithGooglePopUp();
                 setIsLoading(false)
-                navigate('/profile')
+                navigate('/')
             }
 
         } catch (error) {

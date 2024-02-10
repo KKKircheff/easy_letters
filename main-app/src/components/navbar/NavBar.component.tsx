@@ -18,6 +18,7 @@ import BurgerButton from './BurgerButton.component';
 const NavBar = () => {
     const navigate = useNavigate();
     const theme = useTheme();
+    const maxNavHeight = '60px'
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const { xs, md, lg } = styleVariables.layoutPadding;
@@ -58,19 +59,27 @@ const NavBar = () => {
                     boxShadow: theme.shadow.sm,
                     py: { xs: 1, md: 1 },
                     px: { xs: 3, md: 3 },
+                    paddingRight: { md: 1 },
                     flexGrow: 1,
                     borderRadius: theme.radius.full,
                     bgcolor: '#ffffffa0',
                     backdropFilter: 'blur(5px)',
+                    maxHeight: maxNavHeight,
                 }}>
 
                 <Stack
                     direction='row'
                     justifyContent='space-between'
-                    alignItems='center'
+                    alignItems='flex-start'
                     spacing={2}>
 
-                    <Sheet role='logo' sx={{ cursor: 'pointer', backgroundColor: 'transparent' }} onClick={() => navigate('/')}>
+                    <Sheet
+                        role='logo'
+                        sx={{
+                            paddingTop: .7,
+                            cursor: 'pointer',
+                            backgroundColor: 'transparent',
+                        }} onClick={() => navigate('/')}>
                         <Typography
                             level='h3'
                             fontWeight={900}
@@ -83,7 +92,11 @@ const NavBar = () => {
                     <List
                         role="menubar"
                         orientation="horizontal"
-                        sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+                        sx={{
+                            display: { xs: 'none', md: 'flex' },
+                            justifyContent: 'center',
+                            paddingTop: .7,
+                        }}>
                         {items.map((item) => <ListMenuItem
                             key={item.name}
                             item={item}

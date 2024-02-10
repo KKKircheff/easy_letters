@@ -1,9 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Stack, useTheme } from "@mui/joy"
-import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
-import { useUserContext } from '../../context/AuthContext';
+import { Stack, Typography, useTheme } from "@mui/joy"
 import DarkButton from '../buttons/dark-button/DarkButton.component';
+
+import { useUserContext } from '../../context/AuthContext';
+
+import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
+import LogInGroupMenu from './LogInGroupMenu.component';
+import MoreVert from '@mui/icons-material/MoreVert';
+import { useEffect, useState } from 'react';
 
 type Props = {
     setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -14,18 +19,17 @@ const LogInGroup = ({ setIsDrawerOpen }: Props) => {
     const navigate = useNavigate();
     const c = useTheme().palette;
 
+    const { user } = useUserContext()
 
-    const { user, logOut } = useUserContext()
+    const greetName = user ? user.displayName.split(' ')[0] : 'no user'
+    const [isProfileNavOpen, setIsProfileNavOpen] = useState(false);
 
-    const greetName = user ? user.displayName.split(' ')[0] : ''
-
-    const handleClick = async () => {
+    const handleButtonClick = () => {
         if (!user) {
+            setIsDrawerOpen(false);
             navigate('/login');
-            setIsDrawerOpen(false);
         } else {
-            navigate('/profile');
-            setIsDrawerOpen(false);
+            setIsProfileNavOpen(!isProfileNavOpen)
         }
     }
 
@@ -33,34 +37,48 @@ const LogInGroup = ({ setIsDrawerOpen }: Props) => {
         <Stack
             mx='auto'
             role="none"
-            direction='row'
+            direction={{ xs: 'column', md: 'column' }}
             alignItems='center'
-            spacing={1}
+            spacing={1.5}
             bgcolor='transparent'
-            onClick={handleClick}
+            onClick={handleButtonClick}
+            onMouseLeave={() => user && setIsProfileNavOpen(false)}
+            onMouseEnter={() => user && setIsProfileNavOpen(true)}
         >
-            {/* <Button
-                color='neutral'
-                sx={{
-                    bgcolor: 'neutral.800',
-                    borderRadius: theme.vars.radius.full,
-                    px: 4, py: 1.5,
-                    fontSize: { xs: 'sm' },
-                }}
-                endDecorator={<PermIdentityOutlinedIcon sx={{ color: 'currentcolor' }} />}
-            >{user ? `Hi, ${greetName}` : 'Log In'}</Button> */}
-            <DarkButton
-                sx={{
-                    fontSize: 'xSmallTitle',
-                    '&:hover': {
-                        fontWeight: '600',
-                        bgcolor: 'transparent',
-                        color: c.neutral[600],
-                        border: `2px solid ${c.neutral[600]}`,
-                    }
-                }}
-                endDecorator={<PermIdentityOutlinedIcon sx={{ color: 'currentcolor' }} />}
-            >{user ? `Hi, ${greetName}` : 'Log In'}</DarkButton>
+            {user
+                ? <DarkButton
+                    sx={{
+                        paddingY: .5,
+                        height: '45px',
+                        paddingRight: 2,
+                        fontSize: 'xSmallTitle',
+                        '&:hover': {
+                            fontWeight: '600',
+                            bgcolor: 'transparent',
+                            color: c.neutral[600],
+                            border: `2px solid ${c.neutral[600]}`,
+                        }
+                    }}
+                    endDecorator={<MoreVert sx={{ marginLeft: 1, borderRadius: '50%' }} />}
+                >{`Hi, ${greetName}`}</DarkButton>
+
+                : <DarkButton
+                    sx={{
+                        fontSize: 'xSmallTitle',
+                        '&:hover': {
+                            fontWeight: '600',
+                            bgcolor: 'transparent',
+                            color: c.neutral[600],
+                            border: `2px solid ${c.neutral[600]}`,
+                            "& .menu-dots-hover": {
+                                color: c.neutral[700],
+                            }
+                        }
+                    }}
+                    endDecorator={<PermIdentityOutlinedIcon />}
+                >Log In</DarkButton>
+            }
+            {isProfileNavOpen && user && <LogInGroupMenu setIsDrawerOpen={setIsDrawerOpen} setIsProfileNavOpen={setIsProfileNavOpen} />}
         </Stack>
     )
 }
