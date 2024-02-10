@@ -62,10 +62,11 @@ const SignUp = () => {
         setIsLoading(true)
         try {
             if (user) await logOut();
+
             if (isMobile) {
                 const newUser = await signInWithGoogleRedirect();
             } else {
-                await signInWithGooglePopUp();
+                const newUser = await signInWithGooglePopUp();
                 setIsLoading(false)
                 navigate('/')
             }

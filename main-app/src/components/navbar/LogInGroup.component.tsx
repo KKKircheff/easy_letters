@@ -17,6 +17,8 @@ type Props = {
 const LogInGroup = ({ setIsDrawerOpen }: Props) => {
 
     const { user, userProfile } = useUserContext()
+
+
     const navigate = useNavigate();
 
     const c = useTheme().palette;
@@ -25,8 +27,9 @@ const LogInGroup = ({ setIsDrawerOpen }: Props) => {
 
     const greetName = userProfile ? userProfile.general.firstName : 'no user'
 
+
     const handleButtonClick = () => {
-        if (!user) {
+        if (!userProfile) {
             setIsDrawerOpen(false);
             navigate('/login');
         } else {

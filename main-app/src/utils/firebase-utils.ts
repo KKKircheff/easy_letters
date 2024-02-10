@@ -59,12 +59,12 @@ export const updateUserProfileFirebase = async (
     }
 };
 
-export const createUserDocumentFromAuth = async (user: User) => {
-    const userDocRef = doc(db, 'users', user.uid);
+export const createUserDocumentFromAuth = async (loggedUser: User) => {
+    const userDocRef = doc(db, 'users', loggedUser.uid);
     const userSnapshot = await getDoc(userDocRef);
 
     if (!userSnapshot.exists()) {
-        const {displayName, email} = user;
+        const {displayName, email} = loggedUser;
         const createdAt = new Date();
         const planValidTill = new Date(
             createdAt.getTime() + 30 * 24 * 60 * 60 * 1000
@@ -75,7 +75,7 @@ export const createUserDocumentFromAuth = async (user: User) => {
         const [firstName, lastName] = names;
 
         const initProfile: UserProfile = {
-            uid: user.uid,
+            uid: loggedUser.uid,
             general: {
                 createdAt,
                 firstName,
@@ -92,6 +92,9 @@ export const createUserDocumentFromAuth = async (user: User) => {
         } catch (error) {
             throw new Error(error);
         }
+    } else {
+        const profile = userSnapshot.data() as UserProfile | undefined;
+        return profile;
     }
 };
 

@@ -11,6 +11,8 @@ import {
     GoogleAuthProvider,
     onAuthStateChanged,
     getRedirectResult,
+    signInWithEmailAndPassword,
+    signOut,
 } from 'firebase/auth';
 
 
@@ -48,6 +50,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     const signInWithGooglePopUp = async () => {
         const newUser = await signInWithPopup(auth, googleProvider)
         const profile = await createUserDocumentFromAuth(newUser.user);
+        // console.log('creted profile in signUpwithGoogle', profile)
         setUserProfile(profile)
     }
 
@@ -61,16 +64,13 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const logInWithEmail = async (email: string, password: string) => {
-        const { signInWithEmailAndPassword } = await import('firebase/auth')
+        // const { signInWithEmailAndPassword } = await import('firebase/auth')
         const loggedUser = await signInWithEmailAndPassword(auth, email, password);
         const profile = await getUserProfileInfo(loggedUser.user.uid)
         setUserProfile(profile)
     };
 
-    const logOut = async () => {
-        const { signOut } = await import('firebase/auth')
-        return signOut(auth);
-    };
+    const logOut = async () => signOut(auth);
 
     const updateUserProfile = async (updatedProfile: UserProfile) => {
         await updateUserProfileFirebase(updatedProfile);
@@ -82,9 +82,10 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const logInRedirect = async () => {
             const response = await getRedirectResult(auth)
+            // console.log('2:response useEffect:', response)
             if (response) {
                 const profile = await createUserDocumentFromAuth(response.user)
-                setUserProfile(profile)
+                setUserProfile({ ...profile })
                 navigate('/profile')
             }
         }
@@ -93,6 +94,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            // console.log('1:unsubscribe:', currentUser)
             if (currentUser) {
                 setUser(currentUser);
                 return
