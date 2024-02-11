@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import { Dispatch, SetStateAction } from 'react';
+
 
 import {
     User,
@@ -94,8 +94,12 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-            // console.log('1:unsubscribe:', currentUser)
+            console.log('1:unsubscribe:', currentUser)
             if (currentUser) {
+                const profile = await getUserProfileInfo(currentUser.uid);
+                if (profile) {
+                    setUserProfile(profile)
+                }
                 setUser(currentUser);
                 return
             }
