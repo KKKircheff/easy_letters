@@ -25,8 +25,8 @@ type UserContextType = {
     userProfile: UserProfile | null;
     updateUserProfile: (UserProfile) => Promise<void>
     signInWithGoogleRedirect: () => Promise<void>;
-    signInWithGooglePopUp: () => Promise<void>;
-    logInWithEmail: (email: string, password: string) => Promise<void>;
+    signInWithGooglePopUp: () => void;
+    logInWithEmail: (email: string, password: string) => void;
     signUpWithEmail: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
     logOut: () => Promise<void>;
 };
@@ -34,7 +34,7 @@ type UserContextType = {
 
 const UserContext = createContext<UserContextType | null>(null);
 
-export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
+export const UserProvider = ({ children }: { children: ReactNode }) => {
 
     const [user, setUser] = useState<User | null>(null);
     const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
@@ -47,45 +47,35 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         prompt: 'select_account',
     })
 
-    const signInWithGooglePopUp = async () => {
-        const newUser = await signInWithPopup(auth, googleProvider)
-        const profile = await createUserDocumentFromAuth(newUser.user);
-        // console.log('creted profile in signUpwithGoogle', profile)
-        setUserProfile(profile)
-    }
-
     const signUpWithEmail = async (email: string, password: string, firstName: string, lastName: string) => {
-        const newUser = await createUserWithEmailAndPassword(auth, email, password)
-        await updateProfile(newUser.user, { displayName: `${firstName} ${lastName}` })
-        await newUser.user.reload();
+        const response = await createUserWithEmailAndPassword(auth, email, password)
+        await updateProfile(response.user, { displayName: `${firstName} ${lastName}` })
+        await response.user.reload();
         const updatedUser = auth.currentUser;
-        const profile = await createUserDocumentFromAuth(updatedUser)
+        const profile = await createUserDocumentFromAuth(updatedUser);
         setUserProfile(profile)
     }
 
-    const logInWithEmail = async (email: string, password: string) => {
-        // const { signInWithEmailAndPassword } = await import('firebase/auth')
-        const loggedUser = await signInWithEmailAndPassword(auth, email, password);
-        const profile = await getUserProfileInfo(loggedUser.user.uid)
-        setUserProfile(profile)
-    };
+    const logInWithEmail = (email: string, password: string) => signInWithEmailAndPassword(auth, email, password);
 
-    const logOut = async () => signOut(auth);
+    const signInWithGooglePopUp = () => signInWithPopup(auth, googleProvider)
+
+    const signInWithGoogleRedirect = async () => signInWithRedirect(auth, googleProvider)
+
+    const logOut = () => signOut(auth);
 
     const updateUserProfile = async (updatedProfile: UserProfile) => {
         await updateUserProfileFirebase(updatedProfile);
-        setUserProfile(updatedProfile);
+        setUserProfile(prevState => ({ ...prevState, ...updatedProfile }));
     }
-
-    const signInWithGoogleRedirect = async () => signInWithRedirect(auth, googleProvider)
 
     useEffect(() => {
         const logInRedirect = async () => {
             const response = await getRedirectResult(auth)
-            // console.log('2:response useEffect:', response)
             if (response) {
                 const profile = await createUserDocumentFromAuth(response.user)
-                setUserProfile({ ...profile })
+                setUserProfile(profile)
+                setUser(response.user)
                 navigate('/profile')
             }
         }
@@ -94,19 +84,13 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-            console.log('1:unsubscribe:', currentUser)
-            if (currentUser) {
-                const profile = await getUserProfileInfo(currentUser.uid);
-                if (profile) {
-                    setUserProfile(profile)
-                }
-                setUser(currentUser);
-                return
+            if (currentUser && currentUser.displayName !== null) {
+                const profile = await createUserDocumentFromAuth(currentUser);
+                setUserProfile(profile)
+            } else {
+                setUserProfile(null)
             }
-            setUserProfile(null)
-            setUser(null);
-            return
-
+            setUser(currentUser);
         })
         return () => unsubscribe();
     }, []);
@@ -118,8 +102,8 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
                 userProfile,
                 updateUserProfile,
                 logInWithEmail,
-                signUpWithEmail,
                 signInWithGooglePopUp,
+                signUpWithEmail,
                 signInWithGoogleRedirect,
                 logOut,
             }}>

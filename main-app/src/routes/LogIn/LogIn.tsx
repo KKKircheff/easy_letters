@@ -27,7 +27,7 @@ import GoogleButton from '../../components/buttons/google-button/GoogleButton.co
 import DarkButton from '../../components/buttons/dark-button/DarkButton.component';
 import UnderNavBar from '../../components/navbar/UnderNavBar.component';
 import { useEffect, useState } from 'react';
-import { useUserContext } from '../../context/AuthContext';
+import { useUserContext } from '../../context/UserContext';
 import { getRedirectResult } from 'firebase/auth';
 import { auth, createUserDocumentFromAuth } from '../../utils/firebase-utils';
 

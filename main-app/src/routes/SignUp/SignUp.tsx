@@ -27,7 +27,7 @@ import GoogleIcon from '../../assets/icons/Google.icon';
 import DarkButton from '../../components/buttons/dark-button/DarkButton.component';
 import { styleVariables } from "../../styles/styleVariables"
 
-import { useUserContext } from '../../context/AuthContext';
+import { useUserContext } from '../../context/UserContext';
 
 import { getRedirectResult } from 'firebase/auth'
 

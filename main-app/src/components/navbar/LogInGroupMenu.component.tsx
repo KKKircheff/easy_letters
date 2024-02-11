@@ -2,7 +2,7 @@ import { Button, Divider, Stack, useTheme } from "@mui/joy";
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../context/AuthContext";
+import { useUserContext } from "../../context/UserContext";
 
 type Props = {
     setIsProfileNavOpen: React.Dispatch<React.SetStateAction<boolean>>

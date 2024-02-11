@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUserContext } from '../../context/AuthContext';
+import { useUserContext } from '../../context/UserContext';
 
 import { Stack, useTheme } from "@mui/joy"
 import DarkButton from '../buttons/dark-button/DarkButton.component';
@@ -18,7 +18,6 @@ const LogInGroup = ({ setIsDrawerOpen }: Props) => {
 
     const { user, userProfile } = useUserContext()
 
-
     const navigate = useNavigate();
 
     const c = useTheme().palette;
@@ -26,7 +25,6 @@ const LogInGroup = ({ setIsDrawerOpen }: Props) => {
     const [isProfileNavOpen, setIsProfileNavOpen] = useState(false);
 
     const greetName = userProfile ? userProfile.general.firstName : 'no user'
-
 
     const handleButtonClick = () => {
         if (!userProfile) {
@@ -82,7 +80,7 @@ const LogInGroup = ({ setIsDrawerOpen }: Props) => {
                     endDecorator={<PermIdentityOutlinedIcon />}
                 >Log In</DarkButton>
             }
-            {isProfileNavOpen && user && <LogInGroupMenu setIsDrawerOpen={setIsDrawerOpen} setIsProfileNavOpen={setIsProfileNavOpen} />}
+            {isProfileNavOpen && userProfile && <LogInGroupMenu setIsDrawerOpen={setIsDrawerOpen} setIsProfileNavOpen={setIsProfileNavOpen} />}
         </Stack>
     )
 }

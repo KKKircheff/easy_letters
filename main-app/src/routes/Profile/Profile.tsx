@@ -7,7 +7,7 @@ import {
 import UnderNavBar from "../../components/navbar/UnderNavBar.component"
 import DarkButton from "../../components/buttons/dark-button/DarkButton.component"
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
-import { useUserContext } from "../../context/AuthContext";
+import { useUserContext } from "../../context/UserContext";
 import ProfileGeneral from "./ProfileGeneral.section";
 import { useState } from "react";
 import ProfileSidebar from "./ProfileSidebar.section";
@@ -16,9 +16,7 @@ import Footer from "../../components/footer/Footer.component";
 const Profile = () => {
     const { logOut, userProfile, updateUserProfile } = useUserContext()
 
-
-
-    const [isSidebarWide, setIsSidebarWide] = useState(true)
+    const [isSidebarWide, setIsSidebarWide] = useState(window.innerWidth > 900)
     const wideWidth = '220px'
     const compactWidth = '70px'
 
@@ -56,7 +54,7 @@ const Profile = () => {
             position='sticky'
             top={0}
             minHeight='100vh'
-            bgcolor='neutral.100'
+            bgcolor='secondary.100'
         >
             <Stack
                 role='sidebar'

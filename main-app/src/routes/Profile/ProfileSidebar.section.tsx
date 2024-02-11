@@ -76,7 +76,7 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide }: Props) => {
                 return (
                     <Button
                         key={index}
-                        color='neutral'
+                        color='secondary'
                         variant='solid'
                         endDecorator={item.itemName}
                         sx={{
@@ -94,7 +94,7 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide }: Props) => {
             }
 
             <Button
-                color='neutral'
+                color='secondary'
                 variant='solid'
                 endDecorator={'Log Out'}
                 sx={{
@@ -109,7 +109,7 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide }: Props) => {
             </Button>
 
             <Button
-                color='neutral'
+                color='secondary'
                 variant='solid'
                 sx={{
                     justifyContent: 'flex-start',
