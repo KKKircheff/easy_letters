@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
@@ -28,10 +28,6 @@ import DarkButton from '../../components/buttons/dark-button/DarkButton.componen
 import { styleVariables } from "../../styles/styleVariables"
 
 import { useUserContext } from '../../context/UserContext';
-
-import { getRedirectResult } from 'firebase/auth'
-
-import { auth, createUserDocumentFromAuth } from '../../utils/firebase-utils';
 
 type UserCredentials = {
     firstName: string,

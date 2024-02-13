@@ -9,6 +9,7 @@ import {doc, getDoc, getFirestore, setDoc} from 'firebase/firestore';
 import {firebaseConfig} from './firebase-config';
 import {getStorage, ref, getDownloadURL} from 'firebase/storage';
 import {UserProfile} from '../data/userProfileTypes';
+import {initialUserProfile} from '../data/initialUserProfile';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -70,11 +71,13 @@ export const createUserDocumentFromAuth = async (loggedUser: User) => {
             createdAt.getTime() + 30 * 24 * 60 * 60 * 1000
         );
         const pricePlan = 'free';
+        const aiCredits = 10;
 
         const names = displayName.split(' ');
         const [firstName, lastName] = names;
 
         const initProfile: UserProfile = {
+            ...initialUserProfile,
             uid: loggedUser.uid,
             general: {
                 createdAt,
@@ -83,6 +86,7 @@ export const createUserDocumentFromAuth = async (loggedUser: User) => {
                 email,
                 pricePlan,
                 planValidTill,
+                aiCredits,
             },
         };
 

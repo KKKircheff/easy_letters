@@ -1,4 +1,6 @@
 import { Button, Stack, useTheme } from '@mui/joy'
+import { SectionsToRender } from './Profile';
+
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
@@ -7,25 +9,34 @@ import WorkHistoryOutlinedIcon from '@mui/icons-material/WorkHistoryOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 import KeyboardDoubleArrowRightOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowRightOutlined';
-import KeyboardDoubleArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftOutlined';
+import RecordVoiceOverOutlinedIcon from '@mui/icons-material/RecordVoiceOverOutlined';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
+import { useUserContext } from '../../context/UserContext';
+
 
 type Props = {
     isSidebarWide: boolean
     setIsSidebarWide: React.Dispatch<React.SetStateAction<boolean>>
+    setSectionToRender: React.Dispatch<React.SetStateAction<SectionsToRender>>
 }
 
+type SidebarItems = {
+    icon: JSX.Element,
+    itemName: string,
+    sectionName: SectionsToRender
+}[]
 
-
-const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide }: Props) => {
+const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide, setSectionToRender }: Props) => {
 
     const c = useTheme().palette;
+    const { logOut } = useUserContext()
+
     const iconColor = c.warning[400]
     const textColor = c.neutral[100]
 
-    const sidebarItems = [
+    const sidebarItems: SidebarItems = [
         {
             icon: <PermIdentityOutlinedIcon sx={{ color: iconColor }} />,
             itemName: 'General',
@@ -37,9 +48,14 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide }: Props) => {
             sectionName: 'education'
         },
         {
+            icon: <RecordVoiceOverOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'Languages',
+            sectionName: 'languages'
+        },
+        {
             icon: <WorkHistoryOutlinedIcon sx={{ color: iconColor }} />,
-            itemName: 'Employment History',
-            sectionName: 'workHistory'
+            itemName: 'Career History',
+            sectionName: 'careerHistory'
         },
         {
             icon: <FormatListBulletedOutlinedIcon sx={{ color: iconColor }} />,
@@ -52,11 +68,6 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide }: Props) => {
             sectionName: 'summary'
         },
         {
-            icon: <ArticleOutlinedIcon sx={{ color: iconColor }} />,
-            itemName: 'Templates',
-            sectionName: 'templates'
-        },
-        {
             icon: <FileCopyOutlinedIcon sx={{ color: iconColor }} />,
             itemName: 'Application Documents',
             sectionName: 'applicationDocs'
@@ -66,50 +77,13 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide }: Props) => {
             itemName: 'Invoices',
             sectionName: 'invoices'
         },
-
     ]
 
     return (
-        <Stack direction='column' spacing={1} mt={16}>
-
-            {sidebarItems.map((item, index) => {
-                return (
-                    <Button
-                        key={index}
-                        color='secondary'
-                        variant='solid'
-                        endDecorator={item.itemName}
-                        sx={{
-                            width: isSidebarWide ? 'auto' : '100%',
-                            paddingRight: isSidebarWide ? 2 : 0,
-                            fontSize: isSidebarWide ? 'sm' : '0px',
-                            justifyContent: 'flex-start',
-                            color: textColor,
-                            transition: 'all .2s ease-in',
-                        }}
-                    >
-                        {item.icon}
-                    </Button>)
-            })
-            }
-
+        <Stack direction='column' spacing={1} mt={{ xs: 10, md: 13, lg: 16 }}>
             <Button
-                color='secondary'
-                variant='solid'
-                endDecorator={'Log Out'}
-                sx={{
-                    paddingRight: isSidebarWide ? 1 : 0,
-                    justifyContent: 'flex-start',
-                    color: c.neutral[100],
-                    fontSize: isSidebarWide ? 'sm' : '0px',
-                    transition: 'all .2s ease-in'
-                }}
-            >
-                <PowerSettingsNewIcon sx={{ color: c.danger[300] }} />
-            </Button>
-
-            <Button
-                color='secondary'
+                aria-label='extend sidebar'
+                color='neutral'
                 variant='solid'
                 sx={{
                     justifyContent: 'flex-start',
@@ -127,6 +101,45 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide }: Props) => {
                     }} />
             </Button>
 
+            {sidebarItems.map((item, index) => {
+                return (
+                    <Button
+                        key={index}
+                        aria-label={item.itemName}
+                        color='neutral'
+                        variant='solid'
+                        endDecorator={item.itemName}
+                        onClick={() => setSectionToRender(item.sectionName)}
+                        sx={{
+                            width: isSidebarWide ? 'auto' : '100%',
+                            paddingRight: isSidebarWide ? 2 : 0,
+                            fontSize: isSidebarWide ? 'sm' : '0px',
+                            justifyContent: 'flex-start',
+                            color: textColor,
+                            transition: 'all .2s ease-in',
+                        }}
+                    >
+                        {item.icon}
+                    </Button>)
+            })
+            }
+
+            <Button
+                aria-label='log out'
+                color='neutral'
+                variant='solid'
+                endDecorator={'Log Out'}
+                onClick={() => logOut}
+                sx={{
+                    paddingRight: isSidebarWide ? 1 : 0,
+                    justifyContent: 'flex-start',
+                    color: c.neutral[100],
+                    fontSize: isSidebarWide ? 'sm' : '0px',
+                    transition: 'all .2s ease-in'
+                }}
+            >
+                <PowerSettingsNewIcon sx={{ color: c.danger[300] }} />
+            </Button>
         </Stack>
     )
 }
