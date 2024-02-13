@@ -47,6 +47,7 @@ const InputBlock = ({ title, children, value, section, inputKey, updateCurrentSe
             // ref={ref}
             onBlur={handleBlur}
             maxWidth={{ xs: '400px', md: '100%' }}
+            width='100%'
             mx='auto'
             bgcolor='neutral.100'
             py={1.5}
@@ -55,7 +56,7 @@ const InputBlock = ({ title, children, value, section, inputKey, updateCurrentSe
         >
             <Stack direction='row' py={1} justifyContent='space-between'>
 
-                <FormLabel sx={{ mb: 1, fontWeight: 600 }}>{title}</FormLabel>
+                <FormLabel sx={{ mb: 1, fontWeight: 600, }}>{title}</FormLabel>
 
                 {inputKey && <Stack direction='row' spacing={.5} fontSize='xl'>
                     <DriveFileRenameOutlineOutlinedIcon
@@ -77,7 +78,7 @@ const InputBlock = ({ title, children, value, section, inputKey, updateCurrentSe
                     </FormControl>
                     : <Typography
                         fontWeight={500}
-                        fontSize='sm'
+                        fontSize='md'
                         textColor='neutral.600'
                         pl={1.5}
                     >{value}</Typography>

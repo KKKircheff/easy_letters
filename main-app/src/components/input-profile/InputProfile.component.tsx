@@ -2,7 +2,7 @@ import { Input, styled } from "@mui/joy";
 
 const InputProfile = styled(Input)(({ theme }) => ({
     backgroundColor: 'white',
-    fontSize: theme.fontSize.sm,
+    fontSize: theme.fontSize.md,
     fontWeight: 500,
     borderRadius: theme.radius.lg,
     color: theme.vars.palette.neutral[600],

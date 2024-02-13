@@ -2,6 +2,7 @@ import { Autocomplete, useTheme } from '@mui/joy';
 
 const AutocompleteStyled = ({ options, onChange, onInputChange, value, name, inputValue }) => {
     const c = useTheme().palette;
+    const f = useTheme().fontSize;
 
     return (
         <Autocomplete
@@ -18,7 +19,7 @@ const AutocompleteStyled = ({ options, onChange, onInputChange, value, name, inp
                         scrollbarWidth: 'none',
                         fontWeight: '500',
                         color: c.neutral[300]!,
-                        fontSize: '.9rem'!,
+                        fontSize: f.md!,
                         '&:active': {
                             color: c.neutral[300]!,
                         }
@@ -27,7 +28,7 @@ const AutocompleteStyled = ({ options, onChange, onInputChange, value, name, inp
                 input: {
                     sx: {
                         fontFamily: 'Montserrat',
-                        fontSize: '0.9rem',
+                        fontSize: f.md,
                         fontWeight: '500',
                         color: c.neutral[500]
                     },
@@ -37,7 +38,7 @@ const AutocompleteStyled = ({ options, onChange, onInputChange, value, name, inp
                         '--Input-focusedThickness': '0rem',
                         backgroundColor: 'white',
                         fontFamily: 'sans-serif',
-                        fontSize: 'sm',
+                        fontSize: f.md,
                         fontWeight: 500,
                         color: c.neutral[600],
                         outline: `2px solid ${c.primary[500]}`,

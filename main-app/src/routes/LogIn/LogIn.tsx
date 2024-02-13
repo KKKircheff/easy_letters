@@ -1,6 +1,6 @@
 
 import logIn from '/assets/images/login1.jfif'
-import StyledInput from "../../components/styled-input/StyledInput.component"
+import InputLogInSignUp from '../../components/input-login-signup/InputLogInSignUp.component';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
@@ -182,7 +182,7 @@ const LogIn = () => {
                         <Grid xs={12} md={12} px={0} >
                             <FormControl >
                                 <FormLabel sx={{ mb: '8px' }}>Email</FormLabel>
-                                <StyledInput
+                                <InputLogInSignUp
                                     required
                                     autoComplete='off'
                                     type='email'
@@ -197,7 +197,7 @@ const LogIn = () => {
                         <Grid xs={12} md={12} mb={2} px={0}>
                             <FormControl>
                                 <FormLabel sx={{ mb: '8px' }}>Password</FormLabel>
-                                <StyledInput
+                                <InputLogInSignUp
                                     required
                                     autoComplete='off'
                                     type='password'

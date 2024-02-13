@@ -54,7 +54,6 @@ const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfile, update
         <Box>
             <Typography level='h1' p={2}> General contact information and web links</Typography>
             <Typography level='h2' p={2}> Please fill in all necessary fields</Typography>
-
             <Grid
                 container
                 columns={12}

@@ -29,9 +29,7 @@ type SidebarItems = {
 }[]
 
 const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide, setSectionToRender }: Props) => {
-
     const c = useTheme().palette;
-    const { logOut } = useUserContext()
 
     const iconColor = c.warning[400]
     const textColor = c.neutral[100]
@@ -79,68 +77,88 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide, setSectionToRender }:
         },
     ]
 
+    const { logOut } = useUserContext()
+
     return (
-        <Stack direction='column' spacing={1} mt={{ xs: 10, md: 13, lg: 16 }}>
-            <Button
-                aria-label='extend sidebar'
-                color='neutral'
-                variant='solid'
-                sx={{
-                    justifyContent: 'flex-start',
-                    color: c.neutral[100],
-                    fontSize: isSidebarWide ? 'sm' : '0px',
-                    transition: 'all .2s ease-in'
-                }}
-                onClick={() => setIsSidebarWide(!isSidebarWide)}
-            > <KeyboardDoubleArrowRightOutlinedIcon
-                    sx={{
-                        color: isSidebarWide ? c.neutral[100] : iconColor,
-                        marginLeft: 'auto',
-                        transform: isSidebarWide ? 'rotate(-180deg)' : 'rotate(0deg)',
-                        transition: 'all .2s ease-in'
-                    }} />
-            </Button>
 
-            {sidebarItems.map((item, index) => {
-                return (
-                    <Button
-                        key={index}
-                        aria-label={item.itemName}
-                        color='neutral'
-                        variant='solid'
-                        endDecorator={item.itemName}
-                        onClick={() => setSectionToRender(item.sectionName)}
-                        sx={{
-                            width: isSidebarWide ? 'auto' : '100%',
-                            paddingRight: isSidebarWide ? 2 : 0,
-                            fontSize: isSidebarWide ? 'sm' : '0px',
-                            justifyContent: 'flex-start',
-                            color: textColor,
-                            transition: 'all .2s ease-in',
-                        }}
-                    >
-                        {item.icon}
-                    </Button>)
-            })
-            }
-
-            <Button
-                aria-label='log out'
-                color='neutral'
-                variant='solid'
-                endDecorator={'Log Out'}
-                onClick={() => logOut}
-                sx={{
-                    paddingRight: isSidebarWide ? 1 : 0,
-                    justifyContent: 'flex-start',
-                    color: c.neutral[100],
-                    fontSize: isSidebarWide ? 'sm' : '0px',
-                    transition: 'all .2s ease-in'
-                }}
+        <Stack
+            direction='column'
+            bgcolor='secondary.50'
+            height='100vh'
+            maxHeight={{ xs: '100vh', sm: '99vh' }}
+            overflow='hidden'
+            pt={{ xs: 10, md: 13, lg: 16 }}
+        >
+            <Stack
+                direction='column'
+                spacing={1}
+                bgcolor='secondary.50'
+                sx={{ overflowY: 'scroll', scrollbarWidth: 'none', }}
+                pb={2}
+            // maxHeight={{ xs: '100vh', sm: '100vh' }}
             >
-                <PowerSettingsNewIcon sx={{ color: c.danger[300] }} />
-            </Button>
+                <Button
+                    aria-label='extend sidebar'
+                    color='neutral'
+                    variant='solid'
+                    sx={{
+                        justifyContent: 'flex-start',
+                        color: c.neutral[100],
+                        fontSize: isSidebarWide ? 'sm' : '0px',
+                        transition: 'all .2s ease-in'
+                    }}
+                    onClick={() => setIsSidebarWide(!isSidebarWide)}
+                > <KeyboardDoubleArrowRightOutlinedIcon
+                        sx={{
+                            color: isSidebarWide ? c.neutral[100] : iconColor,
+                            marginLeft: 'auto',
+                            transform: isSidebarWide ? 'rotate(-180deg)' : 'rotate(0deg)',
+                            transition: 'all .2s ease-in'
+                        }} />
+                </Button>
+
+                {sidebarItems.map((item, index) => {
+                    return (
+                        <Button
+                            key={index}
+                            aria-label={item.itemName}
+                            color='neutral'
+                            variant='solid'
+                            endDecorator={item.itemName}
+                            onClick={() => setSectionToRender(item.sectionName)}
+                            sx={{
+                                width: isSidebarWide ? 'auto' : '100%',
+                                paddingRight: isSidebarWide ? 2 : 0,
+                                fontSize: isSidebarWide ? 'sm' : '0px',
+                                justifyContent: 'flex-start',
+                                color: textColor,
+                                transition: 'all .2s ease-in',
+                            }}
+                        >
+                            {item.icon}
+                        </Button>)
+                })
+                }
+
+                <Button
+                    aria-label='log out'
+                    color='neutral'
+                    variant='solid'
+                    endDecorator={'Log Out'}
+                    onClick={() => logOut}
+                    sx={{
+                        paddingRight: isSidebarWide ? 1 : 0,
+                        justifyContent: 'flex-start',
+                        color: c.neutral[100],
+                        fontSize: isSidebarWide ? 'sm' : '0px',
+                        transition: 'all .2s ease-in'
+                    }}
+                >
+                    <PowerSettingsNewIcon sx={{ color: c.danger[300] }} />
+                </Button>
+            </Stack>
         </Stack>
+
     )
 }
 
