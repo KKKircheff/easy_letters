@@ -10,12 +10,12 @@ import InputProfile from "../../components/input-profile/InputProfile.component"
 type Props = {
     draftProfile: UserProfile;
     handleAutocoplete: (value: string, section: string, inputKey: string) => void
-    handleProfile: (e: React.ChangeEvent<HTMLInputElement>, section: string) => void
+    handleProfileOnChange: (e: React.ChangeEvent<HTMLInputElement>, section: string) => void
     updateCurrentSection: (value: string, section: string, inputKey: string,) => void
     setDraftProfile: React.Dispatch<React.SetStateAction<UserProfile>>
 }
 
-const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfile, updateCurrentSection }: Props) => {
+const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfileOnChange, updateCurrentSection }: Props) => {
 
     const section = 'general'
 
@@ -72,7 +72,7 @@ const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfile, update
                             variant="outlined"
                             color='neutral'
                             value={firstName}
-                            onChange={(e) => handleProfile(e, section)}
+                            onChange={(e) => handleProfileOnChange(e, section)}
                         />
                     </InputBlock>
                 </Grid>
@@ -88,7 +88,7 @@ const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfile, update
                             variant="outlined"
                             color='neutral'
                             value={lastName}
-                            onChange={(e) => handleProfile(e, section)}
+                            onChange={(e) => handleProfileOnChange(e, section)}
                         />
                     </InputBlock>
                 </Grid>
@@ -104,7 +104,7 @@ const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfile, update
                             variant="outlined"
                             color='neutral'
                             value={city}
-                            onChange={(e) => handleProfile(e, section)}
+                            onChange={(e) => handleProfileOnChange(e, section)}
                         />
                     </InputBlock>
                 </Grid>
@@ -119,7 +119,7 @@ const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfile, update
                             variant="outlined"
                             color='neutral'
                             value={postCode}
-                            onChange={(e) => handleProfile(e, section)}
+                            onChange={(e) => handleProfileOnChange(e, section)}
                         />
                     </InputBlock>
                 </Grid>
@@ -148,7 +148,7 @@ const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfile, update
                             variant="outlined"
                             color='neutral'
                             value={phoneNumber}
-                            onChange={(e) => handleProfile(e, section)}
+                            onChange={(e) => handleProfileOnChange(e, section)}
                         />
                     </InputBlock>
                 </Grid>
@@ -164,7 +164,7 @@ const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfile, update
                             variant="outlined"
                             color='neutral'
                             value={email}
-                            onChange={(e) => handleProfile(e, section)}
+                            onChange={(e) => handleProfileOnChange(e, section)}
                         />
                     </InputBlock>
                 </Grid>

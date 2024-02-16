@@ -83,19 +83,18 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide, setSectionToRender }:
 
         <Stack
             direction='column'
-            bgcolor='secondary.50'
-            height='100vh'
-            maxHeight={{ xs: '100vh', sm: '99vh' }}
+            bgcolor='trasparent'
+            height={{ xs: '100vh', sm: '95vh' }}
+            maxHeight={{ xs: '100vh', sm: '95vh' }}
             overflow='hidden'
             pt={{ xs: 10, md: 13, lg: 16 }}
         >
             <Stack
                 direction='column'
                 spacing={1}
-                bgcolor='secondary.50'
+                bgcolor='transparent'
                 sx={{ overflowY: 'scroll', scrollbarWidth: 'none', }}
                 pb={2}
-            // maxHeight={{ xs: '100vh', sm: '100vh' }}
             >
                 <Button
                     aria-label='extend sidebar'
@@ -105,12 +104,14 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide, setSectionToRender }:
                         justifyContent: 'flex-start',
                         color: c.neutral[100],
                         fontSize: isSidebarWide ? 'sm' : '0px',
-                        transition: 'all .2s ease-in'
+                        transition: 'all .2s ease-in',
+                        bgcolor: 'neutral.800',
                     }}
                     onClick={() => setIsSidebarWide(!isSidebarWide)}
                 > <KeyboardDoubleArrowRightOutlinedIcon
                         sx={{
-                            color: isSidebarWide ? c.neutral[100] : iconColor,
+                            // color: isSidebarWide ? c.neutral[100] : iconColor,
+                            color: isSidebarWide ? c.neutral[100] : c.primary[50],
                             marginLeft: 'auto',
                             transform: isSidebarWide ? 'rotate(-180deg)' : 'rotate(0deg)',
                             transition: 'all .2s ease-in'
@@ -133,6 +134,7 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide, setSectionToRender }:
                                 justifyContent: 'flex-start',
                                 color: textColor,
                                 transition: 'all .2s ease-in',
+                                bgcolor: 'neutral.800',
                             }}
                         >
                             {item.icon}
@@ -151,13 +153,14 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide, setSectionToRender }:
                         justifyContent: 'flex-start',
                         color: c.neutral[100],
                         fontSize: isSidebarWide ? 'sm' : '0px',
-                        transition: 'all .2s ease-in'
+                        transition: 'all .2s ease-in',
+                        bgcolor: 'neutral.800',
                     }}
                 >
-                    <PowerSettingsNewIcon sx={{ color: c.danger[300] }} />
+                    <PowerSettingsNewIcon sx={{ color: c.warning[400] }} />
                 </Button>
             </Stack>
-        </Stack>
+        </Stack >
 
     )
 }

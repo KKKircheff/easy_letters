@@ -42,9 +42,6 @@ const Profile = () => {
 
     const { xs, md, lg } = styleVariables.layoutPadding;
 
-    const { userProfile, updateUserProfile } = useUserContext()
-    const [draftProfile, setDraftProfile] = useState<UserProfile | null>(userProfile)
-
     const totalWidth = useScreenWidth()
 
     const wideWidth = 224
@@ -54,13 +51,20 @@ const Profile = () => {
 
     const isWide = totalWidth > 600;
 
+    const { userProfile, updateUserProfile } = useUserContext()
+    const [draftProfile, setDraftProfile] = useState<UserProfile | null>(userProfile)
+
     const [isSidebarWide, setIsSidebarWide] = useState(totalWidth > 900)
     const [sectionToRender, setSectionToRender] = useState<SectionsToRender>('general');
+
+    const [isProfileModified, setIsProfileModified] = useState(false)
 
 
     useEffect(() => {
         setDraftProfile({ ...userProfile })
     }, [userProfile])
+
+
 
     const handleUpdate = async () => {
         const updatedProfile = {
@@ -69,6 +73,7 @@ const Profile = () => {
         };
         try {
             await updateUserProfile(updatedProfile);
+            setIsProfileModified(false);
             alert('Updated!')
         } catch (error) {
             alert(error)
@@ -79,7 +84,8 @@ const Profile = () => {
         updateCurrentSection(value ?? '', currentSection, inputKey)
     }
 
-    const handleProfile = (e: React.ChangeEvent<HTMLInputElement>, currentSection) => {
+    const handleProfileOnChange = (e: React.ChangeEvent<HTMLInputElement>, currentSection) => {
+        setIsProfileModified(true);
         setDraftProfile({
             ...draftProfile,
             [currentSection]: {
@@ -90,6 +96,7 @@ const Profile = () => {
     };
 
     const updateCurrentSection = (value: string, currentSection: string, key: string) => {
+        setIsProfileModified(true);
         setDraftProfile({
             ...draftProfile,
             [currentSection]: {
@@ -97,6 +104,11 @@ const Profile = () => {
                 [key]: value ?? ''
             }
         });
+    }
+
+    const handleRevertProfileChanges = () => {
+        setDraftProfile({ ...userProfile })
+        setIsProfileModified(false)
     }
 
     // const handleDelete = async () => {
@@ -119,7 +131,7 @@ const Profile = () => {
             top={0}
             left={0}
             minHeight='100vh'
-            bgcolor='secondary.50'
+            bgcolor='neutral.700'
         >
             <Stack
                 zIndex={1}
@@ -128,12 +140,13 @@ const Profile = () => {
                 width={isSidebarWide ? `${wideWidth}px` : `${compactWidth}px`}
                 minWidth={isSidebarWide ? `${wideWidth}px` : `${compactWidth}px`}
                 position={{ xs: 'fixed', sm: 'sticky' }}
-                bgcolor='secondary.50'
-                maxHeight={{ xs: '100vh', sm: '95vh' }}
+                maxHeight={{ xs: '100vh', md: '98vh' }}
                 top={0}
                 left={0}
                 pl={1.1}
+                bgcolor={c.neutral[700]}
                 sx={{
+                    // backgroundImage: `linear-gradient(90deg ,${c.primary[700]},${c.primary[500]} )`,
                     transition: 'all .2s ease-in'
                 }}>
                 <ProfileSidebar
@@ -159,69 +172,18 @@ const Profile = () => {
                         draftProfile={draftProfile}
                         setDraftProfile={setDraftProfile}
                         handleAutocoplete={handleAutocoplete}
-                        handleProfile={handleProfile}
+                        handleProfileOnChange={handleProfileOnChange}
                         updateCurrentSection={updateCurrentSection}
                     />
                 </Box>
 
                 <Stack
                     direction='column'
-                    spacing={2.5}
-                    py={4}
+                    spacing={2}
+                    py={5}
+                    pb={10}
                     px={{ xs: '3vw', sm: md, md: xs, lg: md }}
                 >
-
-                    <Stack
-                        direction='row'
-                        justifyContent='space-between'
-                        maxWidth='1200px'
-                        px={{ md: 1 }}
-                        spacing={{ xs: 1, sm: 2, md: 4 }}>
-
-                        <DarkButton
-                            size='sm'
-                            // onClick={handleUpdate}
-                            sx={{
-                                borderColor: c.neutral[500],
-                                bgcolor: c.neutral[600],
-                                paddingLeft: 1,
-                                paddingRight: { xs: 2, sm: 2.5 },
-                                paddingY: .2,
-
-                            }}
-                            startDecorator={<UndoIcon sx={{
-                                p: .3,
-                                border: `2px solid ${c.warning[400]}`,
-                                color: c.warning[400],
-                                fontSize: f.mediumTitle,
-                                fontWeight: 700,
-                                borderRadius: 'lg',
-                            }} />}
-                        >{isWide ? 'Revert changes' : 'Undo'}
-                        </DarkButton>
-
-                        <DarkButton
-                            onClick={handleUpdate}
-                            variant='outlined'
-                            color='neutral'
-                            sx={{
-                                borderColor: c.neutral[500],
-                                bgcolor: c.neutral[600],
-                                paddingLeft: 1.1,
-                                paddingRight: { xs: 2, sm: 2.5 },
-                                paddingY: .4,
-                            }}
-                            startDecorator={<CheckIcon sx={{
-                                p: .2,
-                                border: `2px solid ${c.primary[500]}`,
-                                color: c.primary[500],
-                                fontSize: f.mediumTitle,
-                                fontWeight: 800,
-                                borderRadius: 'lg',
-                            }} />}
-                        >{isWide ? 'Update profile' : 'Update'}
-                        </DarkButton>
-                    </Stack>
 
                     <Stack
                         direction='row'
@@ -230,14 +192,12 @@ const Profile = () => {
                         px={{ md: 1 }}
                     >
                         <Button
-                            // onClick={handleUpdate}
                             variant='outlined'
                             color='neutral'
                             sx={{
                                 borderWidth: '2px',
-                                borderColor: c.neutral[400],
+                                borderColor: c.neutral[300],
                                 color: c.neutral[400],
-                                fontWeight: 600,
                                 paddingLeft: 1,
                                 paddingY: .3,
                             }}
@@ -248,7 +208,7 @@ const Profile = () => {
                                 borderRadius: 'lg',
                             }} />}
                         >
-                            previous
+                            Previous
                         </Button>
 
                         <Button
@@ -257,9 +217,9 @@ const Profile = () => {
                             color='neutral'
                             sx={{
                                 borderWidth: '2px',
-                                borderColor: c.neutral[400],
+                                borderColor: c.neutral[300],
                                 color: c.neutral[400],
-                                fontWeight: 600,
+                                // fontWeight: 600,
                                 paddingRight: 1,
                                 paddingY: .3,
                             }}
@@ -267,13 +227,85 @@ const Profile = () => {
                                 color: c.neutral[100],
                                 fontSize: f.mediumTitle,
                                 bgcolor: c.neutral[400],
+                                borderColor: c.neutral[200],
                                 borderRadius: 'lg',
                             }} />}
                         >
-                            next
+                            Next
                         </Button>
                     </Stack>
 
+                    {isProfileModified &&
+                        <Stack
+                            direction='row-reverse'
+                            justifyContent='center'
+                            mx='auto'
+                            px={{ md: 1 }}
+                            spacing={{ xs: 2 }}>
+
+                            <Button
+                                color='primary'
+                                variant='solid'
+                                onClick={handleUpdate}
+                                sx={{
+                                    justifyContent: 'flex-start',
+                                    paddingLeft: 1,
+                                    paddingY: .2,
+                                    paddingRight: { xs: 2, sm: 2.5 },
+                                    bgcolor: c.neutral[50],
+                                    color: c.primary[500],
+                                    border: `2px solid ${c.primary[400]}`,
+                                    '&:hover': {
+                                        color: c.neutral[50],
+                                        bgcolor: c.primary[500],
+                                    }
+
+                                }}
+                                startDecorator={<CheckIcon sx={{
+                                    p: .2,
+                                    border: `2px solid ${c.primary[300]}`,
+                                    bgcolor: c.primary[500],
+                                    color: c.neutral[50]!,
+                                    fontSize: f.mediumTitle,
+                                    fontWeight: 800,
+                                    borderRadius: 'lg',
+                                }} />}
+
+                            >{isWide ? 'Update profile' : 'Update'}
+                            </Button>
+
+
+                            <Button
+                                color='warning'
+                                onClick={handleRevertProfileChanges}
+                                sx={{
+                                    justifyContent: 'flex-start',
+                                    border: `2px solid ${c.neutral[300]}`,
+                                    paddingLeft: 1,
+                                    paddingRight: { xs: 2, sm: 2.5 },
+                                    paddingY: .2,
+                                    bgcolor: c.neutral[50],
+                                    color: c.neutral[400],
+                                    '&:hover': {
+                                        border: `2px solid ${c.warning[400]}`,
+                                        color: c.neutral[50],
+                                        bgcolor: c.warning[500],
+                                    }
+
+                                }}
+                                startDecorator={<UndoIcon sx={{
+                                    p: .2,
+                                    border: `2px solid ${c.warning[100]}`,
+                                    bgcolor: c.warning[500],
+                                    color: c.neutral[50],
+                                    fontSize: f.mediumTitle,
+                                    fontWeight: 700,
+                                    borderRadius: 'lg',
+                                }} />}
+                            >{isWide ? 'Revert changes' : 'Undo'}
+                            </Button>
+                        </Stack>
+                    }
                 </Stack>
 
                 <Footer />

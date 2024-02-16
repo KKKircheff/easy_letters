@@ -20,6 +20,19 @@ const InputBlock = ({ title, children, value, section, inputKey, updateCurrentSe
 
     const [isEditActive, setIsEditActive] = useState(value ? false : true)
 
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Enter') {
+                setIsEditActive(false);
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
 
     // const ref = useRef(null);
     // useEffect(() => {
@@ -49,10 +62,11 @@ const InputBlock = ({ title, children, value, section, inputKey, updateCurrentSe
             maxWidth={{ xs: '400px', md: '100%' }}
             width='100%'
             mx='auto'
-            bgcolor='neutral.100'
-            py={1.5}
+            // bgcolor='neutral.100'
+            py={2}
             px={2}
             borderRadius='md'
+            border={`2px solid ${c.neutral[300]}`}
         >
             <Stack direction='row' py={1} justifyContent='space-between'>
 
