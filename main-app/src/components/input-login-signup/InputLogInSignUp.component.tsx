@@ -1,6 +1,6 @@
 import { Input, styled } from "@mui/joy";
 
-const StyledInput = styled(Input)(({ theme }) => ({
+const InputLogInSignUp = styled(Input)(({ theme }) => ({
     backgroundColor: 'transparent',
     fontSize: '.9rem',
     fontWeight: '500',
@@ -17,4 +17,4 @@ const StyledInput = styled(Input)(({ theme }) => ({
     },
 }))
 
-export default StyledInput
+export default InputLogInSignUp

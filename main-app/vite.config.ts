@@ -15,17 +15,17 @@ export default defineConfig(({command, mode}) => {
         plugins: [
             splitVendorChunkPlugin(),
             react(),
-            Sitemap({
-                // dynamicRoutes,
-                hostname: 'https://easy-letters.web.app',
-                readable: true,
-                robots: [
-                    {
-                        userAgent: '*',
-                        allow: '/',
-                    },
-                ],
-            }),
+            // Sitemap({
+            //     // dynamicRoutes,
+            //     hostname: 'https://easy-letters.web.app',
+            //     readable: true,
+            //     robots: [
+            //         {
+            //             userAgent: '*',
+            //             allow: '/',
+            //         },
+            //     ],
+            // }),
         ],
         build: {
             minify: 'terser',

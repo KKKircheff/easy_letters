@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
 import signUp from '/assets/images/signup.jfif'
-import StyledInput from "../../components/styled-input/StyledInput.component"
+import InputLogInSignUp from '../../components/input-login-signup/InputLogInSignUp.component';
 import UnderNavBar from '../../components/navbar/UnderNavBar.component';
 
 import {
@@ -27,11 +27,7 @@ import GoogleIcon from '../../assets/icons/Google.icon';
 import DarkButton from '../../components/buttons/dark-button/DarkButton.component';
 import { styleVariables } from "../../styles/styleVariables"
 
-import { useUserContext } from '../../context/AuthContext';
-
-import { getRedirectResult } from 'firebase/auth'
-
-import { auth, createUserDocumentFromAuth } from '../../utils/firebase-utils';
+import { useUserContext } from '../../context/UserContext';
 
 type UserCredentials = {
     firstName: string,
@@ -62,10 +58,11 @@ const SignUp = () => {
         setIsLoading(true)
         try {
             if (user) await logOut();
+
             if (isMobile) {
                 const newUser = await signInWithGoogleRedirect();
             } else {
-                await signInWithGooglePopUp();
+                const newUser = await signInWithGooglePopUp();
                 setIsLoading(false)
                 navigate('/')
             }
@@ -193,7 +190,7 @@ const SignUp = () => {
                         <Grid xs={12} md={6} px={0} pr={{ md: 1 }}>
                             <FormControl>
                                 <FormLabel sx={{ mb: '8px' }}>First name</FormLabel>
-                                <StyledInput
+                                <InputLogInSignUp
                                     required
                                     autoComplete='off'
                                     name='firstName'
@@ -208,7 +205,7 @@ const SignUp = () => {
                         <Grid xs={12} md={6} px={0} pl={{ md: 1 }}>
                             <FormControl>
                                 <FormLabel sx={{ mb: '8px' }}>Last name</FormLabel>
-                                <StyledInput
+                                <InputLogInSignUp
                                     required
                                     autoComplete='off'
                                     name='lastName'
@@ -222,7 +219,7 @@ const SignUp = () => {
                         <Grid xs={12} md={12} px={0}>
                             <FormControl >
                                 <FormLabel sx={{ mb: '8px' }}>Email</FormLabel>
-                                <StyledInput
+                                <InputLogInSignUp
                                     required
                                     autoComplete='off'
                                     type='email'
@@ -237,7 +234,7 @@ const SignUp = () => {
                         <Grid xs={12} md={6} mb={2} px={0} pr={{ md: 1 }}>
                             <FormControl>
                                 <FormLabel sx={{ mb: '8px' }}>Password</FormLabel>
-                                <StyledInput
+                                <InputLogInSignUp
                                     required
                                     autoComplete='off'
                                     type='password'
@@ -252,7 +249,7 @@ const SignUp = () => {
                         <Grid xs={12} md={6} mb={2} px={0} pl={{ md: 1 }}>
                             <FormControl>
                                 <FormLabel sx={{ mb: '8px' }}>Confirm password</FormLabel>
-                                <StyledInput
+                                <InputLogInSignUp
                                     required
                                     autoComplete='off'
                                     type='password'

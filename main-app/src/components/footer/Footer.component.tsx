@@ -12,7 +12,7 @@ const Footer = () => {
     return (
         <Box
             pt={10}
-            bgcolor='neutral.900'
+            bgcolor='neutral.800'
             sx={{ px: { xs: '15%', md, lg } }}
         >
             <Grid container columns={12} spacing={3}>

@@ -18,7 +18,6 @@ const ResourceHero = () => {
 
             <Box maxWidth={{ xs: '100%', md: '40%', lg: '36%' }}
                 sx={{
-                    // transform: { xs: 'skew(0)', md: 'skew(-4deg, 0)' },
                     overflow: 'hidden',
                     borderRadius: 'xl',
                 }} >
@@ -26,7 +25,6 @@ const ResourceHero = () => {
                     p: 0,
                     overflow: 'hidden',
                     borderRadius: 'xl',
-                    // transform: { xs: 'skew(0)', md: 'skew(+4deg, 0) scale(1.07)' },
                 }}>
                     <img src={heroImage} alt="hero image" />
                 </Card>

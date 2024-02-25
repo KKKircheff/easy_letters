@@ -9,6 +9,7 @@ import {doc, getDoc, getFirestore, setDoc} from 'firebase/firestore';
 import {firebaseConfig} from './firebase-config';
 import {getStorage, ref, getDownloadURL} from 'firebase/storage';
 import {UserProfile} from '../data/userProfileTypes';
+import {initialUserProfile} from '../data/initialUserProfile';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -59,38 +60,47 @@ export const updateUserProfileFirebase = async (
     }
 };
 
-export const createUserDocumentFromAuth = async (user: User) => {
-    const userDocRef = doc(db, 'users', user.uid);
+export const createUserDocumentFromAuth = async (loggedUser: User) => {
+    const userDocRef = doc(db, 'users', loggedUser.uid);
     const userSnapshot = await getDoc(userDocRef);
 
     if (!userSnapshot.exists()) {
-        const {displayName, email} = user;
+        const {displayName, email} = loggedUser;
         const createdAt = new Date();
         const planValidTill = new Date(
             createdAt.getTime() + 30 * 24 * 60 * 60 * 1000
         );
         const pricePlan = 'free';
+        const aiCredits = 10;
 
         const names = displayName.split(' ');
         const [firstName, lastName] = names;
 
-        const userProfile: UserProfile = {
-            uid: user.uid,
-            general: {
+        const initProfile: UserProfile = {
+            ...initialUserProfile,
+            uid: loggedUser.uid,
+            admin: {
                 createdAt,
-                firstName,
-                lastName,
                 email,
                 pricePlan,
                 planValidTill,
+                aiCredits,
+            },
+            general: {
+                firstName,
+                lastName,
             },
         };
 
         try {
-            await setDoc(userDocRef, userProfile);
+            await setDoc(userDocRef, initProfile);
+            return initProfile;
         } catch (error) {
             throw new Error(error);
         }
+    } else {
+        const profile = userSnapshot.data() as UserProfile | undefined;
+        return profile;
     }
 };
 

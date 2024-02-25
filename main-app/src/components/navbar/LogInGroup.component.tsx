@@ -1,14 +1,14 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
 
-import { Stack, Typography, useTheme } from "@mui/joy"
+import { Stack, useTheme } from "@mui/joy"
 import DarkButton from '../buttons/dark-button/DarkButton.component';
 
-import { useUserContext } from '../../context/AuthContext';
+import LogInGroupMenu from './LogInGroupMenu.component';
 
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
-import LogInGroupMenu from './LogInGroupMenu.component';
 import MoreVert from '@mui/icons-material/MoreVert';
-import { useEffect, useState } from 'react';
 
 type Props = {
     setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -16,16 +16,18 @@ type Props = {
 
 const LogInGroup = ({ setIsDrawerOpen }: Props) => {
 
+    const { user, userProfile } = useUserContext()
+
     const navigate = useNavigate();
+
     const c = useTheme().palette;
 
-    const { user } = useUserContext()
-
-    const greetName = user ? user.displayName.split(' ')[0] : 'no user'
     const [isProfileNavOpen, setIsProfileNavOpen] = useState(false);
 
+    const greetName = userProfile ? userProfile.general.firstName : 'no user'
+
     const handleButtonClick = () => {
-        if (!user) {
+        if (!userProfile) {
             setIsDrawerOpen(false);
             navigate('/login');
         } else {
@@ -45,7 +47,7 @@ const LogInGroup = ({ setIsDrawerOpen }: Props) => {
             onMouseLeave={() => user && setIsProfileNavOpen(false)}
             onMouseEnter={() => user && setIsProfileNavOpen(true)}
         >
-            {user
+            {userProfile
                 ? <DarkButton
                     sx={{
                         paddingY: .5,
@@ -78,7 +80,7 @@ const LogInGroup = ({ setIsDrawerOpen }: Props) => {
                     endDecorator={<PermIdentityOutlinedIcon />}
                 >Log In</DarkButton>
             }
-            {isProfileNavOpen && user && <LogInGroupMenu setIsDrawerOpen={setIsDrawerOpen} setIsProfileNavOpen={setIsProfileNavOpen} />}
+            {isProfileNavOpen && userProfile && <LogInGroupMenu setIsDrawerOpen={setIsDrawerOpen} setIsProfileNavOpen={setIsProfileNavOpen} />}
         </Stack>
     )
 }

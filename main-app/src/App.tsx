@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { AuthContextProvider } from './context/AuthContext'
+import { UserProvider } from './context/UserContext'
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
@@ -34,7 +34,7 @@ function App() {
 
     return (
         <Box sx={{ width: '100vw', m: 0, p: 0 }}>
-            <AuthContextProvider>
+            <UserProvider>
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
@@ -80,7 +80,7 @@ function App() {
                         <Route path={`/*`} element={<Home />} />
                     </Route>
                 </Routes>
-            </AuthContextProvider>
+            </UserProvider>
         </Box>
 
     )

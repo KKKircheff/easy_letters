@@ -124,6 +124,11 @@ pnpm add -S @types/slick-carousel@latest
   import "slick-carousel/slick/slick-theme.css";
 */
 
+pnpm add uuid
+
+pnpm add react-hook-form
+pnpm add zod 
+
 # still not installed
 
 pnpm install react-icons
@@ -142,6 +147,7 @@ pnpm add -S react-slick
 pnpm add -S @types/react-slick@latest
 pnpm add -S slick-carousel
 pnpm add -S react-photo-album
+
 
 
 
