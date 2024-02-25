@@ -126,6 +126,9 @@ pnpm add -S @types/slick-carousel@latest
 
 pnpm add uuid
 
+pnpm add react-hook-form
+pnpm add zod 
+
 # still not installed
 
 pnpm install react-icons
