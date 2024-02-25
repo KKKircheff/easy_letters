@@ -1,54 +1,78 @@
 import { Box, Grid, Typography } from "@mui/joy"
-import { UserProfile } from "../../data/userProfileTypes"
+import { UserProfile, SectionKeys, ArraySectionsValues, WebLink } from "../../data/userProfileTypes"
 
-import InputBlock from "../../components/input-block.tsx/InputBlock.component"
+import InputBlock from "../../components/input-block/InputBlock.component"
 import { countriesList } from "../../data/countriesList"
 
 import AutocompleteStyled from "../../components/autocomplete-styled/AutocompleteStyled.component"
 import InputProfile from "../../components/input-profile/InputProfile.component"
+import AddNew from "../../components/add-new/AddNew.component"
+import InputArrayBlock from "../../components/input-array-block/InputArrayBlock.component"
+import { useState } from "react"
+
+
 
 type Props = {
     draftProfile: UserProfile;
+    setDraftProfile: React.Dispatch<React.SetStateAction<UserProfile>>
+
+    isAddInProgress: boolean;
+    setIsAddInProgress: React.Dispatch<React.SetStateAction<boolean>>
+
     handleAutocoplete: (value: string, section: string, inputKey: string) => void
     handleProfileOnChange: (e: React.ChangeEvent<HTMLInputElement>, section: string) => void
     updateCurrentSection: (value: string, section: string, inputKey: string,) => void
-    setDraftProfile: React.Dispatch<React.SetStateAction<UserProfile>>
+
+    handleProfileArraySectionOnChange: (
+        e: React.ChangeEvent<HTMLInputElement>,
+        currentSection: SectionKeys,
+        currentIndex: number) => void
+    addArraySectionElement: (section: SectionKeys, value: ArraySectionsValues) => void
+    deleteArraySectionElement: (section: SectionKeys, deleteIndex: number) => void
 }
 
-const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfileOnChange, updateCurrentSection }: Props) => {
+const ProfileGeneral = ({
+    draftProfile,
+    isAddInProgress,
+    setIsAddInProgress,
+    handleAutocoplete,
+    handleProfileOnChange,
+    updateCurrentSection,
+    handleProfileArraySectionOnChange,
+    addArraySectionElement,
+    deleteArraySectionElement
+}: Props) => {
 
+    const adminSection = 'admin'
     const section = 'general'
+    const arraySection = 'webLinks'
+
+    const {
+        email,
+    } = draftProfile.admin
 
     const {
         firstName,
         lastName,
         city,
         country,
-        email,
         phoneNumber,
-        postCode } = draftProfile[section]
+        postCode,
+    } = draftProfile[section]
 
-    // const handleGeneralProfile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     console.log(e.currentTarget.name, e.currentTarget.value)
-    //     setDraftProfile((state) => ({
-    //         ...state,
-    //         general: {
-    //             ...state.general,
-    //             [e.currentTarget.name]: e.currentTarget.value
-    //         }
-    //     }));
-    // };
+    const webLinks = draftProfile[arraySection];
 
+    const newWebLink: WebLink = {
+        media: '',
+        link: ''
+    }
 
-    // const updateCurrentSection = (value: string, key: string) => {
-    //     setDraftProfile((state) => ({
-    //         ...state,
-    //         general: {
-    //             ...state.general,
-    //             [key]: value
-    //         }
-    //     }));
-    // }
+    const lastIndex = webLinks ? webLinks.length : 0
+
+    const addNewArraySectionRecord = () => {
+        addArraySectionElement('webLinks', newWebLink)
+        setIsAddInProgress(true);
+    }
 
     return (
         <Box>
@@ -88,6 +112,38 @@ const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfileOnChange
                             variant="outlined"
                             color='neutral'
                             value={lastName}
+                            onChange={(e) => handleProfileOnChange(e, section)}
+                        />
+                    </InputBlock>
+                </Grid>
+
+                <Grid xs={12} md={6}>
+                    <InputBlock title='Email' value={email}>
+                        <InputProfile
+                            required
+                            autoComplete='off'
+                            type='email'
+                            name='email'
+                            size='md'
+                            variant="outlined"
+                            color='neutral'
+                            value={email}
+                        // onChange={(e) => handleProfileOnChange(e, adminSection)}
+                        />
+                    </InputBlock>
+                </Grid>
+
+                <Grid xs={12} md={6}>
+                    <InputBlock title='Phone number' value={phoneNumber} section={section} inputKey='phoneNumber' updateCurrentSection={updateCurrentSection}>
+                        <InputProfile
+                            required
+                            autoComplete='off'
+                            name='phoneNumber'
+                            placeholder='Phone number'
+                            size='md'
+                            variant="outlined"
+                            color='neutral'
+                            value={phoneNumber}
                             onChange={(e) => handleProfileOnChange(e, section)}
                         />
                     </InputBlock>
@@ -137,37 +193,56 @@ const ProfileGeneral = ({ draftProfile, handleAutocoplete, handleProfileOnChange
                     </InputBlock>
                 </Grid>
 
-                <Grid xs={12} md={6}>
-                    <InputBlock title='Phone number' value={phoneNumber} section={section} inputKey='phoneNumber' updateCurrentSection={updateCurrentSection}>
-                        <InputProfile
-                            required
-                            autoComplete='off'
-                            name='phoneNumber'
-                            placeholder='Phone number'
-                            size='lg'
-                            variant="outlined"
-                            color='neutral'
-                            value={phoneNumber}
-                            onChange={(e) => handleProfileOnChange(e, section)}
-                        />
-                    </InputBlock>
-                </Grid>
+                {webLinks.length ?
+                    webLinks.map((webLink, index) => {
+                        return (
+                            <Grid key={index} xs={12} md={6}>
+                                <InputArrayBlock
+                                    index={index}
+                                    title='Web link'
+                                    value={webLink}
+                                    section={arraySection}
+                                    inputKey='webLinks'
+                                    deleteArraySectionElement={deleteArraySectionElement}>
 
-                <Grid xs={12} md={6}>
-                    <InputBlock title='Email' value={email}>
-                        <InputProfile
-                            required
-                            autoComplete='off'
-                            type='email'
-                            name='email'
-                            size='md'
-                            variant="outlined"
-                            color='neutral'
-                            value={email}
-                            onChange={(e) => handleProfileOnChange(e, section)}
+                                    <InputProfile
+                                        autoComplete='off'
+                                        name='media'
+                                        size='md'
+                                        placeholder='Name'
+                                        variant="outlined"
+                                        color='neutral'
+                                        value={webLink.media}
+                                        onChange={(e) => handleProfileArraySectionOnChange(e, arraySection, index)}
+                                    />
+                                    <InputProfile
+                                        autoComplete='off'
+                                        name='link'
+                                        size='md'
+                                        placeholder='Web link'
+                                        variant="outlined"
+                                        color='neutral'
+                                        value={webLink.link}
+                                        onChange={(e) => handleProfileArraySectionOnChange(e, arraySection, index)}
+                                    />
+                                </InputArrayBlock>
+                            </Grid>
+                        )
+                    })
+                    : null
+                }
+
+                {isAddInProgress
+                    ? null
+                    : <Grid
+                        xs={12} md={6} sx={{ cursor: 'pointer' }}
+                        onClick={addNewArraySectionRecord}>
+                        <AddNew
+                            itemToAdd={'link'}
+                            description={'e.g LinkedIn, Instagram, Youtube, Github, Portfolio Website or other links.'}
                         />
-                    </InputBlock>
-                </Grid>
+                    </Grid>
+                }
             </Grid>
         </Box>
     )

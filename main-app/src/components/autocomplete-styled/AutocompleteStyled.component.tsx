@@ -41,12 +41,12 @@ const AutocompleteStyled = ({ options, onChange, onInputChange, value, name, inp
                         fontSize: f.md,
                         fontWeight: 500,
                         color: c.neutral[600],
-                        outline: `2px solid ${c.primary[500]}`,
+                        outline: `1.5px solid ${c.primary[500]}`,
                         borderRadius: 'lg',
                         boxShadow: 'none',
                         '&:focus-within': {
                             boxShadow: '0 0 2px rgba(0, 0, 0, 0.3)',
-                            outline: `2px solid ${c.primary[500]}`,
+                            outline: `1.5px solid ${c.primary[500]}`,
                             outlineOffset: '0px',
                         },
                         '&::before': {

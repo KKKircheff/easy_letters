@@ -79,14 +79,16 @@ export const createUserDocumentFromAuth = async (loggedUser: User) => {
         const initProfile: UserProfile = {
             ...initialUserProfile,
             uid: loggedUser.uid,
-            general: {
+            admin: {
                 createdAt,
-                firstName,
-                lastName,
                 email,
                 pricePlan,
                 planValidTill,
                 aiCredits,
+            },
+            general: {
+                firstName,
+                lastName,
             },
         };
 

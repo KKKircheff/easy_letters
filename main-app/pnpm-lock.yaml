@@ -65,6 +65,9 @@ dependencies:
   sort-by:
     specifier: ^1.2.0
     version: 1.2.0
+  uuid:
+    specifier: ^9.0.1
+    version: 9.0.1
 
 devDependencies:
   '@types/react':
@@ -3806,6 +3809,11 @@ packages:
     dependencies:
       punycode: 2.3.1
     dev: true
+
+  /uuid@9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    hasBin: true
+    dev: false
 
   /vite-plugin-sitemap@0.5.3:
     resolution: {integrity: sha512-DSqZLAkXaNgoJLcaxjJHrfWjIIiZRSuZIseE7ihJYUvPFG4OsvXn/+Oujmzbs+6tV7yu1dn7uhWXpV7QuiH/1g==}

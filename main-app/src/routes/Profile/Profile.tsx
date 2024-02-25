@@ -1,23 +1,18 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../../context/UserContext";
-import { UserProfile } from "../../data/userProfileTypes"
+import { v4 as uuidv4 } from 'uuid';
 
 import {
     Box,
     Button,
     Stack,
-    Typography,
     useTheme
 } from "@mui/joy"
 
 import UnderNavBar from "../../components/navbar/UnderNavBar.component"
 import ProfileSidebar from "./ProfileSidebar.section";
-import Footer from "../../components/footer/Footer.component";
-
-import DarkButton from "../../components/buttons/dark-button/DarkButton.component"
-
-import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import ProfileGeneral from "./ProfileGeneral.section";
+import Footer from "../../components/footer/Footer.component";
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -27,14 +22,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import useScreenWidth from "../../hooks/useScreenWidth";
 import { styleVariables } from "../../styles/styleVariables";
 
-export type SectionsToRender = 'general'
-    | 'education'
-    | 'languages'
-    | 'careerHistory'
-    | 'skills'
-    | 'summary'
-    | 'applicationDocs'
-    | 'invoices'
+import { UserProfile, SectionKeys, ArraySectionsValues } from "../../data/userProfileTypes"
+export type SectionsToRender = keyof UserProfile
 
 const Profile = () => {
     const c = useTheme().palette
@@ -57,13 +46,13 @@ const Profile = () => {
     const [isSidebarWide, setIsSidebarWide] = useState(totalWidth > 900)
     const [sectionToRender, setSectionToRender] = useState<SectionsToRender>('general');
 
+    const [isAddInProgress, setIsAddInProgress] = useState(false)
     const [isProfileModified, setIsProfileModified] = useState(false)
 
 
     useEffect(() => {
         setDraftProfile({ ...userProfile })
     }, [userProfile])
-
 
 
     const handleUpdate = async () => {
@@ -74,6 +63,7 @@ const Profile = () => {
         try {
             await updateUserProfile(updatedProfile);
             setIsProfileModified(false);
+            setIsAddInProgress(false)
             alert('Updated!')
         } catch (error) {
             alert(error)
@@ -83,6 +73,7 @@ const Profile = () => {
     const handleAutocoplete = (value: string, currentSection: string, inputKey: string) => {
         updateCurrentSection(value ?? '', currentSection, inputKey)
     }
+
 
     const handleProfileOnChange = (e: React.ChangeEvent<HTMLInputElement>, currentSection) => {
         setIsProfileModified(true);
@@ -95,16 +86,66 @@ const Profile = () => {
         });
     };
 
-    const updateCurrentSection = (value: string, currentSection: string, key: string) => {
+    const updateCurrentSection = (value: string, currentSection: string, currentKey: string) => {
         setIsProfileModified(true);
         setDraftProfile({
             ...draftProfile,
             [currentSection]: {
                 ...draftProfile[currentSection],
-                [key]: value ?? ''
+                [currentKey]: value ?? ''
             }
         });
     }
+
+
+    const handleProfileArraySectionOnChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        section: SectionKeys,
+        currentIndex: number
+    ) => {
+        setIsAddInProgress(true)
+        setIsProfileModified(true);
+
+        const updatedValue = draftProfile[section][currentIndex]
+        updatedValue[e.currentTarget.name] = e.currentTarget.value;
+
+        setDraftProfile((prevProfile) => ({
+            ...prevProfile,
+            [section]: [
+                ...prevProfile[section].slice(0, currentIndex),
+                updatedValue,
+                ...prevProfile[section].slice(currentIndex + 1)
+            ]
+        })
+        );
+    }
+
+    const addArraySectionElement = (section: SectionKeys, value: ArraySectionsValues | null) => {
+        setIsProfileModified(true);
+        setIsAddInProgress(false)
+        const id = uuidv4()
+        if (value) {
+            setDraftProfile((prevProfile) => ({
+                ...prevProfile,
+                [section]: [...prevProfile[section], { ...value, id }],
+            }));
+        }
+    };
+
+    const deleteArraySectionElement = (section: SectionKeys, deleteIndex: number) => {
+        setIsProfileModified(true);
+        setIsAddInProgress(false);
+
+        setDraftProfile(prevProfile => {
+            const updatedSection = [...prevProfile[section]];
+            updatedSection.splice(deleteIndex, 1);
+            return {
+                ...prevProfile,
+                [section]: updatedSection
+            };
+        });
+    };
+
 
     const handleRevertProfileChanges = () => {
         setDraftProfile({ ...userProfile })
@@ -169,11 +210,19 @@ const Profile = () => {
 
                 <Box px={{ md: xs, lg: md }}>
                     <ProfileGeneral
-                        draftProfile={draftProfile}
                         setDraftProfile={setDraftProfile}
+                        draftProfile={draftProfile}
+
+                        isAddInProgress={isAddInProgress}
+                        setIsAddInProgress={setIsAddInProgress}
                         handleAutocoplete={handleAutocoplete}
+
                         handleProfileOnChange={handleProfileOnChange}
                         updateCurrentSection={updateCurrentSection}
+
+                        handleProfileArraySectionOnChange={handleProfileArraySectionOnChange}
+                        addArraySectionElement={addArraySectionElement}
+                        deleteArraySectionElement={deleteArraySectionElement}
                     />
                 </Box>
 
