@@ -1,5 +1,5 @@
-import { Box, Grid, Typography } from "@mui/joy"
-import { UserProfile, SectionKeys, ArraySectionsValues, WebLink } from "../../data/userProfileTypes"
+import { Box, Grid, Typography, useTheme } from "@mui/joy"
+import { UserProfile, SectionKeys, ArraySectionsValues, WebLink, General, Admin } from "../../data/userProfileTypes"
 
 import InputBlock from "../../components/input-block/InputBlock.component"
 import { countriesList } from "../../data/countriesList"
@@ -9,69 +9,42 @@ import InputProfile from "../../components/input-profile/InputProfile.component"
 import AddNew from "../../components/add-new/AddNew.component"
 import InputArrayBlock from "../../components/input-array-block/InputArrayBlock.component"
 import { useState } from "react"
+import { useUserContext } from "../../context/UserContext"
+import { useForm } from "react-hook-form"
+import FormInput from "../../components/inputsStyled/FormInput.component"
+import FormInputBlock from "../../components/InputsUI/FormInputBlock.component"
 
+// type Props = {
+//     register: UseFormRegister<UserProfile>
+// }
 
+const ProfileGeneral = () => {
 
-type Props = {
-    draftProfile: UserProfile;
-    setDraftProfile: React.Dispatch<React.SetStateAction<UserProfile>>
-
-    isAddInProgress: boolean;
-    setIsAddInProgress: React.Dispatch<React.SetStateAction<boolean>>
-
-    handleAutocoplete: (value: string, section: string, inputKey: string) => void
-    handleProfileOnChange: (e: React.ChangeEvent<HTMLInputElement>, section: string) => void
-    updateCurrentSection: (value: string, section: string, inputKey: string,) => void
-
-    handleProfileArraySectionOnChange: (
-        e: React.ChangeEvent<HTMLInputElement>,
-        currentSection: SectionKeys,
-        currentIndex: number) => void
-    addArraySectionElement: (section: SectionKeys, value: ArraySectionsValues) => void
-    deleteArraySectionElement: (section: SectionKeys, deleteIndex: number) => void
-}
-
-const ProfileGeneral = ({
-    draftProfile,
-    isAddInProgress,
-    setIsAddInProgress,
-    handleAutocoplete,
-    handleProfileOnChange,
-    updateCurrentSection,
-    handleProfileArraySectionOnChange,
-    addArraySectionElement,
-    deleteArraySectionElement
-}: Props) => {
-
+    const c = useTheme().palette
+    const { userProfile } = useUserContext()
+    const { register, formState: { errors } } = useForm<UserProfile>();
     const adminSection = 'admin'
     const section = 'general'
     const arraySection = 'webLinks'
 
-    const {
-        email,
-    } = draftProfile.admin
+    // const {
+    //     email,
+    // } = register.userProfile.admin
 
-    const {
-        firstName,
-        lastName,
-        city,
-        country,
-        phoneNumber,
-        postCode,
-    } = draftProfile[section]
+    // const {
+    //     firstName,
+    //     lastName,
+    //     city,
+    //     country,
+    //     phoneNumber,
+    //     postCode,
+    // } = register.general
 
-    const webLinks = draftProfile[arraySection];
+    // const webLinks = register.webLinks;
 
     const newWebLink: WebLink = {
         media: '',
         link: ''
-    }
-
-    const lastIndex = webLinks ? webLinks.length : 0
-
-    const addNewArraySectionRecord = () => {
-        addArraySectionElement('webLinks', newWebLink)
-        setIsAddInProgress(true);
     }
 
     return (
@@ -87,21 +60,17 @@ const ProfileGeneral = ({
                 textAlign='left'
             >
                 <Grid xs={12} md={6}>
-                    <InputBlock title='First name' value={firstName} section={section} inputKey='firstName' updateCurrentSection={updateCurrentSection}>
-                        <InputProfile
-                            required
-                            autoComplete='off'
-                            name='firstName'
+                    <FormInputBlock label={'First Name'} >
+                        <FormInput
                             size='md'
-                            variant="outlined"
-                            color='neutral'
-                            value={firstName}
-                            onChange={(e) => handleProfileOnChange(e, section)}
+                            variant="plain"
+                            isOutlined={false}
+                            {...register('general.firstName')}
                         />
-                    </InputBlock>
+                    </FormInputBlock>
                 </Grid>
 
-                <Grid xs={12} md={6}>
+                {/* <Grid xs={12} md={6}>
                     <InputBlock title='Last Name' value={lastName} section={section} inputKey='lastName' updateCurrentSection={updateCurrentSection}>
                         <InputProfile
                             required
@@ -230,9 +199,9 @@ const ProfileGeneral = ({
                         )
                     })
                     : null
-                }
+                } */}
 
-                {isAddInProgress
+                {/* {isAddInProgress
                     ? null
                     : <Grid
                         xs={12} md={6} sx={{ cursor: 'pointer' }}
@@ -242,7 +211,7 @@ const ProfileGeneral = ({
                             description={'e.g LinkedIn, Instagram, Youtube, Github, Portfolio Website or other links.'}
                         />
                     </Grid>
-                }
+                } */}
             </Grid>
         </Box>
     )

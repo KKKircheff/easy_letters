@@ -128,6 +128,8 @@ pnpm add uuid
 
 pnpm add react-hook-form
 pnpm add zod 
+pnpm add -D @hookform/devtools
+
 
 # still not installed
 

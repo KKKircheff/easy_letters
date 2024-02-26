@@ -19,10 +19,13 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import UndoIcon from '@mui/icons-material/Undo';
 import CheckIcon from '@mui/icons-material/Check';
 
-import useScreenWidth from "../../hooks/useScreenWidth";
-import { styleVariables } from "../../styles/styleVariables";
+import useScreenWidth from '../../hooks/useScreenWidth';
+import { styleVariables } from '../../styles/styleVariables';
 
-import { UserProfile, SectionKeys, ArraySectionsValues } from "../../data/userProfileTypes"
+import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools'
+
+import { UserProfile } from '../../data/userProfileTypes'
 export type SectionsToRender = keyof UserProfile
 
 const Profile = () => {
@@ -30,6 +33,9 @@ const Profile = () => {
     const f = useTheme().fontSize
 
     const { xs, md, lg } = styleVariables.layoutPadding;
+
+    const { userProfile, updateUserProfile } = useUserContext()
+    const { register, handleSubmit, control, formState: { errors } } = useForm<UserProfile>();
 
     const totalWidth = useScreenWidth()
 
@@ -40,130 +46,20 @@ const Profile = () => {
 
     const isWide = totalWidth > 600;
 
-    const { userProfile, updateUserProfile } = useUserContext()
-    const [draftProfile, setDraftProfile] = useState<UserProfile | null>(userProfile)
 
     const [isSidebarWide, setIsSidebarWide] = useState(totalWidth > 900)
     const [sectionToRender, setSectionToRender] = useState<SectionsToRender>('general');
 
-    const [isAddInProgress, setIsAddInProgress] = useState(false)
-    const [isProfileModified, setIsProfileModified] = useState(false)
-
-
-    useEffect(() => {
-        setDraftProfile({ ...userProfile })
-    }, [userProfile])
-
-
-    const handleUpdate = async () => {
-        const updatedProfile = {
-            ...userProfile,
-            ...draftProfile
-        };
+    const handleUpdate = async (data: UserProfile) => {
         try {
-            await updateUserProfile(updatedProfile);
-            setIsProfileModified(false);
-            setIsAddInProgress(false)
+            await updateUserProfile(data);
             alert('Updated!')
         } catch (error) {
             alert(error)
         }
     };
 
-    const handleAutocoplete = (value: string, currentSection: string, inputKey: string) => {
-        updateCurrentSection(value ?? '', currentSection, inputKey)
-    }
 
-
-    const handleProfileOnChange = (e: React.ChangeEvent<HTMLInputElement>, currentSection) => {
-        setIsProfileModified(true);
-        setDraftProfile({
-            ...draftProfile,
-            [currentSection]: {
-                ...draftProfile[currentSection],
-                [e.currentTarget.name]: e.currentTarget.value
-            }
-        });
-    };
-
-    const updateCurrentSection = (value: string, currentSection: string, currentKey: string) => {
-        setIsProfileModified(true);
-        setDraftProfile({
-            ...draftProfile,
-            [currentSection]: {
-                ...draftProfile[currentSection],
-                [currentKey]: value ?? ''
-            }
-        });
-    }
-
-
-    const handleProfileArraySectionOnChange = (
-        e: React.ChangeEvent<HTMLInputElement>,
-        section: SectionKeys,
-        currentIndex: number
-    ) => {
-        setIsAddInProgress(true)
-        setIsProfileModified(true);
-
-        const updatedValue = draftProfile[section][currentIndex]
-        updatedValue[e.currentTarget.name] = e.currentTarget.value;
-
-        setDraftProfile((prevProfile) => ({
-            ...prevProfile,
-            [section]: [
-                ...prevProfile[section].slice(0, currentIndex),
-                updatedValue,
-                ...prevProfile[section].slice(currentIndex + 1)
-            ]
-        })
-        );
-    }
-
-    const addArraySectionElement = (section: SectionKeys, value: ArraySectionsValues | null) => {
-        setIsProfileModified(true);
-        setIsAddInProgress(false)
-        const id = uuidv4()
-        if (value) {
-            setDraftProfile((prevProfile) => ({
-                ...prevProfile,
-                [section]: [...prevProfile[section], { ...value, id }],
-            }));
-        }
-    };
-
-    const deleteArraySectionElement = (section: SectionKeys, deleteIndex: number) => {
-        setIsProfileModified(true);
-        setIsAddInProgress(false);
-
-        setDraftProfile(prevProfile => {
-            const updatedSection = [...prevProfile[section]];
-            updatedSection.splice(deleteIndex, 1);
-            return {
-                ...prevProfile,
-                [section]: updatedSection
-            };
-        });
-    };
-
-
-    const handleRevertProfileChanges = () => {
-        setDraftProfile({ ...userProfile })
-        setIsProfileModified(false)
-    }
-
-    // const handleDelete = async () => {
-    //     const updatedProfile = { ...userProfile };
-
-    //     if (updatedProfile.general && updatedProfile.general.phoneNumber) {
-    //         delete updatedProfile.general.phoneNumber;
-    //     }
-    //     try {
-    //         await updateUserProfile(updatedProfile);
-    //     } catch (error) {
-    //         alert(error)
-    //     }
-    // };
 
     return (
         <Stack
@@ -206,85 +102,74 @@ const Profile = () => {
                     transition: 'all .2s ease-in',
                     overflowX: 'hidden',
                 }}>
+
                 <UnderNavBar />
 
-                <Box px={{ md: xs, lg: md }}>
-                    <ProfileGeneral
-                        setDraftProfile={setDraftProfile}
-                        draftProfile={draftProfile}
-
-                        isAddInProgress={isAddInProgress}
-                        setIsAddInProgress={setIsAddInProgress}
-                        handleAutocoplete={handleAutocoplete}
-
-                        handleProfileOnChange={handleProfileOnChange}
-                        updateCurrentSection={updateCurrentSection}
-
-                        handleProfileArraySectionOnChange={handleProfileArraySectionOnChange}
-                        addArraySectionElement={addArraySectionElement}
-                        deleteArraySectionElement={deleteArraySectionElement}
-                    />
-                </Box>
-
-                <Stack
-                    direction='column'
-                    spacing={2}
-                    py={5}
-                    pb={10}
-                    px={{ xs: '3vw', sm: md, md: xs, lg: md }}
-                >
+                <form onSubmit={handleSubmit(handleUpdate)}>
+                    <Box px={{ md: xs, lg: md }}>
+                        <ProfileGeneral />
+                    </Box>
 
                     <Stack
-                        direction='row'
-                        justifyContent='space-between'
-                        mx='auto'
-                        px={{ md: 1 }}
+                        direction='column'
+                        spacing={2}
+                        py={5}
+                        pb={10}
+                        px={{ xs: '3vw', sm: md, md: xs, lg: md }}
                     >
-                        <Button
-                            variant='outlined'
-                            color='neutral'
-                            sx={{
-                                borderWidth: '2px',
-                                borderColor: c.neutral[300],
-                                color: c.neutral[400],
-                                paddingLeft: 1,
-                                paddingY: .3,
-                            }}
-                            startDecorator={<ChevronLeftIcon sx={{
-                                color: c.neutral[100],
-                                fontSize: f.mediumTitle,
-                                bgcolor: c.neutral[400],
-                                borderRadius: 'lg',
-                            }} />}
-                        >
-                            Previous
-                        </Button>
 
-                        <Button
-                            // onClick={handleUpdate}
-                            variant='outlined'
-                            color='neutral'
-                            sx={{
-                                borderWidth: '2px',
-                                borderColor: c.neutral[300],
-                                color: c.neutral[400],
-                                // fontWeight: 600,
-                                paddingRight: 1,
-                                paddingY: .3,
-                            }}
-                            endDecorator={<ChevronRightIcon sx={{
-                                color: c.neutral[100],
-                                fontSize: f.mediumTitle,
-                                bgcolor: c.neutral[400],
-                                borderColor: c.neutral[200],
-                                borderRadius: 'lg',
-                            }} />}
+                        <Stack
+                            direction='row'
+                            justifyContent='space-between'
+                            mx='auto'
+                            px={{ md: 1 }}
                         >
-                            Next
-                        </Button>
-                    </Stack>
+                            <Button
+                                variant='outlined'
+                                color='neutral'
+                                type='button'
+                                sx={{
+                                    borderWidth: '2px',
+                                    borderColor: c.neutral[300],
+                                    color: c.neutral[400],
+                                    paddingLeft: 1,
+                                    paddingY: .3,
+                                }}
+                                startDecorator={<ChevronLeftIcon sx={{
+                                    color: c.neutral[100],
+                                    fontSize: f.mediumTitle,
+                                    bgcolor: c.neutral[400],
+                                    borderRadius: 'lg',
+                                }} />}
+                            >
+                                Previous
+                            </Button>
 
-                    {isProfileModified &&
+                            <Button
+                                // onClick={handleUpdate}
+                                variant='outlined'
+                                color='neutral'
+                                type='button'
+                                sx={{
+                                    borderWidth: '2px',
+                                    borderColor: c.neutral[300],
+                                    color: c.neutral[400],
+                                    // fontWeight: 600,
+                                    paddingRight: 1,
+                                    paddingY: .3,
+                                }}
+                                endDecorator={<ChevronRightIcon sx={{
+                                    color: c.neutral[100],
+                                    fontSize: f.mediumTitle,
+                                    bgcolor: c.neutral[400],
+                                    borderColor: c.neutral[200],
+                                    borderRadius: 'lg',
+                                }} />}
+                            >
+                                Next
+                            </Button>
+                        </Stack>
+
                         <Stack
                             direction='row-reverse'
                             justifyContent='center'
@@ -295,7 +180,8 @@ const Profile = () => {
                             <Button
                                 color='primary'
                                 variant='solid'
-                                onClick={handleUpdate}
+                                type='submit'
+                                // onClick={handleUpdate}
                                 sx={{
                                     justifyContent: 'flex-start',
                                     paddingLeft: 1,
@@ -326,7 +212,8 @@ const Profile = () => {
 
                             <Button
                                 color='warning'
-                                onClick={handleRevertProfileChanges}
+                                type='button'
+                                // onClick={handleRevertProfileChanges}
                                 sx={{
                                     justifyContent: 'flex-start',
                                     border: `2px solid ${c.neutral[300]}`,
@@ -354,9 +241,10 @@ const Profile = () => {
                             >{isWide ? 'Revert changes' : 'Undo'}
                             </Button>
                         </Stack>
-                    }
-                </Stack>
 
+                    </Stack>
+                </form>
+                <DevTool control={control} />
                 <Footer />
             </Stack>
         </Stack >
