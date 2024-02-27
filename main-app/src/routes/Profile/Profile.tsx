@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../../context/UserContext";
-import { v4 as uuidv4 } from 'uuid';
 
 import {
     Box,
@@ -35,7 +34,9 @@ const Profile = () => {
     const { xs, md, lg } = styleVariables.layoutPadding;
 
     const { userProfile, updateUserProfile } = useUserContext()
-    const { register, handleSubmit, control, formState: { errors } } = useForm<UserProfile>();
+    const { handleSubmit, formState: { errors } } = useForm<UserProfile>({
+        defaultValues: { ...userProfile }
+    });
 
     const totalWidth = useScreenWidth()
 
@@ -244,7 +245,6 @@ const Profile = () => {
 
                     </Stack>
                 </form>
-                <DevTool control={control} />
                 <Footer />
             </Stack>
         </Stack >

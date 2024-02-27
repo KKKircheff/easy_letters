@@ -10,19 +10,17 @@ import AddNew from "../../components/add-new/AddNew.component"
 import InputArrayBlock from "../../components/input-array-block/InputArrayBlock.component"
 import { useState } from "react"
 import { useUserContext } from "../../context/UserContext"
-import { useForm } from "react-hook-form"
+import { Control, useForm } from "react-hook-form"
 import FormInput from "../../components/inputsStyled/FormInput.component"
 import FormInputBlock from "../../components/InputsUI/FormInputBlock.component"
-
-// type Props = {
-//     register: UseFormRegister<UserProfile>
-// }
 
 const ProfileGeneral = () => {
 
     const c = useTheme().palette
     const { userProfile } = useUserContext()
-    const { register, formState: { errors } } = useForm<UserProfile>();
+    const { register, formState: { errors } } = useForm<UserProfile>({
+        defaultValues: { ...userProfile }
+    });
     const adminSection = 'admin'
     const section = 'general'
     const arraySection = 'webLinks'
@@ -70,99 +68,74 @@ const ProfileGeneral = () => {
                     </FormInputBlock>
                 </Grid>
 
-                {/* <Grid xs={12} md={6}>
-                    <InputBlock title='Last Name' value={lastName} section={section} inputKey='lastName' updateCurrentSection={updateCurrentSection}>
-                        <InputProfile
-                            required
-                            autoComplete='off'
-                            name='lastName'
-                            placeholder='name'
+                <Grid xs={12} md={6}>
+                    <FormInputBlock label={'Last Name'} >
+                        <FormInput
                             size='md'
-                            variant="outlined"
-                            color='neutral'
-                            value={lastName}
-                            onChange={(e) => handleProfileOnChange(e, section)}
+                            variant="plain"
+                            isOutlined={false}
+                            {...register('general.lastName')}
                         />
-                    </InputBlock>
+                    </FormInputBlock>
                 </Grid>
 
                 <Grid xs={12} md={6}>
-                    <InputBlock title='Email' value={email}>
-                        <InputProfile
-                            required
-                            autoComplete='off'
-                            type='email'
-                            name='email'
+                    <FormInputBlock label={'Email'} >
+                        <FormInput
                             size='md'
-                            variant="outlined"
-                            color='neutral'
-                            value={email}
-                        // onChange={(e) => handleProfileOnChange(e, adminSection)}
+                            variant="plain"
+                            readOnly={true}
+                            isOutlined={false}
+                            {...register('admin.email')}
                         />
-                    </InputBlock>
+                    </FormInputBlock>
                 </Grid>
 
                 <Grid xs={12} md={6}>
-                    <InputBlock title='Phone number' value={phoneNumber} section={section} inputKey='phoneNumber' updateCurrentSection={updateCurrentSection}>
-                        <InputProfile
-                            required
-                            autoComplete='off'
-                            name='phoneNumber'
-                            placeholder='Phone number'
+                    <FormInputBlock label={'Phone Number'} >
+                        <FormInput
                             size='md'
-                            variant="outlined"
-                            color='neutral'
-                            value={phoneNumber}
-                            onChange={(e) => handleProfileOnChange(e, section)}
+                            variant="plain"
+                            isOutlined={false}
+                            {...register('general.phoneNumber')}
                         />
-                    </InputBlock>
+                    </FormInputBlock>
                 </Grid>
 
                 <Grid xs={12} md={3}>
-                    <InputBlock title='City' value={city} section={section} inputKey='city' updateCurrentSection={updateCurrentSection}>
-                        <InputProfile
-                            required
-                            autoComplete='off'
-                            name='city'
-                            placeholder='Place of residance'
+                    <FormInputBlock label={'City'} >
+                        <FormInput
                             size='md'
-                            variant="outlined"
-                            color='neutral'
-                            value={city}
-                            onChange={(e) => handleProfileOnChange(e, section)}
+                            variant="plain"
+                            isOutlined={false}
+                            {...register('general.city')}
                         />
-                    </InputBlock>
+                    </FormInputBlock>
                 </Grid>
 
                 <Grid xs={12} md={3}>
-                    <InputBlock title='Postal code' value={postCode} section={section} inputKey='postCode' updateCurrentSection={updateCurrentSection} >
-                        <InputProfile
-                            autoComplete='off'
-                            name='postCode'
+                    <FormInputBlock label={'Postal code'} >
+                        <FormInput
                             size='md'
-                            placeholder='Postal code'
-                            variant="outlined"
-                            color='neutral'
-                            value={postCode}
-                            onChange={(e) => handleProfileOnChange(e, section)}
+                            variant="plain"
+                            isOutlined={false}
+                            {...register('general.postCode')}
                         />
-                    </InputBlock>
+                    </FormInputBlock>
                 </Grid>
 
                 <Grid xs={12} md={6}>
-                    <InputBlock title='Country of residence' value={country} section={section} inputKey='country' updateCurrentSection={updateCurrentSection}>
-                        <AutocompleteStyled
-                            options={countriesList}
-                            name='country'
-                            value={country ?? ''}
-                            inputValue={country ?? ''}
-                            onChange={(event, newValue) => handleAutocoplete(newValue, section, 'country')}
-                            onInputChange={(event, newInputValue) => handleAutocoplete(newInputValue, section, 'country')}
+                    <FormInputBlock label={'Country of residence'} >
+                        <FormInput
+                            size='md'
+                            variant="plain"
+                            isOutlined={false}
+                            {...register('general.country')}
                         />
-                    </InputBlock>
+                    </FormInputBlock>
                 </Grid>
 
-                {webLinks.length ?
+                {/* {webLinks.length ?
                     webLinks.map((webLink, index) => {
                         return (
                             <Grid key={index} xs={12} md={6}>
