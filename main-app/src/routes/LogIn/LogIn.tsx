@@ -1,6 +1,6 @@
 
 import logIn from '/assets/images/login1.jfif'
-import InputLogInSignUp from '../../components/input-login-signup/InputLogInSignUp.component';
+import InputLogInSignUp from '../../components/form-inputs/input-login-signup/InputLogInSignUp.component';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 

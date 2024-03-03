@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
 import signUp from '/assets/images/signup.jfif'
-import InputLogInSignUp from '../../components/input-login-signup/InputLogInSignUp.component';
+import InputLogInSignUp from '../../components/form-inputs/input-login-signup/InputLogInSignUp.component';
 import UnderNavBar from '../../components/navbar/UnderNavBar.component';
 
 import {

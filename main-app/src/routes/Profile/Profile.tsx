@@ -64,27 +64,20 @@ const Profile = () => {
 
     return (
         <Stack
-            direction='row'
-            position='sticky'
-            top={0}
-            left={0}
-            minHeight='100vh'
+            direction='row' position='sticky'
+            top={0} left={0} minHeight='100vh'
             bgcolor='neutral.700'
         >
             <Stack
-                zIndex={1}
                 role='sidebar'
-                alignItems='flex-start'
+                zIndex={1} alignItems='flex-start'
                 width={isSidebarWide ? `${wideWidth}px` : `${compactWidth}px`}
                 minWidth={isSidebarWide ? `${wideWidth}px` : `${compactWidth}px`}
                 position={{ xs: 'fixed', sm: 'sticky' }}
                 maxHeight={{ xs: '100vh', md: '98vh' }}
-                top={0}
-                left={0}
-                pl={1.1}
+                top={0} left={0} pl={1.1}
                 bgcolor={c.neutral[700]}
                 sx={{
-                    // backgroundImage: `linear-gradient(90deg ,${c.primary[700]},${c.primary[500]} )`,
                     transition: 'all .2s ease-in'
                 }}>
                 <ProfileSidebar
@@ -103,9 +96,7 @@ const Profile = () => {
                     transition: 'all .2s ease-in',
                     overflowX: 'hidden',
                 }}>
-
                 <UnderNavBar />
-
                 <form onSubmit={handleSubmit(handleUpdate)}>
                     <Box px={{ md: xs, lg: md }}>
                         <ProfileGeneral />

@@ -3,9 +3,10 @@ import { Input, styled } from "@mui/joy";
 import { InputProps } from "@mui/joy/Input";
 
 interface FormInputProps extends InputProps {
-    isOutlined: boolean;
+    isOutlined?: boolean;
+    readOnly?: boolean
 }
-const FormInput = styled(Input)<FormInputProps>(({ theme, isOutlined, readOnly }) => ({
+const InputStyled = styled(Input)<FormInputProps>(({ theme, isOutlined = false, readOnly = false }) => ({
     backgroundColor: 'white',
     fontSize: theme.fontSize.md,
     fontWeight: 500,
@@ -25,4 +26,4 @@ const FormInput = styled(Input)<FormInputProps>(({ theme, isOutlined, readOnly }
     },
 }))
 
-export default FormInput
+export default InputStyled

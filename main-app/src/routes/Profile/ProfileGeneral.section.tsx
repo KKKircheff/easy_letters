@@ -1,49 +1,21 @@
 import { Box, Grid, Typography, useTheme } from "@mui/joy"
-import { UserProfile, SectionKeys, ArraySectionsValues, WebLink, General, Admin } from "../../data/userProfileTypes"
-
-import InputBlock from "../../components/input-block/InputBlock.component"
+import { UserProfile } from "../../data/userProfileTypes"
 import { countriesList } from "../../data/countriesList"
 
-import AutocompleteStyled from "../../components/autocomplete-styled/AutocompleteStyled.component"
-import InputProfile from "../../components/input-profile/InputProfile.component"
-import AddNew from "../../components/add-new/AddNew.component"
-import InputArrayBlock from "../../components/input-array-block/InputArrayBlock.component"
-import { useState } from "react"
 import { useUserContext } from "../../context/UserContext"
-import { Control, useForm } from "react-hook-form"
-import FormInput from "../../components/inputsStyled/FormInput.component"
-import FormInputBlock from "../../components/InputsUI/FormInputBlock.component"
+import { useForm } from "react-hook-form"
+import AddNew from "../../components/add-new/AddNew.component"
+import InputContainer from "../../components/form-inputs/InputContainer"
+import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
+import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 
 const ProfileGeneral = () => {
 
     const c = useTheme().palette
     const { userProfile } = useUserContext()
-    const { register, formState: { errors } } = useForm<UserProfile>({
+    const { register, control, formState: { errors } } = useForm<UserProfile>({
         defaultValues: { ...userProfile }
     });
-    const adminSection = 'admin'
-    const section = 'general'
-    const arraySection = 'webLinks'
-
-    // const {
-    //     email,
-    // } = register.userProfile.admin
-
-    // const {
-    //     firstName,
-    //     lastName,
-    //     city,
-    //     country,
-    //     phoneNumber,
-    //     postCode,
-    // } = register.general
-
-    // const webLinks = register.webLinks;
-
-    const newWebLink: WebLink = {
-        media: '',
-        link: ''
-    }
 
     return (
         <Box>
@@ -58,82 +30,77 @@ const ProfileGeneral = () => {
                 textAlign='left'
             >
                 <Grid xs={12} md={6}>
-                    <FormInputBlock label={'First Name'} >
-                        <FormInput
-                            size='md'
-                            variant="plain"
-                            isOutlined={false}
-                            {...register('general.firstName')}
+                    <InputContainer>
+                        <FormInputText
+                            control={control}
+                            name='general.firstName'
+                            label='First name'
                         />
-                    </FormInputBlock>
+                    </InputContainer>
                 </Grid>
 
                 <Grid xs={12} md={6}>
-                    <FormInputBlock label={'Last Name'} >
-                        <FormInput
-                            size='md'
-                            variant="plain"
-                            isOutlined={false}
-                            {...register('general.lastName')}
+                    <InputContainer>
+                        <FormInputText
+                            control={control}
+                            name='general.lastName'
+                            label='Last name'
                         />
-                    </FormInputBlock>
+                    </InputContainer>
                 </Grid>
 
                 <Grid xs={12} md={6}>
-                    <FormInputBlock label={'Email'} >
-                        <FormInput
-                            size='md'
-                            variant="plain"
+                    <InputContainer>
+                        <FormInputText
+                            control={control}
+                            name='admin.email'
+                            label='Email'
                             readOnly={true}
-                            isOutlined={false}
-                            {...register('admin.email')}
                         />
-                    </FormInputBlock>
+                    </InputContainer>
                 </Grid>
 
                 <Grid xs={12} md={6}>
-                    <FormInputBlock label={'Phone Number'} >
-                        <FormInput
-                            size='md'
-                            variant="plain"
-                            isOutlined={false}
-                            {...register('general.phoneNumber')}
+                    <InputContainer>
+                        <FormInputText
+                            control={control}
+                            name='general.phoneNumber'
+                            label='Phone number'
                         />
-                    </FormInputBlock>
+                    </InputContainer>
                 </Grid>
 
                 <Grid xs={12} md={3}>
-                    <FormInputBlock label={'City'} >
-                        <FormInput
-                            size='md'
-                            variant="plain"
-                            isOutlined={false}
-                            {...register('general.city')}
+                    <InputContainer>
+                        <FormInputText
+                            control={control}
+                            name='general.city'
+                            label='City'
                         />
-                    </FormInputBlock>
+                    </InputContainer>
                 </Grid>
 
                 <Grid xs={12} md={3}>
-                    <FormInputBlock label={'Postal code'} >
-                        <FormInput
-                            size='md'
-                            variant="plain"
-                            isOutlined={false}
-                            {...register('general.postCode')}
+                    <InputContainer>
+                        <FormInputText
+                            control={control}
+                            name='general.postCode'
+                            label='Postal code'
                         />
-                    </FormInputBlock>
+                    </InputContainer>
                 </Grid>
 
                 <Grid xs={12} md={6}>
-                    <FormInputBlock label={'Country of residence'} >
-                        <FormInput
-                            size='md'
-                            variant="plain"
-                            isOutlined={false}
-                            {...register('general.country')}
+                    <InputContainer>
+                        <FormInputAutocomplete
+                            control={control}
+                            name='general.country'
+                            label='Country of residence'
+                            options={countriesList}
                         />
-                    </FormInputBlock>
+                    </InputContainer>
                 </Grid>
+
 
                 {/* {webLinks.length ?
                     webLinks.map((webLink, index) => {
@@ -173,18 +140,14 @@ const ProfileGeneral = () => {
                     })
                     : null
                 } */}
-
-                {/* {isAddInProgress
-                    ? null
-                    : <Grid
-                        xs={12} md={6} sx={{ cursor: 'pointer' }}
-                        onClick={addNewArraySectionRecord}>
-                        <AddNew
-                            itemToAdd={'link'}
-                            description={'e.g LinkedIn, Instagram, Youtube, Github, Portfolio Website or other links.'}
-                        />
-                    </Grid>
-                } */}
+                <Grid
+                    xs={12} md={6} sx={{ cursor: 'pointer' }}
+                    onClick={() => console.log('clicked')}>
+                    <AddNew
+                        itemToAdd={'link'}
+                        description={'e.g LinkedIn, Instagram, Youtube, Github, Portfolio Website or other links.'}
+                    />
+                </Grid>
             </Grid>
         </Box>
     )
