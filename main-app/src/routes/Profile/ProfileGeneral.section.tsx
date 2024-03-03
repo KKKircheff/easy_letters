@@ -89,7 +89,7 @@ const ProfileGeneral = ({ control }: Props) => {
                     </InputContainer>
                 </Grid>
 
-                {/* <Grid xs={12} md={6}>
+                <Grid xs={12} md={6}>
                     <InputContainer>
                         <FormInputAutocomplete
                             control={control}
@@ -98,7 +98,7 @@ const ProfileGeneral = ({ control }: Props) => {
                             options={countriesList}
                         />
                     </InputContainer>
-                </Grid> */}
+                </Grid>
 
 
                 {/* {webLinks.length ?

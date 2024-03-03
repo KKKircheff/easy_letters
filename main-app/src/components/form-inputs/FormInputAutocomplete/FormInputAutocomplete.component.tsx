@@ -10,43 +10,42 @@ type Props = {
     options: string[];
     placeholder?: string;
     readOnly?: boolean
+    required?: boolean
 }
-const FormInputAutocomplete = ({ name, control, label, options, readOnly = false, placeholder = label }: Props) => {
+const FormInputAutocomplete = ({ name, control, label, options, readOnly = false, placeholder = label, required = false }: Props) => {
 
     return (
         <FormControl>
-            <FormLabel sx={{ mb: 1, fontWeight: 600, }}>{label}</FormLabel>
+            <FormLabel sx={{ mb: 1, fontWeight: 600 }}>{label}</FormLabel>
             <Controller
                 name={name}
                 control={control}
-                render={({
-                    field: { onChange, onBlur, value },
-                    fieldState: { error },
-                    formState,
-                }) => (
+                rules={{
+                    required: required ? "Required field" : undefined
+                }}
+                render={({ field: { onChange, value }, fieldState: { error }, formState: { errors } }) => (
                     <>
                         <AutocompleteStyled
                             options={options}
-                            onChange={(event, newValue) => {
-                                onChange(newValue);
-                            }}
-                            onBlur={(event, newValue) => {
-                                onChange(event.target.value, newValue)
-                            }}
-                            value={value ? value : ''}
-                            fullWidth
-                            size="md"
-                            variant="plain"
                             isOutlined={!value}
                             placeholder={placeholder}
                             disabled={readOnly}
+                            onChange={(event, newValue) => {
+                                onChange(newValue);
+                            }}
+                            value={value ? value : ''}
+                            fullWidth
+                            clearOnBlur={true}
+                            clearOnEscape={true}
+                            size="md"
+                            variant="plain"
                         />
-                        <FormHelperText >{!!error ? error.message : null}</FormHelperText>
+                        {errors && <FormHelperText>{error && error.message}</FormHelperText>}
                     </>
                 )}
             />
         </FormControl>
-    )
-}
+    );
+};
 
 export default FormInputAutocomplete

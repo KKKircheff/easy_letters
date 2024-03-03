@@ -35,7 +35,7 @@ const Profile = () => {
 
     const { userProfile, updateUserProfile } = useUserContext()
 
-    const { handleSubmit, control } = useForm<UserProfile>({
+    const { handleSubmit, control, formState: { isDirty }, reset } = useForm<UserProfile>({
         defaultValues: { ...userProfile }
     });
 
@@ -54,7 +54,7 @@ const Profile = () => {
 
     const handleUpdate = async (data: UserProfile) => {
         try {
-            // await updateUserProfile(data);
+            await updateUserProfile(data);
             console.log('Data:', data)
             alert('Updated!')
         } catch (error) {
@@ -86,12 +86,8 @@ const Profile = () => {
                     setSectionToRender={setSectionToRender} />
             </Stack>
 
-            <Stack
-                role='section'
-                bgcolor='white'
-                width='100%'
-                maxWidth={restWideWidth}
-                ml={{ xs: `${compactWidth}px`, sm: '0' }}
+            <Stack role='section' bgcolor='white'
+                width='100%' maxWidth={restWideWidth} ml={{ xs: `${compactWidth}px`, sm: '0' }}
                 sx={{
                     transition: 'all .2s ease-in',
                     overflowX: 'hidden',
@@ -173,7 +169,6 @@ const Profile = () => {
                                 color='primary'
                                 variant='solid'
                                 type='submit'
-                                // onClick={handleUpdate}
                                 sx={{
                                     justifyContent: 'flex-start',
                                     paddingLeft: 1,
@@ -202,10 +197,10 @@ const Profile = () => {
                             </Button>
 
 
-                            <Button
+                            {isDirty && <Button
                                 color='warning'
                                 type='button'
-                                // onClick={handleRevertProfileChanges}
+                                onClick={() => reset()}
                                 sx={{
                                     justifyContent: 'flex-start',
                                     border: `2px solid ${c.neutral[300]}`,
@@ -231,7 +226,7 @@ const Profile = () => {
                                     borderRadius: 'lg',
                                 }} />}
                             >{isWide ? 'Revert changes' : 'Undo'}
-                            </Button>
+                            </Button>}
                         </Stack>
 
                     </Stack>

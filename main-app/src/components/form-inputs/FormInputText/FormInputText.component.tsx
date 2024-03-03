@@ -19,9 +19,10 @@ const FormInputText = ({ name, control, label, readOnly = false, placeholder = l
             <Controller
                 name={name}
                 control={control}
-                rules={{
-                    required: "Required field"
-                }}
+                rules={
+                    {
+                        required: required ? "Required field" : undefined
+                    }}
                 render={({
                     field: { onChange, value },
                     fieldState: { error },
@@ -31,13 +32,11 @@ const FormInputText = ({ name, control, label, readOnly = false, placeholder = l
                         <InputStyled
                             onChange={(event) => {
                                 onChange(event.target.value)
-                                console.log('onchange:', event.target.value, '   ', value)
                             }}
                             onBlur={(event) => {
                                 onChange(event.target.value)
-                                console.log('onblur:', event.target.value, '   ', value)
                             }}
-                            value={value ? value as string | null : ''}
+                            value={value ? value as string : ''}
                             disabled={readOnly}
                             isOutlined={!value}
                             fullWidth
