@@ -6,7 +6,7 @@ interface FormInputProps extends InputProps {
     isOutlined?: boolean;
     readOnly?: boolean
 }
-const InputStyled = styled(Input)<FormInputProps>(({ theme, isOutlined = false, readOnly = false }) => ({
+const InputStyled = styled(Input)<FormInputProps>(({ theme, isOutlined, readOnly = false }) => ({
     backgroundColor: 'white',
     fontSize: theme.fontSize.md,
     fontWeight: 500,

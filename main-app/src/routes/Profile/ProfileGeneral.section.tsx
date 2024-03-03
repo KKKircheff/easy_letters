@@ -3,19 +3,17 @@ import { UserProfile } from "../../data/userProfileTypes"
 import { countriesList } from "../../data/countriesList"
 
 import { useUserContext } from "../../context/UserContext"
-import { useForm } from "react-hook-form"
+import { Control, useForm } from "react-hook-form"
 import AddNew from "../../components/add-new/AddNew.component"
 import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 
-const ProfileGeneral = () => {
+type Props = {
+    control: Control<UserProfile>
+}
 
-    const c = useTheme().palette
-    const { userProfile } = useUserContext()
-    const { register, control, formState: { errors } } = useForm<UserProfile>({
-        defaultValues: { ...userProfile }
-    });
+const ProfileGeneral = ({ control }: Props) => {
 
     return (
         <Box>
@@ -86,11 +84,12 @@ const ProfileGeneral = () => {
                             control={control}
                             name='general.postCode'
                             label='Postal code'
+                            required={true}
                         />
                     </InputContainer>
                 </Grid>
 
-                <Grid xs={12} md={6}>
+                {/* <Grid xs={12} md={6}>
                     <InputContainer>
                         <FormInputAutocomplete
                             control={control}
@@ -99,7 +98,7 @@ const ProfileGeneral = () => {
                             options={countriesList}
                         />
                     </InputContainer>
-                </Grid>
+                </Grid> */}
 
 
                 {/* {webLinks.length ?

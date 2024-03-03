@@ -34,7 +34,8 @@ const Profile = () => {
     const { xs, md, lg } = styleVariables.layoutPadding;
 
     const { userProfile, updateUserProfile } = useUserContext()
-    const { handleSubmit, formState: { errors } } = useForm<UserProfile>({
+
+    const { handleSubmit, control } = useForm<UserProfile>({
         defaultValues: { ...userProfile }
     });
 
@@ -53,14 +54,13 @@ const Profile = () => {
 
     const handleUpdate = async (data: UserProfile) => {
         try {
-            await updateUserProfile(data);
+            // await updateUserProfile(data);
+            console.log('Data:', data)
             alert('Updated!')
         } catch (error) {
             alert(error)
         }
     };
-
-
 
     return (
         <Stack
@@ -97,9 +97,9 @@ const Profile = () => {
                     overflowX: 'hidden',
                 }}>
                 <UnderNavBar />
-                <form onSubmit={handleSubmit(handleUpdate)}>
+                <form onSubmit={handleSubmit(handleUpdate)} noValidate>
                     <Box px={{ md: xs, lg: md }}>
-                        <ProfileGeneral />
+                        <ProfileGeneral control={control} />
                     </Box>
 
                     <Stack

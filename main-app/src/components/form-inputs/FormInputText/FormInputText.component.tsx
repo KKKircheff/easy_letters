@@ -9,27 +9,35 @@ type Props = {
     label: string;
     placeholder?: string;
     readOnly?: boolean
+    required?: boolean
 }
-const FormInputText = ({ name, control, label, readOnly = false, placeholder = label }: Props) => {
+const FormInputText = ({ name, control, label, readOnly = false, placeholder = label, required = false }: Props) => {
 
     return (
-
         <FormControl>
             <FormLabel sx={{ mb: 1, fontWeight: 600, }}>{label}</FormLabel>
             <Controller
-                name={`${name}`}
+                name={name}
                 control={control}
+                rules={{
+                    required: "Required field"
+                }}
                 render={({
                     field: { onChange, value },
                     fieldState: { error },
-                    formState,
+                    formState: { errors },
                 }) => (
                     <>
                         <InputStyled
-                            error={!!error}
-                            onChange={onChange}
-                            onBlur={onChange}
-                            value={value as string | null}
+                            onChange={(event) => {
+                                onChange(event.target.value)
+                                console.log('onchange:', event.target.value, '   ', value)
+                            }}
+                            onBlur={(event) => {
+                                onChange(event.target.value)
+                                console.log('onblur:', event.target.value, '   ', value)
+                            }}
+                            value={value ? value as string | null : ''}
                             disabled={readOnly}
                             isOutlined={!value}
                             fullWidth
@@ -37,7 +45,7 @@ const FormInputText = ({ name, control, label, readOnly = false, placeholder = l
                             variant="plain"
                             placeholder={placeholder}
                         />
-                        <FormHelperText >{!!error ? error.message : null}</FormHelperText>
+                        {errors && <FormHelperText > {error && error.message}</FormHelperText>}
                     </>
                 )}
             />
