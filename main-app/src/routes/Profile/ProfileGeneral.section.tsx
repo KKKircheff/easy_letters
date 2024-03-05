@@ -1,19 +1,28 @@
-import { Box, Grid, Typography, useTheme } from "@mui/joy"
+import { Box, Button, Grid, Typography, useTheme } from "@mui/joy"
 import { UserProfile } from "../../data/userProfileTypes"
 import { countriesList } from "../../data/countriesList"
 
-import { useUserContext } from "../../context/UserContext"
-import { Control, useForm } from "react-hook-form"
+import { Control, useFieldArray } from "react-hook-form"
 import AddNew from "../../components/add-new/AddNew.component"
 import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
+import { useUserContext } from "../../context/UserContext"
 
 type Props = {
     control: Control<UserProfile>
 }
 
 const ProfileGeneral = ({ control }: Props) => {
+
+    const { userProfile } = useUserContext()
+
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: 'webLinks', // Replace with your field array name
+    });
+
+    const { webLinks } = userProfile;
 
     return (
         <Box>
@@ -84,7 +93,6 @@ const ProfileGeneral = ({ control }: Props) => {
                             control={control}
                             name='general.postCode'
                             label='Postal code'
-                            required={true}
                         />
                     </InputContainer>
                 </Grid>
@@ -100,48 +108,36 @@ const ProfileGeneral = ({ control }: Props) => {
                     </InputContainer>
                 </Grid>
 
-
-                {/* {webLinks.length ?
-                    webLinks.map((webLink, index) => {
+                {fields.length ?
+                    fields.map((field, index) => {
                         return (
-                            <Grid key={index} xs={12} md={6}>
-                                <InputArrayBlock
-                                    index={index}
-                                    title='Web link'
-                                    value={webLink}
-                                    section={arraySection}
-                                    inputKey='webLinks'
-                                    deleteArraySectionElement={deleteArraySectionElement}>
-
-                                    <InputProfile
-                                        autoComplete='off'
-                                        name='media'
-                                        size='md'
-                                        placeholder='Name'
-                                        variant="outlined"
-                                        color='neutral'
-                                        value={webLink.media}
-                                        onChange={(e) => handleProfileArraySectionOnChange(e, arraySection, index)}
+                            <Grid key={field.id} xs={12} md={6}>
+                                <InputContainer>
+                                    <FormInputText
+                                        control={control}
+                                        name={`webLinks.${index}.media`}
+                                        label=''
+                                        required={true}
                                     />
-                                    <InputProfile
-                                        autoComplete='off'
-                                        name='link'
-                                        size='md'
-                                        placeholder='Web link'
-                                        variant="outlined"
-                                        color='neutral'
-                                        value={webLink.link}
-                                        onChange={(e) => handleProfileArraySectionOnChange(e, arraySection, index)}
+                                    <FormInputText
+                                        control={control}
+                                        name={`webLinks.${index}.link`}
+                                        label=''
+                                        required={true}
                                     />
-                                </InputArrayBlock>
+                                    <Button variant='outlined' color='danger' size='sm' type="button" sx={{ marginLeft: 'auto' }} onClick={() => remove(index)}>
+                                        Remove
+                                    </Button>
+                                </InputContainer>
                             </Grid>
                         )
                     })
                     : null
-                } */}
+                }
+
                 <Grid
                     xs={12} md={6} sx={{ cursor: 'pointer' }}
-                    onClick={() => console.log('clicked')}>
+                    onClick={() => append({ media: '', link: '' })}>
                     <AddNew
                         itemToAdd={'link'}
                         description={'e.g LinkedIn, Instagram, Youtube, Github, Portfolio Website or other links.'}

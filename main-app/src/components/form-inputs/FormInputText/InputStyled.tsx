@@ -8,11 +8,13 @@ interface FormInputProps extends InputProps {
 }
 const InputStyled = styled(Input)<FormInputProps>(({ theme, isOutlined, readOnly = false }) => ({
     backgroundColor: 'white',
-    fontSize: theme.fontSize.md,
+    fontSize: theme.fontSize.sm,
     fontWeight: 500,
-    borderRadius: theme.radius.lg,
+    borderRadius: theme.radius.md,
     color: theme.vars.palette.neutral[600],
     boxShadow: 'none',
+    minHeight: '26px',
+    paddingX: .5,
     outline: isOutlined
         ? `1.5px solid ${theme.vars.palette.primary[500]}`
         : `0px solid transparent`,

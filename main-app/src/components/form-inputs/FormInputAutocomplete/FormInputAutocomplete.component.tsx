@@ -37,7 +37,7 @@ const FormInputAutocomplete = ({ name, control, label, options, readOnly = false
                             fullWidth
                             clearOnBlur={true}
                             clearOnEscape={true}
-                            size="md"
+                            size="sm"
                             variant="plain"
                         />
                         {errors && <FormHelperText>{error && error.message}</FormHelperText>}

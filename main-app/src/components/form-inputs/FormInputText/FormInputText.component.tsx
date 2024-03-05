@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, FormLabel } from '@mui/joy'
+import { FormControl, FormHelperText, FormLabel, InputProps } from '@mui/joy'
 import { Path, Control, Controller } from "react-hook-form";
 import { UserProfile } from '../../../data/userProfileTypes';
 import InputStyled from './InputStyled';
@@ -10,8 +10,16 @@ type Props = {
     placeholder?: string;
     readOnly?: boolean
     required?: boolean
-}
-const FormInputText = ({ name, control, label, readOnly = false, placeholder = label, required = false }: Props) => {
+} & InputProps
+
+const FormInputText = ({
+    name,
+    control,
+    label, readOnly = false,
+    placeholder = label,
+    required = false,
+    ...otherProps
+}: Props) => {
 
     return (
         <FormControl>

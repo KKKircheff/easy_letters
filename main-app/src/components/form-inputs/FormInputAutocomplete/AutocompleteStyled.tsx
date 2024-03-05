@@ -15,7 +15,8 @@ const AutocompleteStyled = ({ options, isOutlined = false, readOnly = false, ...
                         scrollbarWidth: 'none',
                         fontWeight: '500',
                         color: c.neutral[300]!,
-                        fontSize: f.md!,
+                        fontSize: f.sm!,
+                        paddingX: .5,
                         '&:active': {
                             color: c.neutral[300]!,
                         }
@@ -27,6 +28,8 @@ const AutocompleteStyled = ({ options, isOutlined = false, readOnly = false, ...
                         fontSize: f.md,
                         fontWeight: '500',
                         color: c.neutral[500],
+                        paddingX: .5,
+                        userSelect: 'none',
                     },
                 },
                 root: {
@@ -39,6 +42,7 @@ const AutocompleteStyled = ({ options, isOutlined = false, readOnly = false, ...
                         color: c.neutral[600],
                         borderRadius: 'lg',
                         boxShadow: 'none',
+                        minHeight: '26px',
                         outline: isOutlined
                             ? `1.5px solid ${c.primary[500]}`
                             : `0px solid transparent`,
