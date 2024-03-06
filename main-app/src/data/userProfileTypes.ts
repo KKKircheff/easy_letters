@@ -16,9 +16,10 @@ export type General = {
 };
 
 export type WebLink = {
-    id?: string;
+    id: string;
     media: string;
     link: string;
+    visible: boolean;
 };
 export type Education = {
     id?: string;
@@ -38,6 +39,7 @@ export type Language = {
         | 'advanced'
         | 'proficient'
         | 'native';
+    visible: boolean;
 };
 export type CareerHistory = {
     id?: string;

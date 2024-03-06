@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUserContext } from "../../context/UserContext";
 
 import {
@@ -10,7 +10,6 @@ import {
 
 import UnderNavBar from "../../components/navbar/UnderNavBar.component"
 import ProfileSidebar from "./ProfileSidebar.section";
-import ProfileGeneral from "./ProfileGeneral.section";
 import Footer from "../../components/footer/Footer.component";
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -22,9 +21,10 @@ import useScreenWidth from '../../hooks/useScreenWidth';
 import { styleVariables } from '../../styles/styleVariables';
 
 import { useForm } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools'
 
 import { UserProfile } from '../../data/userProfileTypes'
+import General from "./General.section";
+import Languages from "./Languages.section";
 export type SectionsToRender = keyof UserProfile
 
 const Profile = () => {
@@ -41,7 +41,7 @@ const Profile = () => {
 
     const totalWidth = useScreenWidth()
 
-    const wideWidth = 224
+    const wideWidth = 240
     const compactWidth = 70
 
     const restWideWidth = totalWidth - compactWidth
@@ -94,77 +94,20 @@ const Profile = () => {
                 }}>
                 <UnderNavBar />
                 <form onSubmit={handleSubmit(handleUpdate)} noValidate>
+
                     <Box px={{ md: xs, lg: md }}>
-                        <ProfileGeneral control={control} />
+                        <General control={control} />
+                        <Languages control={control} />
                     </Box>
 
-                    <Stack
-                        direction='column'
-                        spacing={2}
-                        py={5}
-                        pb={10}
-                        px={{ xs: '3vw', sm: md, md: xs, lg: md }}
-                    >
-
-                        <Stack
-                            direction='row'
-                            justifyContent='space-between'
-                            mx='auto'
-                            px={{ md: 1 }}
-                        >
-                            <Button
-                                variant='outlined'
-                                color='neutral'
-                                type='button'
-                                sx={{
-                                    borderWidth: '2px',
-                                    borderColor: c.neutral[300],
-                                    color: c.neutral[400],
-                                    paddingLeft: 1,
-                                    paddingY: .3,
-                                }}
-                                startDecorator={<ChevronLeftIcon sx={{
-                                    color: c.neutral[100],
-                                    fontSize: f.mediumTitle,
-                                    bgcolor: c.neutral[400],
-                                    borderRadius: 'lg',
-                                }} />}
-                            >
-                                Previous
-                            </Button>
-
-                            <Button
-                                // onClick={handleUpdate}
-                                variant='outlined'
-                                color='neutral'
-                                type='button'
-                                sx={{
-                                    borderWidth: '2px',
-                                    borderColor: c.neutral[300],
-                                    color: c.neutral[400],
-                                    // fontWeight: 600,
-                                    paddingRight: 1,
-                                    paddingY: .3,
-                                }}
-                                endDecorator={<ChevronRightIcon sx={{
-                                    color: c.neutral[100],
-                                    fontSize: f.mediumTitle,
-                                    bgcolor: c.neutral[400],
-                                    borderColor: c.neutral[200],
-                                    borderRadius: 'lg',
-                                }} />}
-                            >
-                                Next
-                            </Button>
-                        </Stack>
+                    <Stack direction='column' spacing={2} py={5} pb={10} px={{ xs: '3vw', sm: md, md: xs, lg: md }}>
 
                         <Stack
                             direction='row-reverse'
-                            justifyContent='center'
+                            justifyContent={{ xs: 'space-between', sm: 'right' }}
                             mx='auto'
                             px={{ md: 1 }}
                             spacing={{ xs: 2 }}>
-
                             <Button
                                 color='primary'
                                 variant='solid'
@@ -193,10 +136,8 @@ const Profile = () => {
                                     borderRadius: 'lg',
                                 }} />}
 
-                            >{isWide ? 'Update profile' : 'Update'}
+                            >{isWide ? 'Save' : 'Save'}
                             </Button>
-
-
                             {isDirty && <Button
                                 color='warning'
                                 type='button'
@@ -225,8 +166,53 @@ const Profile = () => {
                                     fontWeight: 700,
                                     borderRadius: 'lg',
                                 }} />}
-                            >{isWide ? 'Revert changes' : 'Undo'}
+                            >{isWide ? 'Revert' : 'Revert'}
                             </Button>}
+                        </Stack>
+
+                        <Stack direction='row' justifyContent='space-between' mx='auto' px={{ md: 1 }}>
+                            <Button
+                                variant='outlined'
+                                color='neutral'
+                                type='button'
+                                sx={{
+                                    borderWidth: '2px',
+                                    borderColor: c.neutral[300],
+                                    color: c.neutral[400],
+                                    paddingLeft: 1,
+                                    paddingY: .3,
+                                }}
+                                startDecorator={<ChevronLeftIcon sx={{
+                                    color: c.neutral[100],
+                                    fontSize: f.mediumTitle,
+                                    bgcolor: c.neutral[400],
+                                    borderRadius: 'lg',
+                                }} />}
+                            >
+                                Previous
+                            </Button>
+
+                            <Button
+                                variant='outlined'
+                                color='neutral'
+                                type='button'
+                                sx={{
+                                    borderWidth: '2px',
+                                    borderColor: c.neutral[300],
+                                    color: c.neutral[400],
+                                    paddingRight: 1,
+                                    paddingY: .3,
+                                }}
+                                endDecorator={<ChevronRightIcon sx={{
+                                    color: c.neutral[100],
+                                    fontSize: f.mediumTitle,
+                                    bgcolor: c.neutral[400],
+                                    borderColor: c.neutral[200],
+                                    borderRadius: 'lg',
+                                }} />}
+                            >
+                                Next
+                            </Button>
                         </Stack>
 
                     </Stack>

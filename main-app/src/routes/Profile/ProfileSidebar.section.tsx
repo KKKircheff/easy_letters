@@ -94,7 +94,7 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide, setSectionToRender }:
                 spacing={1}
                 bgcolor='transparent'
                 sx={{ overflowY: 'scroll', scrollbarWidth: 'none', }}
-                pb={2}
+                pr={2}
             >
                 <Button
                     aria-label='extend sidebar'
@@ -128,6 +128,7 @@ const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide, setSectionToRender }:
                             endDecorator={item.itemName}
                             onClick={() => setSectionToRender(item.sectionName)}
                             sx={{
+                                whiteSpace: 'nowrap',
                                 width: isSidebarWide ? 'auto' : '100%',
                                 paddingRight: isSidebarWide ? 2 : 0,
                                 fontSize: isSidebarWide ? 'sm' : '0px',

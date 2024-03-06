@@ -2,18 +2,19 @@ import { Box, Button, Grid, Typography, useTheme } from "@mui/joy"
 import { UserProfile } from "../../data/userProfileTypes"
 import { countriesList } from "../../data/countriesList"
 
-import { Control, useFieldArray } from "react-hook-form"
+import { Control, useFieldArray, useFormContext } from "react-hook-form"
 import AddNew from "../../components/add-new/AddNew.component"
 import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 import { useUserContext } from "../../context/UserContext"
+import { v4 as uuidv4 } from 'uuid';
 
 type Props = {
     control: Control<UserProfile>
 }
 
-const ProfileGeneral = ({ control }: Props) => {
+const General = ({ control }: Props) => {
 
     const { userProfile } = useUserContext()
 
@@ -137,7 +138,7 @@ const ProfileGeneral = ({ control }: Props) => {
 
                 <Grid
                     xs={12} md={6} sx={{ cursor: 'pointer' }}
-                    onClick={() => append({ media: '', link: '' })}>
+                    onClick={() => append({ id: uuidv4(), media: '', link: '', visible: true })}>
                     <AddNew
                         itemToAdd={'link'}
                         description={'e.g LinkedIn, Instagram, Youtube, Github, Portfolio Website or other links.'}
@@ -148,4 +149,4 @@ const ProfileGeneral = ({ control }: Props) => {
     )
 }
 
-export default ProfileGeneral
+export default General
