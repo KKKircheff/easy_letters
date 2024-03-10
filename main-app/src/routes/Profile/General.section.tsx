@@ -2,13 +2,14 @@ import { Box, Button, Grid, Typography, useTheme } from "@mui/joy"
 import { UserProfile } from "../../data/userProfileTypes"
 import { countriesList } from "../../data/countriesList"
 
-import { Control, useFieldArray, useFormContext } from "react-hook-form"
+import { Control, useFieldArray, } from "react-hook-form"
 import AddNew from "../../components/add-new/AddNew.component"
 import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 import { useUserContext } from "../../context/UserContext"
 import { v4 as uuidv4 } from 'uuid';
+import BackspaceIcon from '@mui/icons-material/Backspace';
 
 type Props = {
     control: Control<UserProfile>
@@ -114,6 +115,7 @@ const General = ({ control }: Props) => {
                         return (
                             <Grid key={field.id} xs={12} md={6}>
                                 <InputContainer>
+                                    <BackspaceIcon sx={{ color: 'danger.500', alignSelf: 'flex-end'!, fontSize: 'sm', cursor: 'pointer' }} onClick={() => remove(index)} />
                                     <FormInputText
                                         control={control}
                                         name={`webLinks.${index}.media`}
@@ -126,9 +128,6 @@ const General = ({ control }: Props) => {
                                         label=''
                                         required={true}
                                     />
-                                    <Button variant='outlined' color='danger' size='sm' type="button" sx={{ marginLeft: 'auto' }} onClick={() => remove(index)}>
-                                        Remove
-                                    </Button>
                                 </InputContainer>
                             </Grid>
                         )
@@ -137,7 +136,7 @@ const General = ({ control }: Props) => {
                 }
 
                 <Grid
-                    xs={12} md={6} sx={{ cursor: 'pointer' }}
+                    xs={12} md={12} sx={{ cursor: 'pointer' }}
                     onClick={() => append({ id: uuidv4(), media: '', link: '', visible: true })}>
                     <AddNew
                         itemToAdd={'link'}

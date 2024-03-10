@@ -27,7 +27,9 @@ export type Education = {
     schoolLocation: string;
     degree: string;
     fieldOfStudy: string;
+    startDate: Date | null;
     graduationDate: Date | null;
+    visible: boolean;
 };
 export type Language = {
     id?: string;
@@ -48,10 +50,12 @@ export type CareerHistory = {
     location: string;
     startDate: Date | null;
     endDate: Date | 'current' | null;
+    visible: boolean;
 };
 export type Skill = {
-    id?: string;
+    id: string;
     skill: string;
+    visible: boolean;
 };
 export type Summary = string;
 
@@ -81,16 +85,18 @@ export type UserProfile = {
     languages?: Language[] | [];
     careerHistory?: CareerHistory[] | [];
     skills?: Skill[] | [];
-    summary?: Summary | null;
+    summary?: Summary | '';
     applicationDocs?: ApplicationDoc[] | [];
     invoices?: Invoice[] | [];
 };
 
-type ArrayKeys<T> = {
+export type ArraySectionsKeys<T> = {
     [K in keyof T]: T[K] extends any[] ? K : never;
 }[keyof T];
 
-export type SectionKeys = ArrayKeys<UserProfile>;
+export type SectionKeys<T> = {
+    [K in keyof T]: T[K] extends any[] ? K : K;
+}[keyof T];
 
 export type ArraySectionsValues =
     | WebLink

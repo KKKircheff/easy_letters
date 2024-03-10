@@ -51,6 +51,8 @@ const FormInputText = ({
                             size="md"
                             variant="plain"
                             placeholder={placeholder}
+                            sx={{ cursor: 'pointer' }}
+                            {...otherProps}
                         />
                         {errors && <FormHelperText > {error && error.message}</FormHelperText>}
                     </>

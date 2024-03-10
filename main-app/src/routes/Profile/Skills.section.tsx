@@ -5,25 +5,24 @@ import { Control, useFieldArray } from "react-hook-form"
 import AddNew from "../../components/add-new/AddNew.component"
 import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
-import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
-import { languageLevels } from "../../data/languageLevels"
 import { v4 as uuidv4 } from 'uuid';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+
 
 type Props = {
     control: Control<UserProfile>
 }
 
-const Languages = ({ control }: Props) => {
+const Skills = ({ control }: Props) => {
     const { fields, append, remove } = useFieldArray({
         control,
-        name: 'languages', // Replace with your field array name
+        name: 'skills', // Replace with your field array name
     });
 
     return (
         <Box>
-            <Typography level='h1' p={2}> Languages</Typography>
-            <Typography level='h2' p={2}> Please fill the languages you can use and leve</Typography>
+            <Typography level='h1' p={2}> Skills</Typography>
+            <Typography level='h2' p={2}> Please add you skills</Typography>
             <Grid
                 container
                 columns={12}
@@ -41,14 +40,7 @@ const Languages = ({ control }: Props) => {
                                     <BackspaceIcon sx={{ color: 'danger.500', alignSelf: 'flex-end'!, fontSize: 'sm', cursor: 'pointer' }} onClick={() => remove(index)} />
                                     <FormInputText
                                         control={control}
-                                        name={`languages.${index}.language`}
-                                        label=''
-                                        required={true}
-                                    />
-                                    <FormInputAutocomplete
-                                        options={languageLevels}
-                                        control={control}
-                                        name={`languages.${index}.level`}
+                                        name={`skills.${index}.skill`}
                                         label=''
                                         required={true}
                                     />
@@ -61,10 +53,10 @@ const Languages = ({ control }: Props) => {
 
                 <Grid
                     xs={12} md={12} sx={{ cursor: 'pointer' }}
-                    onClick={() => append({ id: uuidv4(), language: '', level: 'beginner', visible: true })}>
+                    onClick={() => append({ id: uuidv4(), skill: '', visible: true })}>
                     <AddNew
-                        itemToAdd={'language'}
-                        description={'Choose your knowledge level.'}
+                        itemToAdd={'skill'}
+                        description={'Add a skill. For example - technical skills, soft skills, etc ...'}
                     />
                 </Grid>
             </Grid>
@@ -72,4 +64,4 @@ const Languages = ({ control }: Props) => {
     )
 }
 
-export default Languages
+export default Skills

@@ -12,11 +12,6 @@ import UnderNavBar from "../../components/navbar/UnderNavBar.component"
 import ProfileSidebar from "./ProfileSidebar.section";
 import Footer from "../../components/footer/Footer.component";
 
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import UndoIcon from '@mui/icons-material/Undo';
-import CheckIcon from '@mui/icons-material/Check';
-
 import useScreenWidth from '../../hooks/useScreenWidth';
 import { styleVariables } from '../../styles/styleVariables';
 
@@ -25,6 +20,16 @@ import { useForm } from 'react-hook-form';
 import { UserProfile } from '../../data/userProfileTypes'
 import General from "./General.section";
 import Languages from "./Languages.section";
+import Skills from "./Skills.section";
+import Education from "./Education.section";
+import CareerHistory from "./CareerHistory.section";
+import FormSaveButton from "../../components/buttons/form-buttons/FormSaveButton.component";
+import FormRevertButton from "../../components/buttons/form-buttons/FormRevertButton.component";
+import PreviousButton from "../../components/buttons/form-buttons/PreviousButton.component";
+import NextButton from "../../components/buttons/form-buttons/NextButton.component";
+import Invoices from "./Invoices.section";
+import ApplicationDocuments from "./ApplicationDocuments.section";
+import Summary from "./Summary.section";
 export type SectionsToRender = keyof UserProfile
 
 const Profile = () => {
@@ -50,7 +55,29 @@ const Profile = () => {
 
 
     const [isSidebarWide, setIsSidebarWide] = useState(totalWidth > 900)
-    const [sectionToRender, setSectionToRender] = useState<SectionsToRender>('general');
+
+    const sections = [
+        { component: General, menuKey: 'general' },
+        { component: Languages, menuKey: 'languages' },
+        { component: Education, menuKey: 'education' },
+        { component: CareerHistory, menuKey: 'careerHistory' },
+        { component: Skills, menuKey: 'skills' },
+        { component: Summary, menuKey: 'summary' },
+        { component: ApplicationDocuments, menuKey: 'applicationDocs' },
+        { component: Invoices, menuKey: 'invoices' },
+    ];
+
+    const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+
+    const handlePrevious = () => {
+        setCurrentSectionIndex(prevIndex => Math.max(prevIndex - 1, 0));
+    };
+
+    const handleNext = () => {
+        setCurrentSectionIndex(prevIndex => Math.min(prevIndex + 1, sections.length - 1));
+    };
+
+    const CurrentSection = sections[currentSectionIndex].component;
 
     const handleUpdate = async (data: UserProfile) => {
         try {
@@ -68,26 +95,18 @@ const Profile = () => {
             top={0} left={0} minHeight='100vh'
             bgcolor='neutral.700'
         >
-            <Stack
-                role='sidebar'
-                zIndex={1} alignItems='flex-start'
-                width={isSidebarWide ? `${wideWidth}px` : `${compactWidth}px`}
-                minWidth={isSidebarWide ? `${wideWidth}px` : `${compactWidth}px`}
-                position={{ xs: 'fixed', sm: 'sticky' }}
-                maxHeight={{ xs: '100vh', md: '98vh' }}
-                top={0} left={0} pl={1.1}
-                bgcolor={c.neutral[700]}
-                sx={{
-                    transition: 'all .2s ease-in'
-                }}>
-                <ProfileSidebar
-                    setIsSidebarWide={setIsSidebarWide}
-                    isSidebarWide={isSidebarWide}
-                    setSectionToRender={setSectionToRender} />
-            </Stack>
+            <ProfileSidebar
+                sections={sections}
+                wideWidth={wideWidth}
+                compactWidth={compactWidth}
+                setIsSidebarWide={setIsSidebarWide}
+                isSidebarWide={isSidebarWide}
+                setCurrentSectionIndex={setCurrentSectionIndex} />
 
-            <Stack role='section' bgcolor='white'
-                width='100%' maxWidth={restWideWidth} ml={{ xs: `${compactWidth}px`, sm: '0' }}
+            <Stack
+                role='form' bgcolor='neutral.50'
+                width='100%' maxWidth={restWideWidth}
+                ml={{ xs: `${compactWidth}px`, sm: '0' }}
                 sx={{
                     transition: 'all .2s ease-in',
                     overflowX: 'hidden',
@@ -96,125 +115,38 @@ const Profile = () => {
                 <form onSubmit={handleSubmit(handleUpdate)} noValidate>
 
                     <Box px={{ md: xs, lg: md }}>
-                        <General control={control} />
-                        <Languages control={control} />
+                        <CurrentSection control={control} />
                     </Box>
 
                     <Stack direction='column' spacing={2} py={5} pb={10} px={{ xs: '3vw', sm: md, md: xs, lg: md }}>
-
                         <Stack
-                            direction='row-reverse'
-                            justifyContent={{ xs: 'space-between', sm: 'right' }}
-                            mx='auto'
-                            px={{ md: 1 }}
-                            spacing={{ xs: 2 }}>
-                            <Button
-                                color='primary'
-                                variant='solid'
-                                type='submit'
-                                sx={{
-                                    justifyContent: 'flex-start',
-                                    paddingLeft: 1,
-                                    paddingY: .2,
-                                    paddingRight: { xs: 2, sm: 2.5 },
-                                    bgcolor: c.neutral[50],
-                                    color: c.primary[500],
-                                    border: `2px solid ${c.primary[400]}`,
-                                    '&:hover': {
-                                        color: c.neutral[50],
-                                        bgcolor: c.primary[500],
-                                    }
+                            direction='row-reverse' spacing={2} mx='auto' px={{ md: 1 }}
+                            justifyContent={{ xs: 'space-between', sm: 'right' }}>
 
-                                }}
-                                startDecorator={<CheckIcon sx={{
-                                    p: .2,
-                                    border: `2px solid ${c.primary[300]}`,
-                                    bgcolor: c.primary[500],
-                                    color: c.neutral[50]!,
-                                    fontSize: f.mediumTitle,
-                                    fontWeight: 800,
-                                    borderRadius: 'lg',
-                                }} />}
+                            <FormSaveButton color='primary' variant='solid' type='submit'>
+                                {isWide ? 'Save' : 'Save'}
+                            </FormSaveButton>
 
-                            >{isWide ? 'Save' : 'Save'}
-                            </Button>
-                            {isDirty && <Button
-                                color='warning'
-                                type='button'
-                                onClick={() => reset()}
-                                sx={{
-                                    justifyContent: 'flex-start',
-                                    border: `2px solid ${c.neutral[300]}`,
-                                    paddingLeft: 1,
-                                    paddingRight: { xs: 2, sm: 2.5 },
-                                    paddingY: .2,
-                                    bgcolor: c.neutral[50],
-                                    color: c.neutral[400],
-                                    '&:hover': {
-                                        border: `2px solid ${c.warning[400]}`,
-                                        color: c.neutral[50],
-                                        bgcolor: c.warning[500],
-                                    }
+                            {isDirty &&
+                                <FormRevertButton color='warning' type='button' onClick={() => reset()}>
+                                    {isWide ? 'Revert' : 'Revert'}
+                                </FormRevertButton>}
 
-                                }}
-                                startDecorator={<UndoIcon sx={{
-                                    p: .2,
-                                    border: `2px solid ${c.warning[100]}`,
-                                    bgcolor: c.warning[500],
-                                    color: c.neutral[50],
-                                    fontSize: f.mediumTitle,
-                                    fontWeight: 700,
-                                    borderRadius: 'lg',
-                                }} />}
-                            >{isWide ? 'Revert' : 'Revert'}
-                            </Button>}
                         </Stack>
 
                         <Stack direction='row' justifyContent='space-between' mx='auto' px={{ md: 1 }}>
-                            <Button
-                                variant='outlined'
-                                color='neutral'
-                                type='button'
-                                sx={{
-                                    borderWidth: '2px',
-                                    borderColor: c.neutral[300],
-                                    color: c.neutral[400],
-                                    paddingLeft: 1,
-                                    paddingY: .3,
-                                }}
-                                startDecorator={<ChevronLeftIcon sx={{
-                                    color: c.neutral[100],
-                                    fontSize: f.mediumTitle,
-                                    bgcolor: c.neutral[400],
-                                    borderRadius: 'lg',
-                                }} />}
-                            >
+
+                            <PreviousButton variant='outlined' color='neutral' type='button'
+                                disabled={currentSectionIndex === 0} onClick={handlePrevious}>
                                 Previous
-                            </Button>
+                            </PreviousButton>
 
-                            <Button
-                                variant='outlined'
-                                color='neutral'
-                                type='button'
-                                sx={{
-                                    borderWidth: '2px',
-                                    borderColor: c.neutral[300],
-                                    color: c.neutral[400],
-                                    paddingRight: 1,
-                                    paddingY: .3,
-                                }}
-                                endDecorator={<ChevronRightIcon sx={{
-                                    color: c.neutral[100],
-                                    fontSize: f.mediumTitle,
-                                    bgcolor: c.neutral[400],
-                                    borderColor: c.neutral[200],
-                                    borderRadius: 'lg',
-                                }} />}
-                            >
+                            <NextButton variant='outlined' color='neutral' type='button'
+                                disabled={currentSectionIndex === sections.length - 1} onClick={handleNext}>
                                 Next
-                            </Button>
-                        </Stack>
+                            </NextButton>
 
+                        </Stack>
                     </Stack>
                 </form>
                 <Footer />

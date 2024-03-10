@@ -37,6 +37,7 @@ const FormInputAutocomplete = ({ name, control, label, options, readOnly = false
                             fullWidth
                             clearOnBlur={true}
                             clearOnEscape={true}
+                            sx={{ cursor: 'pointer' }}
                             size="sm"
                             variant="plain"
                         />

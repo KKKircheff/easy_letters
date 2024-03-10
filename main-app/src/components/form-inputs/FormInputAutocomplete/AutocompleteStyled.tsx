@@ -25,7 +25,7 @@ const AutocompleteStyled = ({ options, isOutlined = false, readOnly = false, ...
                 input: {
                     sx: {
                         fontFamily: 'Montserrat',
-                        fontSize: f.md,
+                        fontSize: f.sm,
                         fontWeight: '500',
                         color: c.neutral[500],
                         paddingX: .5,
@@ -35,20 +35,21 @@ const AutocompleteStyled = ({ options, isOutlined = false, readOnly = false, ...
                 root: {
                     sx: {
                         '--Input-focusedThickness': '0rem',
-                        backgroundColor: 'white',
+                        backgroundColor: 'neutral.50',
                         fontFamily: 'sans-serif',
-                        fontSize: f.md,
+                        fontSize: f.sm,
                         fontWeight: 500,
                         color: c.neutral[600],
                         borderRadius: 'lg',
                         boxShadow: 'none',
-                        minHeight: '26px',
-                        outline: isOutlined
-                            ? `1.5px solid ${c.primary[500]}`
-                            : `0px solid transparent`,
+                        minHeight: '30px',
+                        borderBottom: isOutlined ?
+                            `1px solid ${c.primary[500]}`
+                            : `0px solid ${c.neutral[200]}`,
+                        outline: `1px solid ${c.neutral[200]}`,
                         '&:focus-within': {
                             boxShadow: '0 0 2px rgba(0, 0, 0, 0.3)',
-                            outline: !readOnly && `1.5px solid ${c.primary[500]}`,
+                            borderBottom: !readOnly && `1.5px solid ${c.primary[500]}`,
                             outlineOffset: '0px',
                         },
                         '&::before': {

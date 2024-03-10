@@ -13,23 +13,12 @@ import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import SidebarMenuButton from '../../components/buttons/sidebar-buttons/SidebarMenuButton.component';
 import { useUserContext } from '../../context/UserContext';
-import { Control } from 'react-hook-form';
-import { UserProfile } from '../../data/userProfileTypes';
-import { scrollToTop } from '../../layout/ScrollToTop.component';
 
-
-type Section = {
-    component: React.ComponentType<{ control: Control<UserProfile> }>; // Corrected component type
-    menuKey: string;
-}
 
 type Props = {
-    wideWidth: number,
-    compactWidth: number,
     isSidebarWide: boolean
     setIsSidebarWide: React.Dispatch<React.SetStateAction<boolean>>
-    setCurrentSectionIndex: React.Dispatch<React.SetStateAction<number>>
-    sections: Section[]
+    setSectionToRender: React.Dispatch<React.SetStateAction<SectionsToRender>>
 }
 
 type SidebarItems = {
@@ -38,7 +27,7 @@ type SidebarItems = {
     sectionName: SectionsToRender
 }[]
 
-const ProfileSidebar = ({ wideWidth, compactWidth, isSidebarWide, setIsSidebarWide, setCurrentSectionIndex, sections }: Props) => {
+const ProfileSidebar = ({ isSidebarWide, setIsSidebarWide, setSectionToRender }: Props) => {
     const c = useTheme().palette;
 
     const iconColor = c.warning[400]
@@ -50,14 +39,14 @@ const ProfileSidebar = ({ wideWidth, compactWidth, isSidebarWide, setIsSidebarWi
             sectionName: 'general'
         },
         {
-            icon: <RecordVoiceOverOutlinedIcon sx={{ color: iconColor }} />,
-            itemName: 'Languages',
-            sectionName: 'languages'
-        },
-        {
             icon: <SchoolOutlinedIcon sx={{ color: iconColor }} />,
             itemName: 'Education',
             sectionName: 'education'
+        },
+        {
+            icon: <RecordVoiceOverOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'Languages',
+            sectionName: 'languages'
         },
         {
             icon: <WorkHistoryOutlinedIcon sx={{ color: iconColor }} />,
@@ -86,35 +75,18 @@ const ProfileSidebar = ({ wideWidth, compactWidth, isSidebarWide, setIsSidebarWi
         },
     ]
 
-
     const { logOut } = useUserContext()
-
-    const renderSection = (sectionName) => {
-        const index = sections.findIndex(section => section.menuKey === sectionName);
-        scrollToTop();
-        setCurrentSectionIndex(index)
-    }
 
     return (
 
         <Stack
-            role='sidebar'
-            position={{ xs: 'fixed', sm: 'sticky' }}
-            top={0} left={0} pl={1.1}
-            pt={{ xs: 10, md: 13, lg: 16 }}
             direction='column'
-            alignItems='flex-start'
+            bgcolor='trasparent'
             height={{ xs: '100vh', sm: '95vh' }}
-            width={isSidebarWide ? `${wideWidth}px` : `${compactWidth}px`}
-            minWidth={isSidebarWide ? `${wideWidth}px` : `${compactWidth}px`}
             maxHeight={{ xs: '100vh', sm: '95vh' }}
-            bgcolor={c.neutral[700]}
-            zIndex={1}
             overflow='hidden'
-            sx={{
-                transition: 'all .2s ease-in'
-            }}>
-
+            pt={{ xs: 10, md: 13, lg: 16 }}
+        >
             <Stack
                 direction='column'
                 spacing={1}
@@ -141,7 +113,7 @@ const ProfileSidebar = ({ wideWidth, compactWidth, isSidebarWide, setIsSidebarWi
                             aria-label={item.itemName}
                             isSidebarWide={isSidebarWide}
                             endDecorator={item.itemName}
-                            onClick={() => renderSection(item.sectionName)}>
+                            onClick={() => setSectionToRender(item.sectionName)}>
                             {item.icon}
                         </SidebarMenuButton>)
                 })}

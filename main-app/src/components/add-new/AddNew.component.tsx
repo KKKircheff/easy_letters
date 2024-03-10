@@ -36,7 +36,7 @@ const AddNew = ({ itemToAdd, description }: Props) => {
                     {`Add new ` + itemToAdd}
                 </Typography>
             </Stack>
-            <Typography fontSize='xs' textColor='primary.500'>{description}</Typography>
+            <Typography fontSize='sm' textColor='primary.500'>{description}</Typography>
         </Stack >
     )
 }

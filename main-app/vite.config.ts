@@ -3,7 +3,15 @@ import Sitemap from 'vite-plugin-sitemap';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig(({command, mode}) => {
-    const paths = ['home'];
+    const paths = [
+        'home',
+        'resources',
+        'pricing',
+        'ai-writer',
+        'signup',
+        'login',
+        'profile',
+    ];
     const dynamicRoutes = [
         // ...paths.map((path) => `/gallery/${path}`),
         // ...paths.map((path) => `/bg/${path}`),
@@ -15,17 +23,17 @@ export default defineConfig(({command, mode}) => {
         plugins: [
             splitVendorChunkPlugin(),
             react(),
-            // Sitemap({
-            //     // dynamicRoutes,
-            //     hostname: 'https://easy-letters.web.app',
-            //     readable: true,
-            //     robots: [
-            //         {
-            //             userAgent: '*',
-            //             allow: '/',
-            //         },
-            //     ],
-            // }),
+            Sitemap({
+                dynamicRoutes,
+                hostname: 'https://easy-letters.web.app',
+                readable: true,
+                robots: [
+                    {
+                        userAgent: '*',
+                        allow: '/',
+                    },
+                ],
+            }),
         ],
         build: {
             minify: 'terser',
@@ -33,6 +41,16 @@ export default defineConfig(({command, mode}) => {
             manifest: true,
 
             rollupOptions: {
+                // onLog(level, log, handler) {
+                //     if (
+                //         log.cause &&
+                //         log.message ===
+                //             `Can't resolve original location of error.`
+                //     ) {
+                //         return;
+                //     }
+                //     handler(level, log);
+                // },
                 output: {
                     manualChunks(id: string) {
                         // creating a chunk to @open-ish deps. Reducing the vendor chunk size
