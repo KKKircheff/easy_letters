@@ -14,6 +14,13 @@ type Props = {
 }
 const FormInputAutocomplete = ({ name, control, label, options, readOnly = false, placeholder = label, required = false }: Props) => {
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            event.currentTarget.blur();
+        }
+    };
+
     return (
         <FormControl>
             <FormLabel sx={{ mb: 1, fontWeight: 600 }}>{label}</FormLabel>
@@ -33,6 +40,7 @@ const FormInputAutocomplete = ({ name, control, label, options, readOnly = false
                             onChange={(event, newValue) => {
                                 onChange(newValue);
                             }}
+                            onKeyDown={handleKeyDown}
                             value={value ? value : ''}
                             fullWidth
                             clearOnBlur={true}

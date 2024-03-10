@@ -5,7 +5,7 @@ import UndoIcon from '@mui/icons-material/Undo';
 
 
 type Props = {
-    children: ReactNode
+    children?: ReactNode
 } & ButtonProps
 const FormRevertButton = ({ children, ...otherProps }: Props) => {
     const c = useTheme().palette;
@@ -13,10 +13,12 @@ const FormRevertButton = ({ children, ...otherProps }: Props) => {
     return (
         <Button
             sx={{
+                marginX: 0,
                 justifyContent: 'flex-start',
                 border: `2px solid ${c.neutral[300]}`,
                 paddingLeft: 1,
-                paddingRight: { xs: 2, sm: 2.5 },
+                // paddingRight: { xs: 2, sm: 2.5 },
+                paddingRight: children ? 2 : 0,
                 paddingY: .2,
                 bgcolor: c.neutral[50],
                 color: c.neutral[400],
@@ -29,6 +31,7 @@ const FormRevertButton = ({ children, ...otherProps }: Props) => {
             }}
             startDecorator={<UndoIcon sx={{
                 p: .2,
+                marginRight: children ? 0 : -.5,
                 border: `2px solid ${c.warning[100]}`,
                 bgcolor: c.warning[500],
                 color: c.neutral[50],
@@ -37,7 +40,7 @@ const FormRevertButton = ({ children, ...otherProps }: Props) => {
                 borderRadius: 'lg',
             }} />}
             {...otherProps}
-        >{children}</Button>
+        >{children ?? ''}</Button>
     )
 }
 

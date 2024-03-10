@@ -24,7 +24,7 @@ const CareerHistory = ({ control }: Props) => {
         <Box>
             <Typography level='h1' p={2}> Carrer history</Typography>
             <Typography level='h2' p={2}> Fill in your job positions.</Typography>
-            <Stack maxWidth='1200px' spacing={2.5} textAlign='left' alignItems={'center'}>
+            <Stack maxWidth='1200px' spacing={2.5} textAlign='left' alignItems={'center'} px={2}>
                 {fields.length ?
                     fields.map((field, index) => {
                         return (

@@ -24,7 +24,7 @@ const Education = ({ control }: Props) => {
         <Box>
             <Typography level='h1' p={2}> Studies</Typography>
             <Typography level='h2' p={2}> Fill in you studies history.</Typography>
-            <Stack maxWidth='1200px' spacing={2.5} textAlign='left' alignItems={'center'}>
+            <Stack maxWidth='1200px' spacing={2.5} textAlign='left' alignItems={'center'} px={2}>
                 {fields.length ?
                     fields.map((field, index) => {
                         return (

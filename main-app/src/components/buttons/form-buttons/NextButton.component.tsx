@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react'
 import { Button, useTheme, ButtonProps } from '@mui/joy'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
 type Props = {
-    children: ReactNode
+    children?: ReactNode
 } & ButtonProps
 const NextButton = ({ children, ...otherProps }: Props) => {
     const c = useTheme().palette;
@@ -15,9 +16,11 @@ const NextButton = ({ children, ...otherProps }: Props) => {
                 borderColor: c.neutral[300],
                 color: c.neutral[400],
                 paddingRight: 1,
+                paddingLeft: children ? 2 : 0,
                 paddingY: .3,
             }}
-            endDecorator={<ChevronRightIcon sx={{
+            endDecorator={<KeyboardDoubleArrowRightIcon sx={{
+                marginLeft: children ? 0 : -.5,
                 color: c.neutral[100],
                 fontSize: f.mediumTitle,
                 bgcolor: c.neutral[400],
@@ -25,7 +28,7 @@ const NextButton = ({ children, ...otherProps }: Props) => {
                 borderRadius: 'lg',
             }} />}
             {...otherProps}
-        >{children}</Button>
+        >{children ?? ''}</Button>
     )
 }
 

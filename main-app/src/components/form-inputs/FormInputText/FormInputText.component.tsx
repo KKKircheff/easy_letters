@@ -21,6 +21,14 @@ const FormInputText = ({
     ...otherProps
 }: Props) => {
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            event.currentTarget.blur();
+        }
+    };
+
+
     return (
         <FormControl>
             <FormLabel sx={{ mb: 1, fontWeight: 600, }}>{label}</FormLabel>
@@ -44,6 +52,7 @@ const FormInputText = ({
                             onBlur={(event) => {
                                 onChange(event.target.value)
                             }}
+                            onKeyDown={handleKeyDown}
                             value={value ? value as string : ''}
                             disabled={readOnly}
                             isOutlined={!value}

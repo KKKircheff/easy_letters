@@ -30,13 +30,14 @@ import NextButton from "../../components/buttons/form-buttons/NextButton.compone
 import Invoices from "./Invoices.section";
 import ApplicationDocuments from "./ApplicationDocuments.section";
 import Summary from "./Summary.section";
+import { scrollToTop } from "../../layout/ScrollToTop.component";
 export type SectionsToRender = keyof UserProfile
 
 const Profile = () => {
     const c = useTheme().palette
     const f = useTheme().fontSize
 
-    const { xs, md, lg } = styleVariables.layoutPadding;
+    const { xs, sm, md, lg } = styleVariables.layoutPadding;
 
     const { userProfile, updateUserProfile } = useUserContext()
 
@@ -72,8 +73,10 @@ const Profile = () => {
     const handlePrevious = () => {
         setCurrentSectionIndex(prevIndex => Math.max(prevIndex - 1, 0));
     };
+    scrollToTop()
 
     const handleNext = () => {
+        scrollToTop()
         setCurrentSectionIndex(prevIndex => Math.min(prevIndex + 1, sections.length - 1));
     };
 
@@ -118,35 +121,36 @@ const Profile = () => {
                         <CurrentSection control={control} />
                     </Box>
 
-                    <Stack direction='column' spacing={2} py={5} pb={10} px={{ xs: '3vw', sm: md, md: xs, lg: md }}>
-                        <Stack
-                            direction='row-reverse' spacing={2} mx='auto' px={{ md: 1 }}
-                            justifyContent={{ xs: 'space-between', sm: 'right' }}>
+                    <Stack
+                        direction='row' spacing={1} mx='auto' py={5}
+                        px={{ xs: '3vw', sm: xs, md: sm, lg: md, xl: lg }}
+                        justifyContent='space-between'>
 
-                            <FormSaveButton color='primary' variant='solid' type='submit'>
-                                {isWide ? 'Save' : 'Save'}
-                            </FormSaveButton>
+                        {currentSectionIndex !== 0 ?
+                            <PreviousButton variant='outlined' color='neutral' type='button' onClick={handlePrevious}>
+                                {totalWidth > 700 ? 'Previous' : ''}
+                            </PreviousButton>
+                            : <div></div>
+                        }
 
+                        <Stack direction={'row'} spacing={1}>
                             {isDirty &&
                                 <FormRevertButton color='warning' type='button' onClick={() => reset()}>
-                                    {isWide ? 'Revert' : 'Revert'}
+                                    {totalWidth > 700 ? 'Revert' : ''}
                                 </FormRevertButton>}
 
+                            {isDirty &&
+                                <FormSaveButton color='primary' variant='solid' type='submit'>
+                                    {isWide ? 'Save' : 'Save'}
+                                </FormSaveButton>}
                         </Stack>
 
-                        <Stack direction='row' justifyContent='space-between' mx='auto' px={{ md: 1 }}>
-
-                            <PreviousButton variant='outlined' color='neutral' type='button'
-                                disabled={currentSectionIndex === 0} onClick={handlePrevious}>
-                                Previous
-                            </PreviousButton>
-
-                            <NextButton variant='outlined' color='neutral' type='button'
-                                disabled={currentSectionIndex === sections.length - 1} onClick={handleNext}>
-                                Next
+                        {(currentSectionIndex !== sections.length - 1) ?
+                            <NextButton variant='outlined' color='neutral' type='button' onClick={handleNext}>
+                                {totalWidth > 700 ? 'Next' : ''}
                             </NextButton>
-
-                        </Stack>
+                            : <div></div>
+                        }
                     </Stack>
                 </form>
                 <Footer />
