@@ -41,16 +41,6 @@ export default defineConfig(({command, mode}) => {
             manifest: true,
 
             rollupOptions: {
-                // onLog(level, log, handler) {
-                //     if (
-                //         log.cause &&
-                //         log.message ===
-                //             `Can't resolve original location of error.`
-                //     ) {
-                //         return;
-                //     }
-                //     handler(level, log);
-                // },
                 output: {
                     manualChunks(id: string) {
                         // creating a chunk to @open-ish deps. Reducing the vendor chunk size
