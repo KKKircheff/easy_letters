@@ -21,16 +21,6 @@ export type WebLink = {
     link: string;
     visible: boolean;
 };
-export type Education = {
-    id?: string;
-    schoolName: string;
-    schoolLocation: string;
-    degree: string;
-    fieldOfStudy: string;
-    startDate: Date | null;
-    graduationDate: Date | null;
-    visible: boolean;
-};
 export type Language = {
     id?: string;
     language: string;
@@ -43,6 +33,17 @@ export type Language = {
         | 'native';
     visible: boolean;
 };
+export type Education = {
+    id?: string;
+    schoolName: string;
+    schoolLocation: string;
+    degree: string;
+    fieldOfStudy: string;
+    startDate: Date | null;
+    graduationDate: Date | null;
+    description: string;
+    visible: boolean;
+};
 export type CareerHistory = {
     id?: string;
     jobTitle: string;
@@ -50,6 +51,7 @@ export type CareerHistory = {
     location: string;
     startDate: Date | null;
     endDate: Date | 'current' | null;
+    description: string;
     visible: boolean;
 };
 export type Skill = {

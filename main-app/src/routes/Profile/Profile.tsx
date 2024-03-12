@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserContext } from "../../context/UserContext";
 
 import {
@@ -69,18 +69,16 @@ const Profile = () => {
     ];
 
     const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+    const CurrentSection = sections[currentSectionIndex].component;
 
     const handlePrevious = () => {
         setCurrentSectionIndex(prevIndex => Math.max(prevIndex - 1, 0));
     };
-    scrollToTop()
 
     const handleNext = () => {
-        scrollToTop()
         setCurrentSectionIndex(prevIndex => Math.min(prevIndex + 1, sections.length - 1));
     };
 
-    const CurrentSection = sections[currentSectionIndex].component;
 
     const handleUpdate = async (data: UserProfile) => {
         try {
@@ -91,6 +89,10 @@ const Profile = () => {
             alert(error)
         }
     };
+
+    useEffect(() => {
+        scrollToTop()
+    }, [currentSectionIndex]);
 
     return (
         <Stack
@@ -126,7 +128,7 @@ const Profile = () => {
                         px={{ xs: '3vw', sm: xs, md: sm, lg: md, xl: lg }}
                         justifyContent='space-between'>
 
-                        {currentSectionIndex !== 0 ?
+                        {currentSectionIndex > 0 ?
                             <PreviousButton variant='outlined' color='neutral' type='button' onClick={handlePrevious}>
                                 {totalWidth > 700 ? 'Previous' : ''}
                             </PreviousButton>
@@ -145,7 +147,7 @@ const Profile = () => {
                                 </FormSaveButton>}
                         </Stack>
 
-                        {(currentSectionIndex !== sections.length - 1) ?
+                        {(currentSectionIndex < sections.length - 1) ?
                             <NextButton variant='outlined' color='neutral' type='button' onClick={handleNext}>
                                 {totalWidth > 700 ? 'Next' : ''}
                             </NextButton>

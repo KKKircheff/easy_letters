@@ -8,6 +8,7 @@ import FormInputText from "../../components/form-inputs/FormInputText/FormInputT
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 import { v4 as uuidv4 } from 'uuid';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import FormInputTextarea from "../../components/form-inputs/FormInputTextarea.tsx/FormInputTextarea"
 
 type Props = {
     control: Control<UserProfile>
@@ -17,7 +18,7 @@ const CareerHistory = ({ control }: Props) => {
     const name = 'careerHistory'
     const { fields, append, remove } = useFieldArray({
         control,
-        name, // Replace with your field array name
+        name,
     });
 
     return (
@@ -77,6 +78,13 @@ const CareerHistory = ({ control }: Props) => {
                                             name={`${name}.${index}.endDate`}
                                         />
                                     </Grid>
+                                    <Grid xs={12}>
+                                        <FormInputTextarea
+                                            control={control}
+                                            label='Additional description'
+                                            name={`${name}.${index}.description`}
+                                        />
+                                    </Grid>
                                     {/* <FormInputAutocomplete
                                         options={languageLevels}
                                         control={control}
@@ -101,6 +109,7 @@ const CareerHistory = ({ control }: Props) => {
                         location: '',
                         startDate: null,
                         endDate: null,
+                        description: '',
                         visible: true
                     })}>
                     <AddNew

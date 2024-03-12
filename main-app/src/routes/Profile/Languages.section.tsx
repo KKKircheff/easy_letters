@@ -17,7 +17,7 @@ type Props = {
 const Languages = ({ control }: Props) => {
     const { fields, append, remove } = useFieldArray({
         control,
-        name: 'languages', // Replace with your field array name
+        name: 'languages',
     });
 
     return (

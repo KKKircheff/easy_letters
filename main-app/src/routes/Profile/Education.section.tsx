@@ -8,6 +8,8 @@ import FormInputText from "../../components/form-inputs/FormInputText/FormInputT
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 import { v4 as uuidv4 } from 'uuid';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import TextareaStyled from "../../components/form-inputs/FormInputTextarea.tsx/TextareaStyled"
+import FormInputTextarea from "../../components/form-inputs/FormInputTextarea.tsx/FormInputTextarea"
 
 type Props = {
     control: Control<UserProfile>
@@ -84,6 +86,13 @@ const Education = ({ control }: Props) => {
                                             required={true}
                                         />
                                     </Grid>
+                                    <Grid xs={12}>
+                                        <FormInputTextarea
+                                            control={control}
+                                            label='Additional description'
+                                            name={`${name}.${index}.description`}
+                                        />
+                                    </Grid>
                                     {/* <FormInputAutocomplete
                                         options={languageLevels}
                                         control={control}
@@ -108,6 +117,7 @@ const Education = ({ control }: Props) => {
                         fieldOfStudy: '',
                         startDate: null,
                         graduationDate: null,
+                        description: '',
                         visible: true
                     })}>
                     <AddNew
