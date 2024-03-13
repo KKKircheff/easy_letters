@@ -83,12 +83,15 @@ const Profile = () => {
     const handleUpdate = async (data: UserProfile) => {
         try {
             await updateUserProfile(data);
-            console.log('Data:', data)
             alert('Updated!')
         } catch (error) {
             alert(error)
         }
     };
+
+    useEffect(() => {
+        reset(userProfile);
+    }, [userProfile]);
 
     useEffect(() => {
         scrollToTop()

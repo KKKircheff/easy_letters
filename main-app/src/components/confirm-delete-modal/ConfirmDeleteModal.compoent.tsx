@@ -23,7 +23,7 @@ const ConfirmDeleteModal = ({ isOpen, setIsOpen, onClick }: Props) => {
     }
     return (
         <React.Fragment>
-            <Modal open={isOpen}>
+            <Modal open={isOpen} onClose={() => setIsOpen(false)}>
                 <ModalDialog variant="outlined" role="alertdialog">
                     <DialogTitle>
                         <WarningRoundedIcon />
