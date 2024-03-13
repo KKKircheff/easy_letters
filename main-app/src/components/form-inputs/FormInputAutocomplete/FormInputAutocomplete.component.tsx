@@ -42,10 +42,9 @@ const FormInputAutocomplete = ({ name, control, label, options, readOnly = false
                             }}
                             onKeyDown={handleKeyDown}
                             value={value ? value : ''}
-                            fullWidth
                             clearOnBlur={true}
                             clearOnEscape={true}
-                            sx={{ cursor: 'pointer' }}
+                            sx={{ cursor: 'pointer', width: '100%' }}
                             size="sm"
                             variant="plain"
                         />

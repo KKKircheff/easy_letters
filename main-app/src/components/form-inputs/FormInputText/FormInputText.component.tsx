@@ -55,12 +55,11 @@ const FormInputText = ({
                             onKeyDown={handleKeyDown}
                             value={value ? value as string : ''}
                             disabled={readOnly}
-                            isOutlined={!value}
-                            fullWidth
+                            isOutlined={!value ?? false}
                             size="md"
                             variant="plain"
                             placeholder={placeholder}
-                            sx={{ cursor: 'pointer' }}
+                            sx={{ cursor: 'pointer', width: '100%' }}
                             {...otherProps}
                         />
                         {errors && <FormHelperText > {error && error.message}</FormHelperText>}

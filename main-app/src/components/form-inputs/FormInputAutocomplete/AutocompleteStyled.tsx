@@ -1,6 +1,7 @@
-import { Autocomplete, useTheme } from '@mui/joy';
+import { Autocomplete, AutocompleteProps, useTheme } from '@mui/joy';
 
-const AutocompleteStyled = ({ options, isOutlined = false, readOnly = false, ...otherProps }) => {
+
+const AutocompleteStyled = ({ options, isOutlined = undefined, readOnly = undefined, ...otherProps }) => {
     const c = useTheme().palette;
     const f = useTheme().fontSize;
 

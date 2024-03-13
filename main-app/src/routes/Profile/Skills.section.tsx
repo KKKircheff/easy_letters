@@ -7,6 +7,7 @@ import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import { v4 as uuidv4 } from 'uuid';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
 
 
 type Props = {
@@ -37,7 +38,7 @@ const Skills = ({ control }: Props) => {
                         return (
                             <Grid key={field.id} xs={12} md={6}>
                                 <InputContainer>
-                                    <BackspaceIcon sx={{ color: 'danger.500', alignSelf: 'flex-end'!, fontSize: 'sm', cursor: 'pointer' }} onClick={() => remove(index)} />
+                                    <RemoveButton onClick={() => remove(index)} />
                                     <FormInputText
                                         control={control}
                                         name={`skills.${index}.skill`}

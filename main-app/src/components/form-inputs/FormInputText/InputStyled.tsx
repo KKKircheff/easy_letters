@@ -22,7 +22,7 @@ const InputStyled = styled(Input)<FormInputProps>(({ theme, isOutlined, readOnly
         ? `1px solid ${theme.vars.palette.neutral[200]}`
         : `1px solid ${theme.vars.palette.neutral[200]}`,
     '&:focus-within': {
-        borderBottom: !readOnly && `1.5px solid ${theme.vars.palette.primary[500]}`,
+        borderBottom: !readOnly ? `1.5px solid ${theme.vars.palette.primary[500]}` : '',
         outlineOffset: '0px',
     },
     '&::before': {

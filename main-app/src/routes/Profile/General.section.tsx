@@ -10,6 +10,7 @@ import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocom
 import { useUserContext } from "../../context/UserContext"
 import { v4 as uuidv4 } from 'uuid';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
 
 type Props = {
     control: Control<UserProfile>
@@ -115,7 +116,7 @@ const General = ({ control }: Props) => {
                         return (
                             <Grid key={field.id} xs={12} md={6}>
                                 <InputContainer>
-                                    <BackspaceIcon sx={{ color: 'danger.500', alignSelf: 'flex-end'!, fontSize: 'sm', cursor: 'pointer' }} onClick={() => remove(index)} />
+                                    <RemoveButton onClick={() => remove(index)} />
                                     <FormInputText
                                         control={control}
                                         name={`webLinks.${index}.media`}

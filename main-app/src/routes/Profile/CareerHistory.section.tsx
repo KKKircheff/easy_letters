@@ -9,6 +9,7 @@ import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocom
 import { v4 as uuidv4 } from 'uuid';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import FormInputTextarea from "../../components/form-inputs/FormInputTextarea.tsx/FormInputTextarea"
+import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
 
 type Props = {
     control: Control<UserProfile>
@@ -29,9 +30,9 @@ const CareerHistory = ({ control }: Props) => {
                 {fields.length ?
                     fields.map((field, index) => {
                         return (
-                            <InputContainer>
-                                <BackspaceIcon sx={{ color: 'danger.500', alignSelf: 'flex-end'!, fontSize: 'sm', cursor: 'pointer' }} onClick={() => remove(index)} />
-                                <Grid container columns={12} key={field.id} spacing={2}>
+                            <InputContainer key={field.id}>
+                                <RemoveButton onClick={() => remove(index)} />
+                                <Grid container columns={12} spacing={2}>
                                     <Grid xs={12} md={6}>
                                         <FormInputText
                                             control={control}
