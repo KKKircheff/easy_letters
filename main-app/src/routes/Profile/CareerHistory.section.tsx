@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, Typography } from "@mui/joy"
+import { Box, Grid, Stack } from "@mui/joy"
 import { UserProfile } from "../../data/userProfileTypes"
 
 import { Control, useFieldArray } from "react-hook-form"
@@ -7,9 +7,9 @@ import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 import { v4 as uuidv4 } from 'uuid';
-import BackspaceIcon from '@mui/icons-material/Backspace';
 import FormInputTextarea from "../../components/form-inputs/FormInputTextarea.tsx/FormInputTextarea"
 import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
+import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
 
 type Props = {
     control: Control<UserProfile>
@@ -24,8 +24,7 @@ const CareerHistory = ({ control }: Props) => {
 
     return (
         <Box>
-            <Typography level='h1' p={2}> Carrer history</Typography>
-            <Typography level='h2' p={2}> Fill in your job positions.</Typography>
+            <ProfileSectionTitle title='Career history' subtitle='Please fill in your previous employed, self-employed positions or volunteer projects. Add additional info for the position in the description field if you think it is needed.' />
             <Stack maxWidth='1200px' spacing={2.5} textAlign='left' alignItems={'center'} px={2}>
                 {fields.length ?
                     fields.map((field, index) => {

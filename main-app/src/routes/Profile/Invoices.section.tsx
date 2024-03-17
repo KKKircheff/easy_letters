@@ -7,6 +7,7 @@ import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import { v4 as uuidv4 } from 'uuid';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
 
 
 type Props = {
@@ -21,8 +22,7 @@ const Invoices = ({ control }: Props) => {
 
     return (
         <Box>
-            <Typography level='h1' p={2}>Invoices section</Typography>
-            <Typography level='h2' p={2}>Under construction...</Typography>
+            <ProfileSectionTitle title='Invoices' subtitle='Full history of your payments.' />
         </Box>
     )
 }

@@ -12,18 +12,7 @@ const RemoveButton = ({ onClick }: Props) => {
 
     return (
         <>
-            <Button
-                type='button'
-                onClick={() => setIsOpen(true)}
-                size='sm' variant='plain' color='danger'
-                sx={{
-                    width: 20, alignSelf: 'flex-end'!,
-                    '&:hover': {
-                        bgcolor: 'transparent'
-                    }
-                }}>
-                < BackspaceIcon sx={{ color: 'danger.500', fontSize: 'md', cursor: 'pointer' }} />
-            </Button >
+            < BackspaceIcon sx={{ color: 'danger.500', fontSize: 'md', cursor: 'pointer', alignSelf: 'flex-end'!, }} onClick={() => setIsOpen(true)} />
             <ConfirmDeleteModal isOpen={isOpen} setIsOpen={setIsOpen} onClick={onClick} />
         </>
     )

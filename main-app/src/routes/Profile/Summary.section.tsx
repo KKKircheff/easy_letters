@@ -7,6 +7,7 @@ import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import { v4 as uuidv4 } from 'uuid';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
 
 
 type Props = {
@@ -18,8 +19,7 @@ const Summary = ({ control }: Props) => {
 
     return (
         <Box>
-            <Typography level='h1' p={2}> Summary section</Typography>
-            <Typography level='h2' p={2}>Under construction...</Typography>
+            <ProfileSectionTitle title='Summary' subtitle='Here you can write the description for your resume or CV.' />
         </Box>
     )
 }

@@ -5,7 +5,7 @@ interface FormInputProps extends TextareaProps {
     isOutlined?: boolean;
     readOnly?: boolean
 }
-const TextareaStyled = styled(Textarea)<FormInputProps>(({ theme, isOutlined, readOnly = false }) => ({
+const TextareaStyled = styled(Textarea)<FormInputProps>(({ theme, isOutlined = false, readOnly = false }) => ({
     backgroundColor: 'neutral.50',
     fontSize: theme.fontSize.sm,
     fontWeight: 500,

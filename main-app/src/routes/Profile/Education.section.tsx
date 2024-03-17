@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, Typography } from "@mui/joy"
+import { Box, Grid, Stack } from "@mui/joy"
 import { UserProfile } from "../../data/userProfileTypes"
 
 import { Control, useFieldArray } from "react-hook-form"
@@ -11,6 +11,7 @@ import BackspaceIcon from '@mui/icons-material/Backspace';
 import TextareaStyled from "../../components/form-inputs/FormInputTextarea.tsx/TextareaStyled"
 import FormInputTextarea from "../../components/form-inputs/FormInputTextarea.tsx/FormInputTextarea"
 import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
+import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
 
 type Props = {
     control: Control<UserProfile>
@@ -20,13 +21,12 @@ const Education = ({ control }: Props) => {
     const name = 'education'
     const { fields, append, remove } = useFieldArray({
         control,
-        name, // Replace with your field array name
+        name,
     });
 
     return (
         <Box>
-            <Typography level='h1' p={2}> Studies</Typography>
-            <Typography level='h2' p={2}> Fill in you studies history.</Typography>
+            <ProfileSectionTitle title='Education' subtitle='Fill in your education history. Add seprate record for each education school. ' />
             <Stack maxWidth='1200px' spacing={2.5} textAlign='left' alignItems={'center'} px={2}>
                 {fields.length ?
                     fields.map((field, index) => {

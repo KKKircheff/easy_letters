@@ -8,6 +8,7 @@ import FormInputText from "../../components/form-inputs/FormInputText/FormInputT
 import { v4 as uuidv4 } from 'uuid';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
+import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
 
 
 type Props = {
@@ -22,8 +23,7 @@ const Skills = ({ control }: Props) => {
 
     return (
         <Box>
-            <Typography level='h1' p={2}> Skills</Typography>
-            <Typography level='h2' p={2}> Please add you skills</Typography>
+            <ProfileSectionTitle title='Skills' subtitle='Please fill in your skills. For example describe with 1-3 words your relevant professional skills - technical skills, soft skills, creativeness, anlalitical, physical, industry specific skills and so on. E.g. -Front-end, React JS, SCSS, Inspired coder, Fast learner, Agile, Team Player, Creative, Extrovert, Fast learner, etc.' />
             <Grid
                 container
                 columns={12}

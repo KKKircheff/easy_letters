@@ -1,7 +1,6 @@
 import { Autocomplete, AutocompleteProps, useTheme } from '@mui/joy';
 
-
-const AutocompleteStyled = ({ options, isOutlined = undefined, readOnly = undefined, ...otherProps }) => {
+const AutocompleteStyled = ({ options, isOutlined = false, readOnly = false, ...otherProps }) => {
     const c = useTheme().palette;
     const f = useTheme().fontSize;
 
@@ -50,7 +49,7 @@ const AutocompleteStyled = ({ options, isOutlined = undefined, readOnly = undefi
                         outline: `1px solid ${c.neutral[200]}`,
                         '&:focus-within': {
                             boxShadow: '0 0 2px rgba(0, 0, 0, 0.3)',
-                            borderBottom: !readOnly && `1.5px solid ${c.primary[500]}`,
+                            borderBottom: !readOnly ? `1.5px solid ${c.primary[500]}` : '',
                             outlineOffset: '0px',
                         },
                         '&::before': {

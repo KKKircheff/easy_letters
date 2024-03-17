@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography, useTheme } from "@mui/joy"
+import { Box, Grid } from "@mui/joy"
 import { UserProfile } from "../../data/userProfileTypes"
 import { countriesList } from "../../data/countriesList"
 
@@ -9,8 +9,8 @@ import FormInputText from "../../components/form-inputs/FormInputText/FormInputT
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 import { useUserContext } from "../../context/UserContext"
 import { v4 as uuidv4 } from 'uuid';
-import BackspaceIcon from '@mui/icons-material/Backspace';
 import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
+import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
 
 type Props = {
     control: Control<UserProfile>
@@ -29,8 +29,7 @@ const General = ({ control }: Props) => {
 
     return (
         <Box>
-            <Typography level='h1' p={2}> General contact information and web links</Typography>
-            <Typography level='h2' p={2}> Please fill in all necessary fields</Typography>
+            <ProfileSectionTitle title='General information' subtitle='Please fill in your general profile data and URLs to LinkedIn profile, personal website or other relevant professional web resources you would like to present in your resume' />
             <Grid
                 container
                 columns={12}

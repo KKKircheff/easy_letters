@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/joy"
+import { Box, Grid } from "@mui/joy"
 import { UserProfile } from "../../data/userProfileTypes"
 
 import { Control, useFieldArray } from "react-hook-form"
@@ -8,8 +8,8 @@ import FormInputText from "../../components/form-inputs/FormInputText/FormInputT
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 import { languageLevels } from "../../data/languageLevels"
 import { v4 as uuidv4 } from 'uuid';
-import BackspaceIcon from '@mui/icons-material/Backspace';
 import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
+import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
 
 type Props = {
     control: Control<UserProfile>
@@ -23,8 +23,7 @@ const Languages = ({ control }: Props) => {
 
     return (
         <Box>
-            <Typography level='h1' p={2}> Languages</Typography>
-            <Typography level='h2' p={2}> Please fill the languages you can use and leve</Typography>
+            <ProfileSectionTitle title='Languages' subtitle='Add all languages you are skilled in and set the proficiency level' />
             <Grid
                 container
                 columns={12}
