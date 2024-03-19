@@ -8,17 +8,18 @@ import FormInputText from "../../components/form-inputs/FormInputText/FormInputT
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 import { languageLevels } from "../../data/languageLevels"
 import { v4 as uuidv4 } from 'uuid';
-import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
 import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
+import FieldButtonGroup from "../../components/buttons/field-button-group/FieldButtonGroup"
 
 type Props = {
     control: Control<UserProfile>
 }
 
 const Languages = ({ control }: Props) => {
+    const name = 'languages';
     const { fields, append, remove } = useFieldArray({
         control,
-        name: 'languages',
+        name
     });
 
     return (
@@ -38,7 +39,12 @@ const Languages = ({ control }: Props) => {
                         return (
                             <Grid key={field.id} xs={12} md={6}>
                                 <InputContainer>
-                                    <RemoveButton onClick={() => remove(index)} />
+                                    <FieldButtonGroup
+                                        control={control}
+                                        name={`${name}.${index}.visible`}
+                                        index={index}
+                                        remove={remove}
+                                    />
                                     <FormInputText
                                         control={control}
                                         name={`languages.${index}.language`}

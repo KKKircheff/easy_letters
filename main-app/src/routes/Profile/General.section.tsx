@@ -1,5 +1,5 @@
 import { Box, Grid } from "@mui/joy"
-import { UserProfile } from "../../data/userProfileTypes"
+import { ArraySectionsKeys, ArraySectionsValues, UserProfile } from "../../data/userProfileTypes"
 import { countriesList } from "../../data/countriesList"
 
 import { Control, useFieldArray, } from "react-hook-form"
@@ -9,8 +9,8 @@ import FormInputText from "../../components/form-inputs/FormInputText/FormInputT
 import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 import { useUserContext } from "../../context/UserContext"
 import { v4 as uuidv4 } from 'uuid';
-import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
 import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
+import FieldButtonGroup from "../../components/buttons/field-button-group/FieldButtonGroup"
 
 type Props = {
     control: Control<UserProfile>
@@ -18,14 +18,12 @@ type Props = {
 
 const General = ({ control }: Props) => {
 
-    const { userProfile } = useUserContext()
+    const name = 'webLinks'
 
-    const { fields, append, remove } = useFieldArray({
+    const { fields, append, update, remove } = useFieldArray<UserProfile>({
         control,
-        name: 'webLinks', // Replace with your field array name
+        name
     });
-
-    const { webLinks } = userProfile;
 
     return (
         <Box>
@@ -115,16 +113,21 @@ const General = ({ control }: Props) => {
                         return (
                             <Grid key={field.id} xs={12} md={6}>
                                 <InputContainer>
-                                    <RemoveButton onClick={() => remove(index)} />
+                                    <FieldButtonGroup
+                                        control={control}
+                                        name={`${name}.${index}.visible`}
+                                        index={index}
+                                        remove={remove}
+                                    />
                                     <FormInputText
                                         control={control}
-                                        name={`webLinks.${index}.media`}
+                                        name={`${name}.${index}.media`}
                                         label=''
                                         required={true}
                                     />
                                     <FormInputText
                                         control={control}
-                                        name={`webLinks.${index}.link`}
+                                        name={`${name}.${index}.link`}
                                         label=''
                                         required={true}
                                     />

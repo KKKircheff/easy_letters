@@ -10,8 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import TextareaStyled from "../../components/form-inputs/FormInputTextarea.tsx/TextareaStyled"
 import FormInputTextarea from "../../components/form-inputs/FormInputTextarea.tsx/FormInputTextarea"
-import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
 import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
+import FieldButtonGroup from "../../components/buttons/field-button-group/FieldButtonGroup"
 
 type Props = {
     control: Control<UserProfile>
@@ -32,7 +32,12 @@ const Education = ({ control }: Props) => {
                     fields.map((field, index) => {
                         return (
                             <InputContainer key={field.id}>
-                                <RemoveButton onClick={() => remove(index)} />
+                                <FieldButtonGroup
+                                    control={control}
+                                    name={`${name}.${index}.visible`}
+                                    index={index}
+                                    remove={remove}
+                                />
                                 <Grid container columns={12} spacing={2}>
                                     <Grid xs={12} md={6}>
                                         <FormInputText

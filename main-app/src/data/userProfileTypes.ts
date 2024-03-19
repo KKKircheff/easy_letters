@@ -22,7 +22,7 @@ export type WebLink = {
     visible: boolean;
 };
 export type Language = {
-    id?: string;
+    id: string;
     language: string;
     level:
         | 'beginner'
@@ -34,7 +34,7 @@ export type Language = {
     visible: boolean;
 };
 export type Education = {
-    id?: string;
+    id: string;
     schoolName: string;
     schoolLocation: string;
     degree: string;
@@ -45,7 +45,7 @@ export type Education = {
     visible: boolean;
 };
 export type CareerHistory = {
-    id?: string;
+    id: string;
     jobTitle: string;
     employer: string;
     location: string;
@@ -62,7 +62,7 @@ export type Skill = {
 export type Summary = string;
 
 export type ApplicationDoc = {
-    id?: string;
+    id: string;
     resumeStorageId?: string;
     resumeName?: string;
     cvStorageId?: string;
@@ -71,7 +71,7 @@ export type ApplicationDoc = {
     coverLetterName?: string;
 };
 export type Invoice = {
-    id?: string;
+    id: string;
     invoiceNumber: string;
     invoiceDate: Date;
     invoiceAmount: number;

@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/joy"
+import { Box, Grid } from "@mui/joy"
 import { UserProfile } from "../../data/userProfileTypes"
 
 import { Control, useFieldArray } from "react-hook-form"
@@ -6,9 +6,8 @@ import AddNew from "../../components/add-new/AddNew.component"
 import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import { v4 as uuidv4 } from 'uuid';
-import BackspaceIcon from '@mui/icons-material/Backspace';
-import RemoveButton from "../../components/buttons/remove-button/RemoveButton"
 import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
+import FieldButtonGroup from "../../components/buttons/field-button-group/FieldButtonGroup"
 
 
 type Props = {
@@ -16,9 +15,10 @@ type Props = {
 }
 
 const Skills = ({ control }: Props) => {
+    const name = 'skills'
     const { fields, append, remove } = useFieldArray({
         control,
-        name: 'skills', // Replace with your field array name
+        name
     });
 
     return (
@@ -38,7 +38,12 @@ const Skills = ({ control }: Props) => {
                         return (
                             <Grid key={field.id} xs={12} md={6}>
                                 <InputContainer>
-                                    <RemoveButton onClick={() => remove(index)} />
+                                    <FieldButtonGroup
+                                        control={control}
+                                        name={`${name}.${index}.visible`}
+                                        index={index}
+                                        remove={remove}
+                                    />
                                     <FormInputText
                                         control={control}
                                         name={`skills.${index}.skill`}
