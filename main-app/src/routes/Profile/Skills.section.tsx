@@ -29,7 +29,7 @@ const Skills = ({ control }: Props) => {
                 columns={12}
                 maxWidth='1200px'
                 mx='auto'
-                spacing={2.5}
+                spacing={1.5}
                 textAlign='left'
             >
 

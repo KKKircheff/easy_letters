@@ -1,8 +1,6 @@
 import React, { ReactNode } from 'react'
 import { Button, useTheme, ButtonProps } from '@mui/joy'
 
-
-
 type Props = {
     children: ReactNode;
     isSidebarWide: boolean;
@@ -16,13 +14,13 @@ const SidebarMenuButton = ({ children, isSidebarWide, ...otherProps }: Props) =>
             sx={{
                 whiteSpace: 'nowrap',
                 width: isSidebarWide ? 'auto' : '100%',
-                paddingLeft: 1.8,
-                paddingRight: isSidebarWide ? 2 : .7,
+                paddingLeft: 1.2,
+                paddingRight: isSidebarWide ? 2 : .4,
                 fontSize: isSidebarWide ? 'sm' : '0px',
                 justifyContent: 'flex-start',
                 color: c.neutral[100],
                 transition: 'all .2s ease-in',
-                bgcolor: 'neutral.800',
+                bgcolor: `rgba(${c.neutral.darkChannel} / 0.80)`,
             }}
             {...otherProps}
         >{children}</Button>

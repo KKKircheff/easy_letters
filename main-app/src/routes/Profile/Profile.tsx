@@ -3,10 +3,14 @@ import { useUserContext } from "../../context/UserContext";
 
 import {
     Box,
-    Button,
     Stack,
+    Typography,
     useTheme
 } from "@mui/joy"
+
+import bgImage from '../../assets/images/background1.webp';
+// import bgImage from '../../assets/images/whiteSquareBackground.webp';
+// import bgImage from '../../assets/images/blackCubesBackground.webp';
 
 import UnderNavBar from "../../components/navbar/UnderNavBar.component"
 import ProfileSidebar from "./ProfileSidebar.section";
@@ -31,6 +35,7 @@ import Invoices from "./Invoices.section";
 import ApplicationDocuments from "./ApplicationDocuments.section";
 import Summary from "./Summary.section";
 import { scrollToTop } from "../../layout/ScrollToTop.component";
+import Certifications from "./Certifications.section";
 export type SectionsToRender = keyof UserProfile
 
 const Profile = () => {
@@ -64,6 +69,7 @@ const Profile = () => {
         { component: CareerHistory, menuKey: 'careerHistory' },
         { component: Skills, menuKey: 'skills' },
         { component: Summary, menuKey: 'summary' },
+        { component: Certifications, menuKey: 'certifications' },
         { component: ApplicationDocuments, menuKey: 'applicationDocs' },
         { component: Invoices, menuKey: 'invoices' },
     ];
@@ -98,69 +104,82 @@ const Profile = () => {
     }, [currentSectionIndex]);
 
     return (
-        <Stack
-            direction='row' position='sticky'
-            top={0} left={0} minHeight='100vh'
-            bgcolor='neutral.700'
-        >
-            <ProfileSidebar
-                sections={sections}
-                wideWidth={wideWidth}
-                compactWidth={compactWidth}
-                setIsSidebarWide={setIsSidebarWide}
-                isSidebarWide={isSidebarWide}
-                setCurrentSectionIndex={setCurrentSectionIndex} />
-
-            <Stack
-                role='form' bgcolor='neutral.50'
-                width='100%' maxWidth={restWideWidth}
-                ml={{ xs: `${compactWidth}px`, sm: '0' }}
-                sx={{
-                    transition: 'all .2s ease-in',
-                    overflowX: 'hidden',
-                }}>
-                <UnderNavBar />
-                <form onSubmit={handleSubmit(handleUpdate)} noValidate>
-
-                    <Box px={{ md: xs, lg: md }}>
-                        <CurrentSection control={control} />
-                    </Box>
+        <Box sx={{
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'top left',
+            minHeight: '80vh', // Ensure the background covers the entire viewport height
+            overflow: 'hidden', // Prevent background image from scrolling
+        }}>
+            {/* Container for scrolling content */}
+            <Box sx={{
+                overflowY: 'auto', // Enable vertical scrolling for content
+                maxHeight: '100vh', // Set maximum height for scrolling
+            }}>
+                <Stack direction='row' className='test'>
+                    <ProfileSidebar
+                        sections={sections}
+                        wideWidth={wideWidth}
+                        compactWidth={compactWidth}
+                        setIsSidebarWide={setIsSidebarWide}
+                        isSidebarWide={isSidebarWide}
+                        setCurrentSectionIndex={setCurrentSectionIndex} />
 
                     <Stack
-                        direction='row' spacing={1} mx='auto' py={5}
-                        px={{ xs: '3vw', sm: xs, md: sm, lg: md, xl: lg }}
-                        justifyContent='space-between'>
+                        role='form'
+                        width='100%' maxWidth={restWideWidth}
+                        ml={{ xs: `${compactWidth}px`, sm: '0' }}
+                        sx={{
+                            transition: 'all .2s ease-in',
+                            overflowX: 'hidden',
+                        }}>
+                        <UnderNavBar />
+                        <form onSubmit={handleSubmit(handleUpdate)} noValidate>
 
-                        {currentSectionIndex > 0 ?
-                            <PreviousButton variant='outlined' color='neutral' type='button' onClick={handlePrevious}>
-                                {totalWidth > 700 ? 'Previous' : ''}
-                            </PreviousButton>
-                            : <div></div>
-                        }
+                            <Box sx={{
+                                paddingRight: { xs: xs, md: md, lg: lg },
+                                paddingLeft: { xs: 0, lg: sm },
+                            }} >
+                                <CurrentSection control={control} />
+                            </Box>
 
-                        <Stack direction={'row'} spacing={1}>
-                            {isDirty &&
-                                <FormRevertButton color='warning' type='button' onClick={() => reset()}>
-                                    {totalWidth > 700 ? 'Revert' : ''}
-                                </FormRevertButton>}
+                            <Stack
+                                direction='row' spacing={1} mx='auto' py={5}
+                                px={{ xs: '3vw', sm: xs, md: sm, lg: md, xl: lg }}
+                                justifyContent='space-between'>
 
-                            {isDirty &&
-                                <FormSaveButton color='primary' variant='solid' type='submit'>
-                                    {isWide ? 'Save' : 'Save'}
-                                </FormSaveButton>}
-                        </Stack>
+                                {currentSectionIndex > 0 ?
+                                    <PreviousButton variant='outlined' color='neutral' type='button' onClick={handlePrevious}>
+                                        {totalWidth > 700 ? 'Previous' : ''}
+                                    </PreviousButton>
+                                    : <div></div>
+                                }
 
-                        {(currentSectionIndex < sections.length - 1) ?
-                            <NextButton variant='outlined' color='neutral' type='button' onClick={handleNext}>
-                                {totalWidth > 700 ? 'Next' : ''}
-                            </NextButton>
-                            : <div></div>
-                        }
+                                <Stack direction={'row'} spacing={1}>
+                                    {isDirty &&
+                                        <FormRevertButton color='warning' type='button' onClick={() => reset()}>
+                                            {totalWidth > 700 ? 'Revert' : ''}
+                                        </FormRevertButton>}
+
+                                    {isDirty &&
+                                        <FormSaveButton color='primary' variant='solid' type='submit'>
+                                            {isWide ? 'Save' : 'Save'}
+                                        </FormSaveButton>}
+                                </Stack>
+
+                                {(currentSectionIndex < sections.length - 1) ?
+                                    <NextButton variant='outlined' color='neutral' type='button' onClick={handleNext}>
+                                        {totalWidth > 700 ? 'Next' : ''}
+                                    </NextButton>
+                                    : <div></div>
+                                }
+                            </Stack>
+                        </form>
+                        {/* <Footer /> */}
                     </Stack>
-                </form>
-                <Footer />
-            </Stack>
-        </Stack >
+                </Stack >
+            </Box>
+        </Box>
     )
 }
 

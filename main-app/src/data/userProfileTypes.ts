@@ -78,16 +78,102 @@ export type Invoice = {
     invoiceStorageId: string;
 };
 
+export type Certifications = {
+    id: string;
+    certificationName: string;
+    issueingOrganization: string;
+    date?: string;
+    visible: boolean;
+};
+
+export type Projects = {
+    id: string;
+    projectName: string;
+    role?: string;
+    description?: string;
+    startDate?: Date | null;
+    endDate?: Date | null;
+    visible: boolean;
+};
+
+export type VolunteerExperience = {
+    id: string;
+    organizationName: string;
+    role?: string;
+    description?: string;
+    startDate?: Date | null;
+    endDate?: Date | null;
+    visible: boolean;
+};
+
+export type Publications = {
+    id: string;
+    title: string;
+    publisher?: string;
+    date: Date | null;
+    description?: string;
+    link?: string;
+    visible: boolean;
+};
+
+export type Awards = {
+    id: string;
+    awardName: string;
+    organization: string;
+    date?: Date | null;
+    visible: boolean;
+};
+
+export type PublicEngagments = {
+    id: string;
+    name: string;
+    topic: string;
+    description?: string;
+    link?: string;
+    visible: boolean;
+};
+
+export type ProMemberships = {
+    id: string;
+    organization: string;
+    description?: string;
+    visible: boolean;
+};
+
+export type References = {
+    id: string;
+    name?: string;
+    company?: string;
+    conact?: string;
+    visible: boolean;
+};
+
+export type Hobbies = {
+    id: string;
+    hobbieName: string;
+    description?: string;
+    visible: boolean;
+};
+
 export type UserProfile = {
     uid: string;
     admin: Admin;
     general: General;
-    webLinks: WebLink[] | [];
+    webLinks?: WebLink[] | [];
     education?: Education[] | [];
     languages?: Language[] | [];
     careerHistory?: CareerHistory[] | [];
     skills?: Skill[] | [];
     summary?: Summary | '';
+    certifications?: Certifications[] | [];
+    projects?: Projects[] | [];
+    volunteerExperience?: VolunteerExperience[] | [];
+    publications?: Publications[] | [];
+    awards?: Awards[] | [];
+    publicEngagments?: PublicEngagments[] | [];
+    proMembership?: ProMemberships[] | [];
+    references?: References[] | [];
+    hobbies?: Hobbies[] | [];
     applicationDocs?: ApplicationDoc[] | [];
     invoices?: Invoice[] | [];
 };

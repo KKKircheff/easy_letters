@@ -11,17 +11,26 @@ type Props = {
 const ProfileSectionTitle = ({ title, subtitle }: Props) => {
     const c = useTheme().palette;
     return (
-        <Stack direction={'column'} py={4} px={2} spacing={3} maxWidth={{ xs: '400px', md: '1200px' }} mx='auto'>
-            <Stack direction='column' spacing={2}>
-                {/* <Box bgcolor='neutral.700' borderRadius='6px'>
+        <Stack
+            direction={'column'}
+            py={2}
+            px={{ xs: .75, sm: 0, md: 1 }}
+            maxWidth={{ xs: '400px', md: '1200px' }}
+            mx='auto' >
+            <Stack spacing={2} bgcolor='white' borderRadius='md' p={2.5}
+                sx={{
+                    bgcolor: `rgba(${c.neutral.lightChannel}/.90)`,
+                    backdropFilter: 'blur(5px)',
+                }}>
+                <Stack direction='column' spacing={2} alignItems="flex-start">
                     <Typography
-                        level='h2' fontSize={'mediumTitle'} px={1} fontStyle='mediumTitle'
-                        sx={{ color: c.primary[500] }}>{title[0].toUpperCase()}</Typography>
-                </Box> */}
-                <Typography level='h2' textAlign='left' fontSize={'mediumTitle'} sx={iconGradientStyles.scondaryPrimary}>{title}</Typography>
+                        level='h2' textAlign='left' fontSize={'lg'}
+                        sx={{ ...iconGradientStyles.scondaryPrimary, width: 'fitContent' }}
+                    >{title.toUpperCase()}</Typography>
+                </Stack>
+                <Divider orientation="horizontal" color='neutral' sx={{ width: '98%' }} />
+                <Typography fontSize='body' fontWeight={'500'} textAlign='left'>{subtitle}</Typography>
             </Stack>
-            <Divider orientation="horizontal" color='neutral' sx={{ width: '98%' }} />
-            <Typography fontSize='body' fontWeight={'500'} textAlign='left'>{subtitle}</Typography>
         </Stack >
     )
 }

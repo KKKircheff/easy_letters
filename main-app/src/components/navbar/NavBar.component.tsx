@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import Box from '@mui/joy/Box';
@@ -17,6 +17,9 @@ import BurgerButton from './BurgerButton.component';
 
 const NavBar = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const bgColor = location.pathname.includes('/profile') ? ' #ffffffc0' : '#ffffff80'
     const theme = useTheme();
     const maxNavHeight = '60px'
 
@@ -62,7 +65,7 @@ const NavBar = () => {
                     paddingRight: { md: 1 },
                     flexGrow: 1,
                     borderRadius: theme.radius.full,
-                    bgcolor: '#ffffffa0',
+                    bgcolor: bgColor,
                     backdropFilter: 'blur(5px)',
                     maxHeight: maxNavHeight,
                 }}>

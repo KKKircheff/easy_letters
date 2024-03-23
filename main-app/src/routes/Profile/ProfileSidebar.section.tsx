@@ -1,4 +1,4 @@
-import { Button, Stack, useTheme } from '@mui/joy'
+import { Box, Button, Stack, useTheme } from '@mui/joy'
 import { SectionsToRender } from './Profile';
 
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
@@ -41,7 +41,7 @@ type SidebarItems = {
 const ProfileSidebar = ({ wideWidth, compactWidth, isSidebarWide, setIsSidebarWide, setCurrentSectionIndex, sections }: Props) => {
     const c = useTheme().palette;
 
-    const iconColor = c.warning[400]
+    const iconColor = c.primary[400]
 
     const sidebarItems: SidebarItems = [
         {
@@ -100,7 +100,7 @@ const ProfileSidebar = ({ wideWidth, compactWidth, isSidebarWide, setIsSidebarWi
         <Stack
             role='sidebar'
             position={{ xs: 'fixed', sm: 'sticky' }}
-            top={0} left={0} pl={1.1}
+            top={0} left={0} px={1.1}
             pt={{ xs: 10, md: 13, lg: 16 }}
             direction='column'
             alignItems='flex-start'
@@ -108,28 +108,31 @@ const ProfileSidebar = ({ wideWidth, compactWidth, isSidebarWide, setIsSidebarWi
             width={isSidebarWide ? `${wideWidth}px` : `${compactWidth}px`}
             minWidth={isSidebarWide ? `${wideWidth}px` : `${compactWidth}px`}
             maxHeight={{ xs: '100vh', sm: '95vh' }}
-            bgcolor={c.neutral[700]}
             zIndex={1}
             overflow='hidden'
             sx={{
                 transition: 'all .2s ease-in'
             }}>
-
             <Stack
                 direction='column'
-                spacing={1}
-                bgcolor='transparent'
-                sx={{ overflowY: 'scroll', scrollbarWidth: 'none', }}
-                pr={2}
+                spacing={.5}
+                width='100%'
+                px={.8} py={1}
+                bgcolor={`rgba(${c.neutral.darkChannel}/.5)`}
+                borderRadius='25px'
+                sx={{
+                    backdropFilter: 'blur(5px)',
+                    overflowY: 'scroll',
+                    scrollbarWidth: 'none'
+                }}
             >
                 <SidebarMenuButton
                     aria-label='extend sidebar' color='neutral' variant='solid'
                     isSidebarWide={isSidebarWide}
                     onClick={() => setIsSidebarWide(!isSidebarWide)}>
                     <KeyboardDoubleArrowRightOutlinedIcon sx={{
+                        marginLeft: isSidebarWide ? '165px' : 0,
                         color: isSidebarWide ? c.neutral[100] : c.primary[50],
-                        marginLeft: 'auto',
-                        marginRight: 1,
                         transform: isSidebarWide ? 'rotate(-180deg)' : 'rotate(0deg)',
                         transition: 'all .2s ease-in'
                     }} />
@@ -150,7 +153,7 @@ const ProfileSidebar = ({ wideWidth, compactWidth, isSidebarWide, setIsSidebarWi
                     isSidebarWide={isSidebarWide}
                     endDecorator={'Log Out'}
                     onClick={() => logOut}>
-                    <PowerSettingsNewIcon sx={{ color: c.warning[400] }} />
+                    <PowerSettingsNewIcon sx={{ color: iconColor }} />
                 </SidebarMenuButton>
             </Stack>
         </Stack >

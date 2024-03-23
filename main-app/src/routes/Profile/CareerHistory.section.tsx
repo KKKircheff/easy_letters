@@ -5,7 +5,6 @@ import { Control, useFieldArray } from "react-hook-form"
 import AddNew from "../../components/add-new/AddNew.component"
 import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
-import FormInputAutocomplete from "../../components/form-inputs/FormInputAutocomplete/FormInputAutocomplete.component"
 import { v4 as uuidv4 } from 'uuid';
 import FormInputTextarea from "../../components/form-inputs/FormInputTextarea.tsx/FormInputTextarea"
 import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
@@ -17,6 +16,16 @@ type Props = {
 
 const CareerHistory = ({ control }: Props) => {
     const name = 'careerHistory'
+    const initObject = {
+        id: uuidv4(),
+        jobTitle: '',
+        employer: '',
+        location: '',
+        startDate: null,
+        endDate: null,
+        description: '',
+        visible: true
+    }
     const { fields, append, remove } = useFieldArray({
         control,
         name,
@@ -25,7 +34,7 @@ const CareerHistory = ({ control }: Props) => {
     return (
         <Box>
             <ProfileSectionTitle title='Career history' subtitle='Please fill in your previous employed, self-employed positions or volunteer projects. Add additional info for the position in the description field if you think it is needed.' />
-            <Stack maxWidth='1200px' spacing={2.5} textAlign='left' alignItems={'center'} px={2}>
+            <Stack maxWidth='1200px' spacing={1.5} textAlign='left' alignItems={'center'} px={.75}>
                 {fields.length ?
                     fields.map((field, index) => {
                         return (
@@ -90,13 +99,6 @@ const CareerHistory = ({ control }: Props) => {
                                             name={`${name}.${index}.description`}
                                         />
                                     </Grid>
-                                    {/* <FormInputAutocomplete
-                                        options={languageLevels}
-                                        control={control}
-                                        name={`languages.${index}.level`}
-                                        label=''
-                                        required={true}
-                                    /> */}
                                 </Grid>
                             </InputContainer>
                         )
@@ -104,19 +106,7 @@ const CareerHistory = ({ control }: Props) => {
                     : null
                 }
 
-                <Box
-                    width='100%'
-                    sx={{ cursor: 'pointer' }}
-                    onClick={() => append({
-                        id: uuidv4(),
-                        jobTitle: '',
-                        employer: '',
-                        location: '',
-                        startDate: null,
-                        endDate: null,
-                        description: '',
-                        visible: true
-                    })}>
+                <Box width='100%' sx={{ cursor: 'pointer' }} onClick={() => append(initObject)}>
                     <AddNew
                         itemToAdd={'Education summary section'}
                         description={'Fill in your schools and degrees.'}

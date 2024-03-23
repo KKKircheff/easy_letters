@@ -27,7 +27,7 @@ const Education = ({ control }: Props) => {
     return (
         <Box>
             <ProfileSectionTitle title='Education' subtitle='Fill in your education history. Add seprate record for each education school. ' />
-            <Stack maxWidth='1200px' spacing={2.5} textAlign='left' alignItems={'center'} px={2}>
+            <Stack maxWidth='1200px' spacing={1.5} textAlign='left' alignItems={'center'} px={.75}>
                 {fields.length ?
                     fields.map((field, index) => {
                         return (

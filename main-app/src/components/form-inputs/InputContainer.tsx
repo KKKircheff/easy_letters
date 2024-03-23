@@ -15,14 +15,16 @@ const InputContainer = ({ children, ...otherProps }: Props) => {
             mx='auto'
             py={2}
             px={2}
-            bgcolor='white'
             maxWidth={{ xs: '400px', md: '100%' }}
             borderRadius='md'
-            border={`1.2px solid ${c.neutral[200]}`}
+            sx={{
+                backgroundColor: `rgba(${c.neutral.lightChannel}/.90)`,
+                backdropFilter: 'blur(10px)'!,
+            }}
             {...otherProps}
         >
             {children}
-        </ Stack>
+        </ Stack >
 
     )
 }
