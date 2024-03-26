@@ -6,6 +6,7 @@ import AddNew from "../../components/add-new/AddNew.component"
 import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import { v4 as uuidv4 } from 'uuid';
+import FormInputTextarea from "../../components/form-inputs/FormInputTextarea.tsx/FormInputTextarea"
 import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
 import FieldButtonGroup from "../../components/buttons/field-button-group/FieldButtonGroup"
 
@@ -13,25 +14,26 @@ type Props = {
     control: Control<UserProfile>
 }
 
-const Certifications = ({ control }: Props) => {
-    const name = 'certifications'
-    const initObject = {
-        id: uuidv4(),
-        certificationName: '',
-        issueingOrganization: '',
-        date: '',
-        visible: true
-    }
+const Projects = ({ control }: Props) => {
+    const name = 'projects'
     const { fields, append, remove } = useFieldArray({
         control,
         name,
     });
 
+    const initObject = {
+        id: uuidv4(),
+        projectName: '',
+        role: '',
+        description: '',
+        startDate: null,
+        endDate: null,
+        visible: true,
+    }
+
     return (
         <Box>
-            <ProfileSectionTitle
-                title='Certification'
-                subtitle='Optional section. Add any certifications you have achieved, only if you find them relevant about your work applications' />
+            <ProfileSectionTitle title='Personal projects' subtitle='Optional section. Add personal projects you consider important for your job applications.' />
             <Stack maxWidth='1200px' spacing={1.5} textAlign='left' alignItems={'center'} px={.75} mx='auto'>
                 {fields.length ?
                     fields.map((field, index) => {
@@ -44,21 +46,37 @@ const Certifications = ({ control }: Props) => {
                                     remove={remove}
                                 />
                                 <Grid container columns={12} spacing={2}>
-                                    <Grid xs={12}>
+                                    <Grid xs={12} md={6}>
                                         <FormInputText
                                             control={control}
-                                            name={`${name}.${index}.certificationName`}
-                                            label='Certification'
-                                            placeholder="e.g. Name"
+                                            name={`${name}.${index}.projectName`}
+                                            label='Personal project'
+                                            placeholder="Title of the project"
                                             required={true}
                                         />
                                     </Grid>
                                     <Grid xs={12} md={6}>
                                         <FormInputText
                                             control={control}
-                                            name={`${name}.${index}.issueingOrganization`}
-                                            label='Issue organization '
-                                            placeholder="e.g. Software Solutions B.V."
+                                            name={`${name}.${index}.role`}
+                                            label='Role '
+                                            placeholder="e.g. Team leader"
+                                            required={true}
+                                        />
+                                    </Grid>
+                                    <Grid xs={12}>
+                                        <FormInputTextarea
+                                            control={control}
+                                            label='Description'
+                                            name={`${name}.${index}.description`}
+                                        />
+                                    </Grid>
+                                    <Grid xs={12} md={6}>
+                                        <FormInputText
+                                            control={control}
+                                            type='date'
+                                            label='Start date'
+                                            name={`${name}.${index}.startDate`}
                                             required={true}
                                         />
                                     </Grid>
@@ -66,8 +84,8 @@ const Certifications = ({ control }: Props) => {
                                         <FormInputText
                                             control={control}
                                             type='date'
-                                            label='Issue date'
-                                            name={`${name}.${index}.date`}
+                                            label='Graduation date or empty'
+                                            name={`${name}.${index}.endDate`}
                                             required={true}
                                         />
                                     </Grid>
@@ -77,16 +95,19 @@ const Certifications = ({ control }: Props) => {
                     })
                     : null
                 }
-
-                <Box width='100%' sx={{ cursor: 'pointer' }} onClick={() => append(initObject)}>
+                <Box
+                    width='100%'
+                    sx={{ cursor: 'pointer' }}
+                    onClick={() => append(initObject)}>
                     <AddNew
-                        itemToAdd={'certificate ( optional )'}
-                        description={'Driving licences, language diploams, etc.'}
+                        itemToAdd={'personal project ( optional )'}
+                        description={'Business projects, startups or freelance projects.'}
                     />
                 </Box>
             </Stack>
-        </Box >
+
+        </Box>
     )
 }
 
-export default Certifications
+export default Projects

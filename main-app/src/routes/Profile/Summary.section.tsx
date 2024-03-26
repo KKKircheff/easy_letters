@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/joy"
+import { Box, Grid, Stack, Typography } from "@mui/joy"
 import { UserProfile } from "../../data/userProfileTypes"
 
 import { Control } from "react-hook-form"
@@ -17,15 +17,17 @@ const Summary = ({ control }: Props) => {
     return (
         <Box>
             <ProfileSectionTitle title='Summary' subtitle='Short professional summary about you. Click "Auto" button when your other data is filled in. You can also click "Check" to have assistance from AI' />
-            <InputContainer>
-                <FormInputTextarea
-                    control={control}
-                    name={name}
-                    label='Short summary'
-                    minRows={3}
-                    maxLenght={400}
-                />
-            </InputContainer>
+            <Stack maxWidth='1200px' spacing={1.5} textAlign='left' alignItems={'center'} px={.75} mx='auto'>
+                <InputContainer>
+                    <FormInputTextarea
+                        control={control}
+                        name={name}
+                        label='Short summary'
+                        minRows={3}
+                        maxLenght={400}
+                    />
+                </InputContainer>
+            </Stack>
         </Box>
     )
 }

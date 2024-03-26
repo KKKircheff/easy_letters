@@ -6,6 +6,7 @@ import AddNew from "../../components/add-new/AddNew.component"
 import InputContainer from "../../components/form-inputs/InputContainer"
 import FormInputText from "../../components/form-inputs/FormInputText/FormInputText.component"
 import { v4 as uuidv4 } from 'uuid';
+import FormInputTextarea from "../../components/form-inputs/FormInputTextarea.tsx/FormInputTextarea"
 import ProfileSectionTitle from "../../components/ProfileSectionTitle/ProfileSectionTitle.component"
 import FieldButtonGroup from "../../components/buttons/field-button-group/FieldButtonGroup"
 
@@ -13,25 +14,23 @@ type Props = {
     control: Control<UserProfile>
 }
 
-const Certifications = ({ control }: Props) => {
-    const name = 'certifications'
-    const initObject = {
-        id: uuidv4(),
-        certificationName: '',
-        issueingOrganization: '',
-        date: '',
-        visible: true
-    }
+const Hobbies = ({ control }: Props) => {
+    const name = 'hobbies'
     const { fields, append, remove } = useFieldArray({
         control,
         name,
     });
 
+    const initObject = {
+        id: uuidv4(),
+        hobbieName: '',
+        description: '',
+        visible: true,
+    }
+
     return (
         <Box>
-            <ProfileSectionTitle
-                title='Certification'
-                subtitle='Optional section. Add any certifications you have achieved, only if you find them relevant about your work applications' />
+            <ProfileSectionTitle title='Hobbies' subtitle='Optional section. Add some hobbies, in case you find them helpful with your job applications.' />
             <Stack maxWidth='1200px' spacing={1.5} textAlign='left' alignItems={'center'} px={.75} mx='auto'>
                 {fields.length ?
                     fields.map((field, index) => {
@@ -47,28 +46,17 @@ const Certifications = ({ control }: Props) => {
                                     <Grid xs={12}>
                                         <FormInputText
                                             control={control}
-                                            name={`${name}.${index}.certificationName`}
-                                            label='Certification'
-                                            placeholder="e.g. Name"
+                                            name={`${name}.${index}.hobbieName`}
+                                            label='Hobbie'
+                                            placeholder="e.g. Cycling"
                                             required={true}
                                         />
                                     </Grid>
-                                    <Grid xs={12} md={6}>
-                                        <FormInputText
+                                    <Grid xs={12}>
+                                        <FormInputTextarea
                                             control={control}
-                                            name={`${name}.${index}.issueingOrganization`}
-                                            label='Issue organization '
-                                            placeholder="e.g. Software Solutions B.V."
-                                            required={true}
-                                        />
-                                    </Grid>
-                                    <Grid xs={12} md={6}>
-                                        <FormInputText
-                                            control={control}
-                                            type='date'
-                                            label='Issue date'
-                                            name={`${name}.${index}.date`}
-                                            required={true}
+                                            label='Hobbie description'
+                                            name={`${name}.${index}.description`}
                                         />
                                     </Grid>
                                 </Grid>
@@ -77,16 +65,19 @@ const Certifications = ({ control }: Props) => {
                     })
                     : null
                 }
-
-                <Box width='100%' sx={{ cursor: 'pointer' }} onClick={() => append(initObject)}>
+                <Box
+                    width='100%'
+                    sx={{ cursor: 'pointer' }}
+                    onClick={() => append(initObject)}>
                     <AddNew
-                        itemToAdd={'certificate ( optional )'}
-                        description={'Driving licences, language diploams, etc.'}
+                        itemToAdd={'a hobbie ( optional )'}
+                        description={'Hobbies that could contribute to your job application.'}
                     />
                 </Box>
             </Stack>
-        </Box >
+
+        </Box>
     )
 }
 
-export default Certifications
+export default Hobbies

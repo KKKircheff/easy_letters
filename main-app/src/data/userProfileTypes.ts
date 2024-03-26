@@ -142,9 +142,9 @@ export type ProMemberships = {
 
 export type References = {
     id: string;
-    name?: string;
     company?: string;
-    conact?: string;
+    name?: string;
+    contact?: string;
     visible: boolean;
 };
 
@@ -171,7 +171,7 @@ export type UserProfile = {
     publications?: Publications[] | [];
     awards?: Awards[] | [];
     publicEngagments?: PublicEngagments[] | [];
-    proMembership?: ProMemberships[] | [];
+    proMemberships?: ProMemberships[] | [];
     references?: References[] | [];
     hobbies?: Hobbies[] | [];
     applicationDocs?: ApplicationDoc[] | [];

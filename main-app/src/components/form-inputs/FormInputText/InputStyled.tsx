@@ -7,8 +7,7 @@ interface FormInputProps extends InputProps {
     readOnly?: boolean
 }
 const InputStyled = styled(Input)<FormInputProps>(({ theme, isOutlined = false, readOnly = false }) => ({
-    // backgroundColor: 'neutral.50',
-    backgroundColor: `rgba(${theme.vars.palette.neutral.lightChannel}/.85)`,
+    backgroundColor: theme.vars.palette.neutral[100],
     fontSize: theme.fontSize.sm,
     fontWeight: 500,
     borderRadius: theme.radius.md,

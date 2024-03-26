@@ -124,12 +124,14 @@ const General = ({ control }: Props) => {
                                         name={`${name}.${index}.media`}
                                         label=''
                                         required={true}
+                                        placeholder='Name or description'
                                     />
                                     <FormInputText
                                         control={control}
                                         name={`${name}.${index}.link`}
                                         label=''
                                         required={true}
+                                        placeholder='Link / URL'
                                     />
                                 </InputContainer>
                             </Grid>

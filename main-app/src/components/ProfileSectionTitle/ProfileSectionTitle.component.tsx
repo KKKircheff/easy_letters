@@ -2,6 +2,7 @@ import bgIconWave from '../../assets/images/bgIconWave.webp'
 import bgIconDoubleWave from '../../assets/images/bgIconDoubleWave.webp'
 import { Box, Divider, Stack, Typography, useTheme } from '@mui/joy';
 import { iconGradientStyles } from '../../styles/iconGradientStyles';
+import { inputsBackgrounColor } from '../../routes/Profile/Profile';
 
 type Props = {
     title: string;
@@ -14,12 +15,13 @@ const ProfileSectionTitle = ({ title, subtitle }: Props) => {
         <Stack
             direction={'column'}
             py={2}
-            px={{ xs: .75, sm: 0, md: 1 }}
-            maxWidth={{ xs: '400px', md: '1200px' }}
+            px={{ xs: .75, md: 1 }}
+            // maxWidth={{ xs: '400px', md: '1200px' }}
+            maxWidth='1200px'
             mx='auto' >
             <Stack spacing={2} bgcolor='white' borderRadius='md' p={2.5}
                 sx={{
-                    bgcolor: `rgba(${c.neutral.lightChannel}/.90)`,
+                    bgcolor: inputsBackgrounColor,
                     backdropFilter: 'blur(5px)',
                 }}>
                 <Stack direction='column' spacing={2} alignItems="flex-start">

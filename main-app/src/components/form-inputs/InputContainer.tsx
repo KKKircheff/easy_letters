@@ -1,12 +1,14 @@
 import { ReactNode, } from 'react'
 import { useTheme, Stack, StackProps } from '@mui/joy';
+import { inputsBackgrounColor } from '../../routes/Profile/Profile';
 
 type Props = {
     children: ReactNode;
 } & StackProps
 
 const InputContainer = ({ children, ...otherProps }: Props) => {
-    const c = useTheme().palette
+    const c = useTheme().palette;
+
     return (
         <Stack
             direction='column'
@@ -15,11 +17,13 @@ const InputContainer = ({ children, ...otherProps }: Props) => {
             mx='auto'
             py={2}
             px={2}
-            maxWidth={{ xs: '400px', md: '100%' }}
+            // maxWidth={{ xs: '400px', md: '100%' }}
+            border={`1px solid ${c.neutral[200]}`}
             borderRadius='md'
+            boxShadow='sm'
             sx={{
-                backgroundColor: `rgba(${c.neutral.lightChannel}/.90)`,
-                backdropFilter: 'blur(10px)'!,
+                backgroundColor: inputsBackgrounColor,
+                backdropFilter: 'blur(7px)'!,
             }}
             {...otherProps}
         >

@@ -20,10 +20,11 @@ type Item = {
 type Props = {
     items: Item[],
     isDrawerOpen: boolean,
-    setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    bgColor: string,
 }
 
-const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
+const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen, bgColor }: Props) => {
     const { xs, md, lg } = styleVariables.layoutPadding;
 
     return (
@@ -53,7 +54,7 @@ const SideDrawer = ({ items, isDrawerOpen, setIsDrawerOpen }: Props) => {
                 borderRadius='xl'
                 boxSizing='border-box'
                 overflow='hidden'
-                bgcolor='#ffffffa0'
+                bgcolor={bgColor}
                 sx={{
                     backdropFilter: 'blur(5px)',
                     transition: 'all .2s ease-in'

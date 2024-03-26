@@ -48,6 +48,7 @@ const Skills = ({ control }: Props) => {
                                         control={control}
                                         name={`skills.${index}.skill`}
                                         label=''
+                                        placeholder='Add new skill'
                                         required={true}
                                     />
                                 </InputContainer>

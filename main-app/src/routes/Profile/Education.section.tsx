@@ -24,10 +24,22 @@ const Education = ({ control }: Props) => {
         name,
     });
 
+    const initObject = {
+        id: uuidv4(),
+        schoolName: '',
+        schoolLocation: '',
+        degree: '',
+        fieldOfStudy: '',
+        startDate: null,
+        graduationDate: null,
+        description: '',
+        visible: true
+    }
+
     return (
         <Box>
             <ProfileSectionTitle title='Education' subtitle='Fill in your education history. Add seprate record for each education school. ' />
-            <Stack maxWidth='1200px' spacing={1.5} textAlign='left' alignItems={'center'} px={.75}>
+            <Stack maxWidth='1200px' spacing={1.5} textAlign='left' alignItems={'center'} px={.75} mx='auto'>
                 {fields.length ?
                     fields.map((field, index) => {
                         return (
@@ -115,17 +127,7 @@ const Education = ({ control }: Props) => {
                 <Box
                     width='100%'
                     sx={{ cursor: 'pointer' }}
-                    onClick={() => append({
-                        id: uuidv4(),
-                        schoolName: '',
-                        schoolLocation: '',
-                        degree: '',
-                        fieldOfStudy: '',
-                        startDate: null,
-                        graduationDate: null,
-                        description: '',
-                        visible: true
-                    })}>
+                    onClick={() => append(initObject)}>
                     <AddNew
                         itemToAdd={'Education summary section'}
                         description={'Fill in your schools and degrees.'}

@@ -75,6 +75,51 @@ const ProfileSidebar = ({ wideWidth, compactWidth, isSidebarWide, setIsSidebarWi
             sectionName: 'summary'
         },
         {
+            icon: <FactCheckOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'Certificates',
+            sectionName: 'certifications'
+        },
+        {
+            icon: <FactCheckOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'Personal projects',
+            sectionName: 'projects'
+        },
+        {
+            icon: <FactCheckOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'Volunteers expirences',
+            sectionName: 'volunteerExperience'
+        },
+        {
+            icon: <FactCheckOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'Publications',
+            sectionName: 'publications'
+        },
+        {
+            icon: <FactCheckOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'Awards',
+            sectionName: 'awards',
+        },
+        {
+            icon: <FactCheckOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'Public engagments',
+            sectionName: 'publicEngagments'
+        },
+        {
+            icon: <FactCheckOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'Pro memberships',
+            sectionName: 'proMemberships'
+        },
+        {
+            icon: <FactCheckOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'References',
+            sectionName: 'references'
+        },
+        {
+            icon: <FactCheckOutlinedIcon sx={{ color: iconColor }} />,
+            itemName: 'Hobbies',
+            sectionName: 'hobbies'
+        },
+        {
             icon: <FileCopyOutlinedIcon sx={{ color: iconColor }} />,
             itemName: 'Application Documents',
             sectionName: 'applicationDocs'
@@ -100,8 +145,8 @@ const ProfileSidebar = ({ wideWidth, compactWidth, isSidebarWide, setIsSidebarWi
         <Stack
             role='sidebar'
             position={{ xs: 'fixed', sm: 'sticky' }}
-            top={0} left={0} px={1.1}
-            pt={{ xs: 10, md: 13, lg: 16 }}
+            top={6} left={0} px={1.1}
+            pt={{ xs: 10, md: 13.5, lg: 13.5 }}
             direction='column'
             alignItems='flex-start'
             height={{ xs: '100vh', sm: '95vh' }}

@@ -6,14 +6,14 @@ interface FormInputProps extends TextareaProps {
     readOnly?: boolean
 }
 const TextareaStyled = styled(Textarea)<FormInputProps>(({ theme, isOutlined = false, readOnly = false }) => ({
-    backgroundColor: 'neutral.50',
+    backgroundColor: theme.vars.palette.neutral[100],
     fontSize: theme.fontSize.sm,
     fontWeight: 500,
     borderRadius: theme.radius.md,
     color: theme.vars.palette.neutral[600],
     boxShadow: 'none',
     minHeight: '30px',
-    paddingX: .5,
+    paddingX: 5,
     borderBottom: isOutlined ?
         `1px solid ${theme.vars.palette.primary[500]}`
         : `0px solid ${theme.vars.palette.neutral[200]}`,

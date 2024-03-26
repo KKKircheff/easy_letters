@@ -50,6 +50,7 @@ const Languages = ({ control }: Props) => {
                                         name={`languages.${index}.language`}
                                         label=''
                                         required={true}
+                                        placeholder='Language'
                                     />
                                     <FormInputAutocomplete
                                         options={languageLevels}

@@ -19,7 +19,7 @@ const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const bgColor = location.pathname.includes('/profile') ? ' #ffffffc0' : '#ffffff80'
+    const bgColor = location.pathname.includes('/profile') ? ' #ffffffb0' : '#ffffff80'
     const theme = useTheme();
     const maxNavHeight = '60px'
 
@@ -120,7 +120,9 @@ const NavBar = () => {
             <SideDrawer
                 items={items}
                 isDrawerOpen={isDrawerOpen}
-                setIsDrawerOpen={setIsDrawerOpen} />
+                setIsDrawerOpen={setIsDrawerOpen}
+                bgColor={bgColor}
+            />
         </>
     )
 }

@@ -8,14 +8,12 @@ import {
     useTheme
 } from "@mui/joy"
 
-import bgImage from '../../assets/images/background1.webp';
-// import bgImage from '../../assets/images/whiteSquareBackground.webp';
-// import bgImage from '../../assets/images/blackCubesBackground.webp';
+import bgImage from '../../assets/images/bg9.webp';
 
 import UnderNavBar from "../../components/navbar/UnderNavBar.component"
 import ProfileSidebar from "./ProfileSidebar.section";
-import Footer from "../../components/footer/Footer.component";
 
+import { scrollToTop } from "../../layout/ScrollToTop.component";
 import useScreenWidth from '../../hooks/useScreenWidth';
 import { styleVariables } from '../../styles/styleVariables';
 
@@ -34,9 +32,18 @@ import NextButton from "../../components/buttons/form-buttons/NextButton.compone
 import Invoices from "./Invoices.section";
 import ApplicationDocuments from "./ApplicationDocuments.section";
 import Summary from "./Summary.section";
-import { scrollToTop } from "../../layout/ScrollToTop.component";
-import Certifications from "./Certifications.section";
+import Certifications from "./Certifications.section"
+    ;
+import Projects from "./Projects.section";
+import VolunteerExperience from "./VolunteerExperience.section";
+import Publications from "./Publications.section";
+import Awards from "./Awards.section";
+import PublicEngagments from "./PublicEngagments.section";
+import ProMemberships from "./ProMemberships.section";
+import References from "./References.section";
+import Hobbies from "./Hobbies.section";
 export type SectionsToRender = keyof UserProfile
+export const inputsBackgrounColor = '#ffffffc0'
 
 const Profile = () => {
     const c = useTheme().palette
@@ -70,6 +77,14 @@ const Profile = () => {
         { component: Skills, menuKey: 'skills' },
         { component: Summary, menuKey: 'summary' },
         { component: Certifications, menuKey: 'certifications' },
+        { component: Projects, menuKey: 'projects' },
+        { component: VolunteerExperience, menuKey: 'volunteerExperience' },
+        { component: Publications, menuKey: 'publications' },
+        { component: Awards, menuKey: 'awards' },
+        { component: PublicEngagments, menuKey: 'publicEngagments' },
+        { component: ProMemberships, menuKey: 'proMemberships' },
+        { component: References, menuKey: 'references' },
+        { component: Hobbies, menuKey: 'hobbies' },
         { component: ApplicationDocuments, menuKey: 'applicationDocs' },
         { component: Invoices, menuKey: 'invoices' },
     ];
@@ -107,11 +122,10 @@ const Profile = () => {
         <Box sx={{
             backgroundImage: `url(${bgImage})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'top left',
+            backgroundPosition: 'center center',
             minHeight: '80vh', // Ensure the background covers the entire viewport height
             overflow: 'hidden', // Prevent background image from scrolling
         }}>
-            {/* Container for scrolling content */}
             <Box sx={{
                 overflowY: 'auto', // Enable vertical scrolling for content
                 maxHeight: '100vh', // Set maximum height for scrolling
@@ -136,12 +150,21 @@ const Profile = () => {
                         <UnderNavBar />
                         <form onSubmit={handleSubmit(handleUpdate)} noValidate>
 
-                            <Box sx={{
-                                paddingRight: { xs: xs, md: md, lg: lg },
-                                paddingLeft: { xs: 0, lg: sm },
-                            }} >
+                            <Stack
+                                sx={{
+                                    transition: 'all .2s ease-in',
+                                    paddingRight: {
+                                        xs: '4vw', md: '70px', lg: '125px'
+                                    },
+                                    paddingLeft: {
+                                        xs: 0,
+                                        md: '10px',
+                                        lg: isSidebarWide ? 0 : sm
+                                    },
+                                }}
+                            >
                                 <CurrentSection control={control} />
-                            </Box>
+                            </Stack>
 
                             <Stack
                                 direction='row' spacing={1} mx='auto' py={5}
@@ -178,8 +201,8 @@ const Profile = () => {
                         {/* <Footer /> */}
                     </Stack>
                 </Stack >
-            </Box>
-        </Box>
+            </Box >
+        </Box >
     )
 }
 

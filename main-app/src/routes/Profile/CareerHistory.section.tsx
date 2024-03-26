@@ -34,7 +34,7 @@ const CareerHistory = ({ control }: Props) => {
     return (
         <Box>
             <ProfileSectionTitle title='Career history' subtitle='Please fill in your previous employed, self-employed positions or volunteer projects. Add additional info for the position in the description field if you think it is needed.' />
-            <Stack maxWidth='1200px' spacing={1.5} textAlign='left' alignItems={'center'} px={.75}>
+            <Stack maxWidth='1200px' spacing={1.5} textAlign='left' alignItems={'center'} px={.75} mx='auto'>
                 {fields.length ?
                     fields.map((field, index) => {
                         return (
